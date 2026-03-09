@@ -8,6 +8,11 @@
   src: url("../fonts/Pokemon Hollow.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Coolvetica";
+  src: url("../fonts/Coolvetica Rg.otf") format("opentype");
+}
+
 *{
     box-sizing: border-box;
     display: grid;
@@ -15,29 +20,40 @@
 }
 
 title {
-  display: none;
+    display: none;
 }
 
 header{
     grid-area: header;
+    display: flex;
+    background-color: #f5f4f5;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
+}
+
+h1{
+    font-family: "Pokemon-solid", serif;
+    text-align: center;
+    font-size: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 nav{
     display: flex;
-    background-color: gray;
-    align-items: center;
 }
 
 footer{
     grid-area: footer;
     color: whitesmoke;
-    background-color: black;
     padding: 1rem;
     text-align: center;
 }
 
 
 .nav-options{
+    font-family: "Coolvetica", serif;
     background-color: whitesmoke;
     color: black;
     margin: 5px;
@@ -45,11 +61,14 @@ footer{
     border-radius: 15%;
 }
 
-#start-title{
-    font-family: "Pokemon-solid", serif;
-    text-align: center;
-    font-size: 100px;
-    padding-left: 10px;
-    padding-right: 10px;
+.nav-options:hover{
+    border: black solid;
+}
+
+.start-visual{
+
+}
+
+#logo-header{
 
 }
