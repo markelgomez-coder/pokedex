@@ -27,21 +27,24 @@ header{
     grid-area: header;
     display: flex;
     background-color: #f5f4f5;
-    align-content: space-around;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
 h1{
     font-family: "Pokemon-solid", serif;
     text-align: center;
-    font-size: 50px;
+    font-size: 1em;
     padding-left: 10px;
     padding-right: 10px;
 }
 
 nav{
     display: flex;
+}
+
+main{
+    grid-area: body;
 }
 
 footer{
@@ -65,10 +68,12 @@ footer{
     border: black solid;
 }
 
-.start-visual{
-
+#logo-nav{
+    display: flex;
+    justify-content:flex-start;
 }
 
-#logo-header{
-
+#pokeball-img{
+    width: 15%;
+    height: 15%;
 }
