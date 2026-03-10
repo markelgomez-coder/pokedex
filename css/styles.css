@@ -15,6 +15,9 @@
 
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
     display: grid;
     grid-template-areas: "header" "body" "footer";
 }
@@ -52,6 +55,7 @@ footer{
     color: whitesmoke;
     padding: 1rem;
     text-align: center;
+    background-color: black;
 }
 
 
@@ -76,4 +80,9 @@ footer{
 #pokeball-img{
     width: 15%;
     height: 15%;
+}
+
+#start-image{
+    width: 96.85vw;
+    height: auto;
 }
