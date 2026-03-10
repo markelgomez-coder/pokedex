@@ -106,18 +106,29 @@ footer{
 
 #buscador-div{
     margin: 1em;
+    display: flex;
     background-color: #eaeaeb;
     height: 1.5em;
     width: 60%;
     border: #c3c1c4 solid 2px;
     padding-top: 0.1em;
     padding-left: 0.1em;
+    column-gap: 0.5em;
 }
 
-#buscador-div img{
-    position: absolute;
+#buscador-button{
     height: 1em;
     width: auto;
+    justify-self: flex-start;
+    background-image: url("../img/lupa.png");
+}
+
+#input-buscador{
+    color: black;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    size: 1em;
 }
 
 #resultado-div{
