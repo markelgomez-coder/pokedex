@@ -18,8 +18,12 @@
     margin: 0;
     padding: 0;
     border: 0;
-    display: grid;
-    grid-template-areas: "header" "body" "footer";
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 title {
@@ -27,11 +31,11 @@ title {
 }
 
 header{
-    grid-area: header;
     display: flex;
     background-color: #f5f4f5;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 h1{
@@ -44,14 +48,11 @@ h1{
 
 nav{
     display: flex;
+    text-align: center;
 }
 
-main{
-    grid-area: body;
-}
 
 footer{
-    grid-area: footer;
     color: whitesmoke;
     padding: 1rem;
     text-align: center;
@@ -83,6 +84,74 @@ footer{
 }
 
 #start-image{
-    width: 96.85vw;
+    width: 100%;
+    max-width: 800px;
     height: auto;
+}
+
+#main-home{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-search{
+    flex: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#buscador-div{
+    margin: 1em;
+    background-color: #eaeaeb;
+    height: 1.5em;
+    width: 60%;
+    border: #c3c1c4 solid 2px;
+    padding-top: 0.1em;
+    padding-left: 0.1em;
+}
+
+#buscador-div img{
+    position: absolute;
+    height: 1em;
+    width: auto;
+}
+
+#resultado-div{
+    display: grid;
+    grid-template-columns: repeat(3,20%);
+    grid-template-rows: auto;
+    gap: 2em;
+}
+
+@media (min-width: 769px) {
+    header {
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    #pokeball-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    nav {
+        margin-left: auto;
+    }
+
+    .nav-options {
+        font-size: 1.2em;
+        padding: 10px 15px;
+    }
+
+    #start-image {
+        max-width: 1200px;
+    }
 }
