@@ -1,3 +1,7 @@
+main{
+  
+}
+
 .pokemon-card {
   width: 361px;
   height: 400px;
@@ -54,13 +58,6 @@
   top: -70px;
 }
 
-#main-search {
-  flex: 2;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-}
 
 #buscador-div {
   position: relative;

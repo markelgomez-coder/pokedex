@@ -1,6 +1,9 @@
 body {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   min-height: 100vh;
 }
 
@@ -31,11 +34,25 @@ nav {
   text-align: center;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-content: flex-start;
+  width: 100%;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 footer {
   color: whitesmoke;
   padding: 1rem;
   text-align: center;
   background-color: black;
+  bottom: 0px;
+  width: 100%;
+  align-self: flex-end;
 }
 
 .nav-options {
@@ -97,7 +114,6 @@ footer {
 
   border: 2.75px solid #030303;
   border-radius: 100%;
-
 }
 #pokeball-vector-4 {
   position: absolute;
@@ -107,7 +123,6 @@ footer {
   bottom: 50%;
 
   border: 1.75px solid #030303;
-
 }
 #pokeball-vector-5 {
   position: absolute;
@@ -117,5 +132,10 @@ footer {
   bottom: 50%;
 
   border: 1.75px solid #030303;
+}
 
+@media (min-width: 768px) {
+  main {
+    max-width: 920px;
+  }
 }
