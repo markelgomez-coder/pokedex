@@ -12,7 +12,14 @@
   <body>
     <header>
       <div id="logo-nav">
-        <img id="pokeball-img" src="img_general/pokeball.png" alt="" />
+        <div class="pokeball">
+          <div id="pokeball-interior"></div>
+          <div id="vector-1"></div>
+          <div id="vector-2"></div>
+          <div id="vector-3"></div>
+          <div id="vector-4"></div>
+          <div id="vector-5"></div>
+        </div>
         <h1>POKÉDEX</h1>
       </div>
       <section>
@@ -25,8 +32,8 @@
 
     <main id="main-search">
       <form id="buscador-div">
-        <input id="buscador-button" type="image" src="img_general/lupa.png" />
-        <input id="input-buscador" type="text" name="pokemon-buscado" />
+        <input id="buscador-button" type="button" />
+        <input id="input-buscador" type="search" name="pokemon-buscado" />
       </form>
       <div id="resultado-div">
         <div class="pokemon-card fire">
@@ -35,15 +42,19 @@
             <p class="number">#004</p>
           </header>
           <img src="img_pokemon/4.png" alt="Imagen de Charmander" />
-          <p class="peso">8.5</p>
-          <p class="altura">0.6</p>
-          <div class="stats">
-            <p class="HP">045</p>
-            <p class="ATK">045</p>
-            <p class="DEF">045</p>
-            <p class="SAT">045</p>
-            <p class="SDF">045</p>
-            <p class="SPD">045</p>
+          <div class="info-pokemon">
+            <div class="fire">
+              <p class="peso">8.5</p>
+              <p class="altura">0.6</p>
+            </div>
+            <div class="stats-pokemon">
+              <p class="HP">045</p>
+              <p class="ATK">045</p>
+              <p class="DEF">045</p>
+              <p class="SAT">045</p>
+              <p class="SDF">045</p>
+              <p class="SPD">045</p>
+            </div>
           </div>
         </div>
         <div class="pokemon-card fire">
@@ -52,15 +63,19 @@
             <p class="number">#005</p>
           </header>
           <img src="img_pokemon/5.png" alt="Imagen de Charmeleon" />
-          <p class="peso">19.0</p>
-          <p class="altura">1.1</p>
-          <div class="stats">
-            <p class="HP">058</p>
-            <p class="ATK">064</p>
-            <p class="DEF">058</p>
-            <p class="SAT">080</p>
-            <p class="SDF">065</p>
-            <p class="SPD">080</p>
+          <div class="info-pokemon">
+            <div class="fire">
+              <p class="peso">19.0</p>
+              <p class="altura">1.1</p>
+            </div>
+            <div class="stats-pokemon">
+              <p class="HP">058</p>
+              <p class="ATK">064</p>
+              <p class="DEF">058</p>
+              <p class="SAT">080</p>
+              <p class="SDF">065</p>
+              <p class="SPD">080</p>
+            </div>
           </div>
         </div>
         <div class="pokemon-card fire poison">
@@ -69,15 +84,19 @@
             <p class="number">#006</p>
           </header>
           <img src="img_pokemon/6.png" alt="Imagen de Charizard" />
-          <p class="peso">90.5</p>
-          <p class="altura">1.7</p>
-          <div class="stats">
-            <p class="HP">078</p>
-            <p class="ATK">084</p>
-            <p class="DEF">078</p>
-            <p class="SAT">109</p>
-            <p class="SDF">085</p>
-            <p class="SPD">100</p>
+          <div class="info-pokemon">
+            <div class="fire poison">
+              <p class="peso">90.5</p>
+              <p class="altura">1.7</p>
+            </div>
+            <div class="stats-pokemon">
+              <p class="HP">078</p>
+              <p class="ATK">084</p>
+              <p class="DEF">078</p>
+              <p class="SAT">109</p>
+              <p class="SDF">085</p>
+              <p class="SPD">100</p>
+            </div>
           </div>
         </div>
       </div>
