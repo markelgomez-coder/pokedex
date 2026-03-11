@@ -1,0 +1,121 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+title {
+  display: none;
+}
+
+header {
+  display: flex;
+  background-color: #f5f4f5;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 80px;
+  width: 100%;
+}
+
+h1 {
+  font-family: "Pokemon-solid", serif;
+  text-align: center;
+  font-size: clamp(1rem, 4vw, 2rem);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+nav {
+  display: flex;
+  text-align: center;
+}
+
+footer {
+  color: whitesmoke;
+  padding: 1rem;
+  text-align: center;
+  background-color: black;
+}
+
+.nav-options {
+  font-family: "Coolvetica", serif;
+  background-color: whitesmoke;
+  color: black;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 15%;
+  font-size: clamp(1rem, 4vw, 2rem);
+}
+
+.nav-options:hover {
+  border: black solid;
+}
+
+#logo-nav {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pokeball {
+  width: 44px;
+  height: 44px;
+  position: relative;
+}
+
+#pokeball-interior {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+#pokeball-vector-1 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+#pokeball-vector-2 {
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 12.5%;
+  bottom: 12.5%;
+
+  border: 2.75px solid #030303;
+  border-radius: 100%;
+}
+#pokeball-vector-3 {
+  position: absolute;
+  left: 35.5%;
+  right: 35.5%;
+  top: 35.5%;
+  bottom: 35.5%;
+
+  border: 2.75px solid #030303;
+  border-radius: 100%;
+
+}
+#pokeball-vector-4 {
+  position: absolute;
+  left: 12.5%;
+  right: 62.5%;
+  top: 45%;
+  bottom: 50%;
+
+  border: 1.75px solid #030303;
+
+}
+#pokeball-vector-5 {
+  position: absolute;
+  left: 62.5%;
+  right: 12.5%;
+  top: 45%;
+  bottom: 50%;
+
+  border: 1.75px solid #030303;
+
+}

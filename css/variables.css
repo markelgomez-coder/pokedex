@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "Pokemon-solid";
+  src: url("../fonts/Pokemon Solid.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Pokemon-hollow";
+  src: url("../fonts/Pokemon Hollow.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("../fonts/Coolvetica Rg.otf") format("opentype");
+}
+
+:root {
+  --shadow-s: rgba(125, 59, 236, 0.07);
+  --shadow-m: rgba(125, 59, 236, 0.05);
+  --shadow-l: rgba(125, 59, 236, 0.05);
+
+  --radius-2xs: 4px;
+  --radius-2xs: 8px;
+  --radius-2xs: 12px;
+  --radius-2xs: 16px;
+  --radius-2xs: 20px;
+  --radius-2xs: 24px;
+  --radius-2xs: 32px;
+
+  --size-3xs: 2px;
+  --size-2xs: 4px;
+  --size-xs: 8px;
+  --size-s: 12px;
+  --size-m: 16px;
+  --size-l: 20px;
+  --size-xl: 24px;
+  --size-2xl: 32px;
+  --size-3xl: 40px;
+  --size-4xl: 64px;
+
+  --color-accent: #7d3bec;
+
+  --color-grass: #a2ce69;
+  --color-bug: #c6d282;
+  --color-electric: #ebd56c;
+  --color-ground: #d3ae6b;
+  --color-fire: #d36255;
+  --color-fighting: #b44d54;
+  --color-poison: #9756dc;
+  --color-psychic: #db6ab5;
+  --color-fairy: #e8a9d3;
+  --color-dragon: #b7b6db;
+  --color-flaying: #a2bfeb;
+  --color-ghost: #655a7d;
+  --color-water: #3cafe8;
+  --color-ice: #c6fbf9;
+  --color-normal: #d1d2c0;
+  --color-rock: #a49d9a;
+  --color-steel: #78817e;
+  --color-dark: #3d413f;
+}
