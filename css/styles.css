@@ -13,156 +13,172 @@
   src: url("../fonts/Coolvetica Rg.otf") format("opentype");
 }
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 title {
-    display: none;
+  display: none;
 }
 
-header{
-    display: flex;
-    background-color: #f5f4f5;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+header {
+  display: flex;
+  background-color: #f5f4f5;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  max-height: 10%;
 }
 
-h1{
-    font-family: "Pokemon-solid", serif;
-    text-align: center;
-    font-size: 1em;
-    padding-left: 10px;
-    padding-right: 10px;
+h1 {
+  font-family: "Pokemon-solid", serif;
+  text-align: center;
+  font-size: clamp(1rem, 4vw, 2rem);
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-nav{
-    display: flex;
-    text-align: center;
+nav {
+  display: flex;
+  text-align: center;
 }
 
-
-footer{
-    color: whitesmoke;
-    padding: 1rem;
-    text-align: center;
-    background-color: black;
+footer {
+  color: whitesmoke;
+  padding: 1rem;
+  text-align: center;
+  background-color: black;
 }
 
-
-.nav-options{
-    font-family: "Coolvetica", serif;
-    background-color: whitesmoke;
-    color: black;
-    margin: 5px;
-    padding: 5px;
-    border-radius: 15%;
+.nav-options {
+  font-family: "Coolvetica", serif;
+  background-color: whitesmoke;
+  color: black;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 15%;
+  font-size: clamp(1rem, 4vw, 2rem);
 }
 
-.nav-options:hover{
-    border: black solid;
+.nav-options:hover {
+  border: black solid;
 }
 
-#logo-nav{
-    display: flex;
-    justify-content:flex-start;
+.pokemon-card {
+  width: 30%;
+  height: 50%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
-#pokeball-img{
-    width: 15%;
-    height: 15%;
+.pokemon-card:hover {
+  transform: scale(1.05);
 }
 
-#start-image{
-    width: 100%;
-    max-width: 800px;
-    height: auto;
+.pokemon-card.fire {
+  background-color: #ff6b6b;
 }
 
-#main-home{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#main-search{
-    flex: 2;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+.pokemon-card img {
+  position: absolute;
 }
 
-#buscador-div{
-    margin: 1em;
-    display: flex;
-    background-color: #eaeaeb;
-    height: 1.5em;
-    width: 60%;
-    border: #c3c1c4 solid 2px;
-    padding-top: 0.1em;
-    padding-left: 0.1em;
-    column-gap: 0.5em;
+#logo-nav {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
 }
 
-#buscador-button{
-    height: 1em;
-    width: auto;
-    justify-self: flex-start;
-    background-image: url("../img/lupa.png");
+#pokeball-img {
+  width: 15%;
+  height: auto;
 }
 
-#input-buscador{
-    color: black;
-    align-self: center;
-    justify-self: center;
-    width: 100%;
-    size: 1em;
+#start-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
 }
 
-#resultado-div{
-    display: grid;
-    grid-template-columns: repeat(3,20%);
-    grid-template-rows: auto;
-    gap: 2em;
+#main-home {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (min-width: 769px) {
-    header {
-        justify-content: space-between;
-        padding: 20px;
-    }
+#main-search {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
 
-    h1 {
-        font-size: 2em;
-    }
+#buscador-div {
+  margin: 1em;
+  display: flex;
+  background-color: #eaeaeb;
+  height: 1.5em;
+  width: 60%;
+  border: #c3c1c4 solid 2px;
+  padding-top: 0.1em;
+  padding-left: 0.1em;
+  column-gap: 0.5em;
+}
 
-    #pokeball-img {
-        width: 50px;
-        height: 50px;
-    }
+#buscador-button {
+  height: 1em;
+  width: auto;
+  justify-self: flex-start;
+  background-image: url("../img/lupa.png");
+}
 
-    nav {
-        margin-left: auto;
-    }
+#input-buscador {
+  color: black;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  size: 1em;
+  background-color: transparent;
+}
 
-    .nav-options {
-        font-size: 1.2em;
-        padding: 10px 15px;
-    }
+#resultado-div {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    #start-image {
-        max-width: 1200px;
-    }
+@media (min-width: 800px) {
+
+  #start-image {
+    max-width: 1200px;
+  }
+
+  #pokeball-img {
+  width: 82.06px;
+  height: auto;
+}
 }
