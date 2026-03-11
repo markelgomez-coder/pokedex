@@ -33,7 +33,7 @@ title {
 header {
   display: flex;
   background-color: #f5f4f5;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
   max-height: 10%;
@@ -74,7 +74,7 @@ footer {
 }
 
 .pokemon-card {
-  width: 30%;
+  width: 70%;
   height: 50%;
   border-radius: 25px;
   display: flex;
@@ -82,10 +82,6 @@ footer {
   justify-content: center;
   align-items: flex-start;
   justify-content: space-between;
-}
-
-.pokemon-card:hover {
-  transform: scale(1.05);
 }
 
 .pokemon-card.fire {
@@ -96,10 +92,12 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: transparent;
 }
 
 .pokemon-card img {
   position: absolute;
+  z-index: -1;
 }
 
 #logo-nav {
@@ -168,17 +166,20 @@ footer {
   flex-direction: row;
   width: 75%;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 @media (min-width: 800px) {
 
+    .pokemon-card {
+  width: 30%;
+    }
   #start-image {
     max-width: 1200px;
   }
 
   #pokeball-img {
-  width: 82.06px;
-  height: auto;
-}
+    width: 82.06px;
+    height: auto;
+  }
 }
