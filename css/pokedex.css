@@ -124,6 +124,7 @@
   gap: var(--spacing-xs);
   top: calc(-244px - var(--spacing-xs));
   z-index: 0;
+  top: -200px;
 }
 
 .tipo-pokemon {
@@ -191,7 +192,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: var(--spacing-xs);
 }
 
 .stat span:first-child {
@@ -281,14 +282,24 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center; 
 
   width: 361px;
   height: 580px;
-  left: calc(50% - 361px / 2);
   top: 208px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
-
+  #resultado-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-2xl);
+    width: 920px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 }
