@@ -3,6 +3,7 @@
   max-width: 800px;
   height: auto;
 }
+
 @media (min-width: 768px) {
   #start-image {
     max-width: 1200px;

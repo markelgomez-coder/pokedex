@@ -4,6 +4,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
   min-height: 100vh;
 }
 
@@ -13,17 +14,21 @@ title {
 
 header {
   display: flex;
-  background-color: #f5f4f5;
   justify-content: space-between;
   align-items: center;
+
+  background-color: #f5f4f5;
+
   margin-bottom: 10px;
   height: 80px;
   width: 100%;
+  box-shadow: 0px 10px 15px -3px var(--shadow-m), 0px 4px 6px -2px var(--shadow-m);
 }
 
 h1 {
-  font-family: "Pokemon-solid", serif;
   text-align: center;
+  font-family: "Pokemon-solid", serif;
+
   font-size: clamp(1rem, 4vw, 2rem);
   padding-left: 10px;
   padding-right: 10px;
@@ -40,29 +45,35 @@ main {
   align-items: center;
   flex-direction: column;
   align-content: flex-start;
+
   width: 100%;
   margin-left: 16px;
   margin-right: 16px;
 }
 
 footer {
-  color: whitesmoke;
-  padding: 1rem;
   text-align: center;
-  background-color: black;
-  bottom: 0px;
-  width: 100%;
   align-self: flex-end;
+
+  color: whitesmoke;
+  background-color: black;
+
+  width: 100%;
+  height: 64px;
+  padding: 1rem;
+  top: 788px;
+  left: calc(50% - 393px/2);
 }
 
 .nav-options {
   font-family: "Coolvetica", serif;
   background-color: whitesmoke;
   color: black;
+
+  font-size: clamp(1rem, 4vw, 2rem);
   margin: 5px;
   padding: 5px;
   border-radius: 15%;
-  font-size: clamp(1rem, 4vw, 2rem);
 }
 
 .nav-options:hover {
@@ -77,9 +88,10 @@ footer {
 }
 
 .pokeball {
+  position: relative;
+
   width: 44px;
   height: 44px;
-  position: relative;
 }
 
 #pokeball-interior {
@@ -90,6 +102,7 @@ footer {
 
 #pokeball-vector-1 {
   position: absolute;
+
   left: 0%;
   right: 0%;
   top: 0%;
@@ -97,41 +110,45 @@ footer {
 }
 #pokeball-vector-2 {
   position: absolute;
+
+  border: 2.75px solid #030303;
+
   left: 12.5%;
   right: 12.5%;
   top: 12.5%;
   bottom: 12.5%;
-
-  border: 2.75px solid #030303;
   border-radius: 100%;
 }
 #pokeball-vector-3 {
   position: absolute;
+
+  border: 2.75px solid #030303;
+
   left: 35.5%;
   right: 35.5%;
   top: 35.5%;
   bottom: 35.5%;
-
-  border: 2.75px solid #030303;
   border-radius: 100%;
 }
 #pokeball-vector-4 {
   position: absolute;
+
+  border: 1.75px solid #030303;
+
   left: 12.5%;
   right: 62.5%;
   top: 45%;
   bottom: 50%;
-
-  border: 1.75px solid #030303;
 }
 #pokeball-vector-5 {
   position: absolute;
+
+  border: 1.75px solid #030303;
+
   left: 62.5%;
   right: 12.5%;
   top: 45%;
   bottom: 50%;
-
-  border: 1.75px solid #030303;
 }
 
 @media (min-width: 768px) {

@@ -1,21 +1,73 @@
-main{
-  
-}
-
 .pokemon-card {
-  width: 361px;
-  height: 400px;
-  border-radius: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   justify-content: space-between;
+
+  width: 361px;
+  height: 400px;
+  border-radius: var(--radius-xl);
+
   margin-bottom: 10px;
+
+  padding: var(--spacing-xs);
+  gap: 102px;
 }
 
 .pokemon-card.fire {
   background-color: var(--color-fire);
+}
+.pokemon-card.grass {
+  background-color: var(--color-grass);
+}
+.pokemon-card.electric {
+  background-color: var(--color-electric);
+}
+.pokemon-card.ground {
+  background-color: var(--color-ground);
+}
+.pokemon-card.bug {
+  background-color: var(--color-bug);
+}
+.pokemon-card.fighting {
+  background-color: var(--color-fighting);
+}
+.pokemon-card.poison {
+  background-color: var(--color-poison);
+}
+.pokemon-card.psychic {
+  background-color: var(--color-psychic);
+}
+.pokemon-card.fairy {
+  background-color: var(--color-fairy);
+}
+.pokemon-card.dragon {
+  background-color: var(--color-dragon);
+}
+.pokemon-card.flying {
+  background-color: var(--color-flying);
+}
+.pokemon-card.ghost {
+  background-color: var(--color-ghost);
+}
+.pokemon-card.water {
+  background-color: var(--color-water);
+}
+.pokemon-card.ice {
+  background-color: var(--color-ice);
+}
+.pokemon-card.normal {
+  background-color: var(--color-normal);
+}
+.pokemon-card.rock {
+  background-color: var(--color-rock);
+}
+.pokemon-card.steel {
+  background-color: var(--color-steel);
+}
+.pokemon-card.dark {
+  background-color: var(--color-dark);
 }
 
 .pokemon-card header {
@@ -23,7 +75,17 @@ main{
   flex-direction: row;
   justify-content: space-between;
   background-color: transparent;
-  width: 100%;
+  align-items: center;
+  align-content: center;
+
+  width: 345px;
+  height: 28px;
+  padding-left: var(--spacing-xs);
+  padding-right: var(--spacing-xs);
+}
+
+.pokemon-card:first-child{
+  padding-bottom: 102px;
 }
 
 .pokemon-card img {
@@ -31,8 +93,8 @@ main{
   align-self: center;
   width: 140px;
   height: 140px;
-  z-index: 10;
-  top: -70px;
+  z-index: 0;
+  top: -80px;
 }
 
 .name,
@@ -40,6 +102,8 @@ main{
   font-family: "Kanit", sans-serif;
   font-weight: 600;
   font-style: normal;
+
+  color: var(--color-brand-0);
 }
 
 .number {
@@ -48,74 +112,98 @@ main{
 
 .info-pokemon {
   position: relative;
+  height: auto;
+  display: flex;
+
   background-color: #ffffff;
   margin: 10px;
   width: calc(100% - 20px);
   border-radius: 25px;
-  height: auto;
-  display: flex;
   z-index: 2;
   top: -70px;
 }
 
-
 #buscador-div {
-  position: relative;
+  position: absolute;
   display: flex;
-  background-color: #eaeaeb;
+  flex-direction: row;
+  gap: var(--spacing-m);
+
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-600);
+  border: 1px solid var(--color-brand-300);
+  border-radius: var(--radius-s);
+
   width: 361px;
   height: 48px;
+
   top: 120px;
-  left: 16px;
-  border: 1px solid #c1bfc2;
+  left: calc(50% - 180.5px);
+
+  padding-top: var(--spacing-s);
+  padding-bottom: var(--spacing-s);
+  padding-left: var(--spacing-m);
+  padding-right: var(--spacing-m);
 }
 
-#buscador-button {
+#buscador-div:hover {
+  border: 1px solid var(--color-accent);
+}
+
+.buscador-icono {
+  width: 24px;
+  height: 24px;
   position: relative;
-  height: 14px;
+}
+
+.lupa-circulo {
+  position: absolute;
   width: 14px;
+  height: 14px;
+  border: 2.5px solid var(--color-brand-400);
+  border-radius: 50%;
   top: 3px;
   left: 3px;
-  border-radius: 100%;
-  border: #ada9ad solid 2.75px;
-  justify-self: flex-start;
 }
 
-#buscador-button-circle {
+.lupa-linea {
   position: absolute;
-  left: 12.5%;
-  right: 29.17%;
-  top: 12.5%;
-  bottom: 29.17%;
-
-  border: 2.75px solid #3f3d3f;
-}
-
-#buscador-button-palo {
-  position: absolute;
-  left: 62.5%;
-  right: 12.5%;
-  top: 62.5%;
-  bottom: 12.5%;
-
-  border: 2.75px solid #3f3d3f;
+  width: 8px;
+  height: 2.5px;
+  background: var(--color-brand-400);
+  top: 15px;
+  left: 15px;
+  transform: rotate(45deg);
 }
 
 #input-buscador {
-  color: black;
-  align-self: center;
-  justify-self: center;
-  width: 100%;
-  size: 1em;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  size: 16px;
+
+  color: var(--color-brand-600);
   background-color: transparent;
+
+  border: none;
+  width: 100%;
+}
+
+#input-buscador:hover {
+  color: var(--color-brand-900);
+  border: none;
 }
 
 #resultado-div {
+  position: absolute;
   display: flex;
   flex-direction: row;
-  width: 75%;
+  width: 361px;
+  height: 580px;
   flex-wrap: wrap;
   justify-content: space-around;
+  left: 16px;
+  top: 208px;
 }
 
 @media (min-width: 768px) {

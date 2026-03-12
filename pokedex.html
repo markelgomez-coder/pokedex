@@ -3,9 +3,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
     <title>Pokédex</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/reboot.css" />
-    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/css-initializer/reset.css" />
+    <link rel="stylesheet" href="css/css-initializer/reboot.css" />
+    <link rel="stylesheet" href="css/css-initializer/normalize.css" />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/static.css" />
     <link rel="stylesheet" href="css/pokedex.css" />
@@ -32,8 +32,11 @@
     </header>
     <main>
       <form id="buscador-div">
-        <input id="buscador-button" type="button" />
-        <input id="input-buscador" type="search" name="pokemon-buscado" />
+        <div class="buscador-icono">
+          <div class="lupa-circulo"></div>
+          <div class="lupa-linea"></div>
+        </div>
+        <input id="input-buscador" type="search" name="pokemon-buscado" placeholder="Search a Pokemon..." />
       </form>
       <div id="resultado-div">
         <div class="pokemon-card fire">
