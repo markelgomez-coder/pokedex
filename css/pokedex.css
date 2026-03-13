@@ -292,7 +292,7 @@
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1170px) {
   #resultado-div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
