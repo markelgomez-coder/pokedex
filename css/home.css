@@ -4,7 +4,7 @@
   height: auto;
 }
 
-@media (min-width: 1170px) {
+@media (min-width: 1185px) {
   #start-image {
     max-width: 1200px;
   }

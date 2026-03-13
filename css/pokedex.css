@@ -140,32 +140,68 @@
   gap: var(--spacing-xs);
 }
 
-.tipo-pokemon div{
+.tipo-pokemon div {
   width: 66px;
   height: var(--spacing-l);
   border-radius: 100px;
 }
 
-.tipo-pokemon .fire{background-color: var(--color-fire);}
-.tipo-pokemon .poison{background-color: var(--color-poison);}
-.tipo-pokemon .grass{background-color: var(--color-grass);}
-.tipo-pokemon .electric{background-color: var(--color-electric);}
-.tipo-pokemon .ground{background-color: var(--color-ground);}
-.tipo-pokemon .bug{background-color: var(--color-bug);}
-.tipo-pokemon .fighting{background-color: var(--color-fighting);}
-.tipo-pokemon .psychic{background-color: var(--color-psychic);}
-.tipo-pokemon .fairy{background-color: var(--color-fairy);}
-.tipo-pokemon .dragon{background-color: var(--color-dragon);}
-.tipo-pokemon .flying{background-color: var(--color-flying);}
-.tipo-pokemon .ghost{background-color: var(--color-ghost);}
-.tipo-pokemon .water{background-color: var(--color-water);}
-.tipo-pokemon .ice{background-color: var(--color-ice);}
-.tipo-pokemon .normal{background-color: var(--color-normal);}
-.tipo-pokemon .rock{background-color: var(--color-rock);}
-.tipo-pokemon .steel{background-color: var(--color-steel);}
-.tipo-pokemon .dark{background-color: var(--color-dark);}
+.tipo-pokemon .fire {
+  background-color: var(--color-fire);
+}
+.tipo-pokemon .poison {
+  background-color: var(--color-poison);
+}
+.tipo-pokemon .grass {
+  background-color: var(--color-grass);
+}
+.tipo-pokemon .electric {
+  background-color: var(--color-electric);
+}
+.tipo-pokemon .ground {
+  background-color: var(--color-ground);
+}
+.tipo-pokemon .bug {
+  background-color: var(--color-bug);
+}
+.tipo-pokemon .fighting {
+  background-color: var(--color-fighting);
+}
+.tipo-pokemon .psychic {
+  background-color: var(--color-psychic);
+}
+.tipo-pokemon .fairy {
+  background-color: var(--color-fairy);
+}
+.tipo-pokemon .dragon {
+  background-color: var(--color-dragon);
+}
+.tipo-pokemon .flying {
+  background-color: var(--color-flying);
+}
+.tipo-pokemon .ghost {
+  background-color: var(--color-ghost);
+}
+.tipo-pokemon .water {
+  background-color: var(--color-water);
+}
+.tipo-pokemon .ice {
+  background-color: var(--color-ice);
+}
+.tipo-pokemon .normal {
+  background-color: var(--color-normal);
+}
+.tipo-pokemon .rock {
+  background-color: var(--color-rock);
+}
+.tipo-pokemon .steel {
+  background-color: var(--color-steel);
+}
+.tipo-pokemon .dark {
+  background-color: var(--color-dark);
+}
 
-.estatura{
+.estatura {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -176,7 +212,91 @@
   gap: 16px;
 }
 
-.stats-pokemon{
+.peso-icono {
+  width: 20px;
+  height: 20px;
+}
+
+.peso-icono-interior {
+  position: relative;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.circulo {
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 12.5%;
+  bottom: 12.5%;
+
+  border: 1.5px solid #989499;
+}
+
+.trapecio {
+  position: absolute;
+  left: 29.22%;
+  right: 29.17%;
+  top: 29.17%;
+  bottom: 50%;
+
+  border: 1.5px solid #989499;
+}
+
+.estatura-linea-divisora {
+  width: 1px;
+  height: 100%;
+  background-color: var(--color-brand-300);
+}
+
+.altura-icono {
+  width: 20px;
+  height: 20px;
+}
+
+.altura-icono-interior {
+  position: relative;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.altura-icono-cuadrado {
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 33.33%;
+  bottom: 33.33%;
+
+  border: 1.5px solid #989499;
+}
+
+.altura-icono-palo {
+  position: absolute;
+  left: 25%;
+  right: 75%;
+  top: 33.33%;
+  bottom: 54.17%;
+
+  border: 1.5px solid #989499;
+}
+
+.altura-icono-palo:nth-of-type(odd) {
+  position: absolute;
+  left: 37.5%;
+  right: 62.5%;
+  top: 33.33%;
+  bottom: 58.33%;
+
+  border: 1.5px solid #989499;
+}
+
+.stats-pokemon {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -282,7 +402,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
 
   width: 361px;
   height: 580px;
@@ -292,7 +412,7 @@
   margin: 0 auto;
 }
 
-@media (min-width: 1170px) {
+@media (min-width: 1185px) {
   #resultado-div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
