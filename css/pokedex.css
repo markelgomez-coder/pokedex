@@ -80,6 +80,8 @@
   height: 28px;
   padding-left: var(--spacing-xs);
   padding-right: var(--spacing-xs);
+
+  box-shadow:none;
 }
 
 .name,
@@ -226,7 +228,7 @@
   height: 20px;
 }
 
-.circulo {
+.peso-icono-circulo {
   position: absolute;
   left: 12.5%;
   right: 12.5%;
@@ -234,9 +236,10 @@
   bottom: 12.5%;
 
   border: 1.5px solid #989499;
+  border-radius: 25%;
 }
 
-.trapecio {
+.peso-icono-trapecio {
   position: absolute;
   left: 29.22%;
   right: 29.17%;
@@ -244,6 +247,12 @@
   bottom: 50%;
 
   border: 1.5px solid #989499;
+  clip-path: polygon(
+    20% 0%,   
+    80% 0%,   
+    100% 100%,
+    0% 100%   
+  );
 }
 
 .estatura-linea-divisora {
