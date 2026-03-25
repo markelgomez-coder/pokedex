@@ -38,16 +38,22 @@ async function mostrarPanelDerecha(descripcion, dobleDaño, mitadDaño, noDaño)
     <p class="subtitulo-panel-pokemon">Debilidades</p>
     <div class="panel-debilidades">
       <div class="panel-doble-daño">
-        <p class="debilidades"> DOBLE DAÑO </p>
+        <p class="debilidades-subtitulo"> DOBLE DAÑO </p>
+        <div class="tipos-daño">
         ${dobleDañoHTML}
+        </div>
       </div>
       <div class="panel-mitad-daño">
-      <p class="debilidades"> MITAD DAÑO </p>
-      ${mitadDañoHTML}
+        <p class="debilidades-subtitulo"> MITAD DAÑO </p>
+        <div class="tipos-daño">
+        ${mitadDañoHTML}
+        </div>
       </div>
       <div class="panel-no-daño">
-      <p class="debilidades"> NO DAÑO </p>
-      ${noDañoHTML}
+        <p class="debilidades-subtitulo"> NO DAÑO </p>
+        <div class="tipos-daño">
+        ${noDañoHTML}
+        </div>
       </div>
       
     </div>

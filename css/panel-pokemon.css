@@ -28,20 +28,31 @@
   width: 100%;
 }
 
+.descripcion-pokemon {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  align-self: center;
+  justify-self: center;
+}
+
 .panel-evoluciones {
   display: flex;
   flex-direction: row;
 }
 
-.panel-debilidades {
+.panel-debilidades,
+.panel-evoluciones {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  gap: 15vw;
+  gap: 5vw;
 
   width: 100%;
+  height: 50%;
 }
 
 .subtitulo-panel-pokemon {
@@ -53,25 +64,55 @@
   font-size: var(--font-size-mobile-display1);
 }
 
+.panel-doble-daño,
+.panel-mitad-daño,
+.panel-no-daño {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.debilidades-subtitulo{
+    font-family: "Kanit", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.daño {
+  border: 2px solid var(--color-brand-900);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-s);
+}
+
+.tipos-daño{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  gap: 5px;
+  
+}
+
 @media (min-width: 1219px) {
   #panel-pokemon {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 100%;
-    gap: 0;
+    gap: 1vw;
   }
 
   #panel-pokemon-izquierda {
-    width: calc(40vw - 20px);
+    width: calc(30vw - 20px);
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   #panel-pokemon-derecha {
-    width: calc(60vw - 20px);
+    width: calc(65vw - 20px);
     height: 400px;
 
     display: flex;

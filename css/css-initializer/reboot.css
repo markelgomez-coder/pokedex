@@ -89,7 +89,7 @@ Similarly, the top margin on `<p>`s get reset. However, we also reset the bottom
 */
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 /*
 Abbreviations
