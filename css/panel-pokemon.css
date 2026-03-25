@@ -1,0 +1,30 @@
+#panel-pokemon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap:  var(--spacing-4xl);
+
+  width: 100%;
+  height: 100%;
+}
+#panel-pokemon-izquierda {
+  position: relative;
+
+  width: 361px;
+  height: 361px;
+}
+
+#panel-pokemon-derecha {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: var(--spacing-l);
+
+  width: 100%;
+}

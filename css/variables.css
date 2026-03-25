@@ -61,7 +61,7 @@
   --color-psychic: #db6ab5;
   --color-fairy: #e8a9d3;
   --color-dragon: #b7b6db;
-  --color-flaying: #a2bfeb;
+  --color-flying: #a2bfeb;
   --color-ghost: #655a7d;
   --color-water: #3cafe8;
   --color-ice: #c6fbf9;
@@ -69,4 +69,41 @@
   --color-rock: #a49d9a;
   --color-steel: #78817e;
   --color-dark: #3d413f;
+
+  --mobile-width: 768px;
+
+  --font-size-mobile-display1: 24px;
+  --font-size-mobile-headline: 20px;
+  --font-size-mobile-subheadline: 16px;
+  --font-size-mobile-link: 14px;
+  --font-size-mobile-body: 14px;
+  --font-size-mobile-caption: 12px;
+
+  --font-size-computer-display1: 28px;
+  --font-size-computer-headline: 24px;
+  --font-size-computer-subheadline: 18px;
+  --font-size-computer-link: 16px;
+  --font-size-computer-body: 16px;
+  --font-size-computer-caption: 12px;
+
+  --estadistica-hp-bulbasaur: 45;
+  --estadistica-atk-bulbasaur: 49;
+  --estadistica-def-bulbasaur: 49;
+  --estadistica-sat-bulbasaur: 65;
+  --estadistica-sdf-bulbasaur: 65;
+  --estadistica-spd-bulbasaur: 45;
+
+  --estadistica-hp-ivysaur: 45;
+  --estadistica-atk-ivysaur: 49;
+  --estadistica-def-ivysaur: 49;
+  --estadistica-sat-ivysaur: 65;
+  --estadistica-sdf-ivysaur: 65;
+  --estadistica-spd-ivysaur: 45;
+
+  --estadistica-hp-venusaur: 45;
+  --estadistica-atk-venusaur: 49;
+  --estadistica-def-venusaur: 49;
+  --estadistica-sat-venusaur: 65;
+  --estadistica-sdf-venusaur: 65;
+  --estadistica-spd-venusaur: 45;
 }

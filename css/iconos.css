@@ -1,0 +1,270 @@
+.pokeball-icono {
+  position: relative;
+
+  width: 44px;
+  height: 44px;
+}
+
+.pokeball-icono-interior {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.pokeball-icono-vector1 {
+  position: absolute;
+
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+.pokeball-icono-vector2 {
+  position: absolute;
+
+  border: 2.75px solid #030303;
+
+  left: 12.5%;
+  right: 12.5%;
+  top: 12.5%;
+  bottom: 12.5%;
+  border-radius: 100%;
+}
+.pokeball-icono-vector3 {
+  position: absolute;
+
+  border: 2.75px solid #030303;
+
+  left: 35.5%;
+  right: 35.5%;
+  top: 35.5%;
+  bottom: 35.5%;
+  border-radius: 100%;
+}
+.pokeball-icono-vector4 {
+  position: absolute;
+
+  border: 1.75px solid #030303;
+
+  left: 12.5%;
+  right: 62.5%;
+  top: 45%;
+  bottom: 50%;
+}
+.pokeball-icono-vector5 {
+  position: absolute;
+
+  border: 1.75px solid #030303;
+
+  left: 62.5%;
+  right: 12.5%;
+  top: 45%;
+  bottom: 50%;
+}
+
+.lupa-icono {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.lupa-icono-circulo {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2.5px solid var(--color-brand-400);
+  border-radius: 50%;
+  left: -7px;
+  top: 3px;
+}
+
+.lupa-icono-linea {
+  position: absolute;
+  width: 8px;
+  height: 2.5px;
+  background: var(--color-brand-400);
+  top: 15px;
+  left: 4px;
+  transform: rotate(45deg);
+}
+
+.icono-poison {
+  position: absolute;
+  left: 20.83%;
+  right: 20.78%;
+  top: 19.83%;
+  bottom: 18.26%;
+  width: 16px;
+  height: 16px;
+
+  mix-blend-mode: normal;
+}
+
+.icono-poison-interior {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+.icono-poison-vector1 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.icono-poison-vector2 {
+  position: absolute;
+  left: 18.75%;
+  right: 18.75%;
+  top: 20.05%;
+  bottom: 19.53%;
+}
+
+.icono-grass {
+  width: 16px;
+  height: 16px;
+
+  mix-blend-mode: normal;
+}
+
+.icono-grass-interior {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.icono-grass-vector1 {
+  position: absolute;
+  left: 20.83%;
+  right: 20.78%;
+  top: 19.83%;
+  bottom: 18.26%;
+}
+
+.icono-grass-vector2 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.icono-grass-vector3 {
+  position: absolute;
+  left: 20.83%;
+  right: 20.78%;
+  top: 19.83%;
+  bottom: 18.26%;
+}
+
+.icono-no-hay-resultado, .icono-error-api-pokemon {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: calc(100vh / 2 - 197px);
+}
+
+.icono-no-hay-resultado-interior, .icono-error-api-pokemon-interior {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.icono-no-hay-resultado-vector1, .icono-error-api-pokemon-vector1 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.icono-no-hay-resultado-vector2 {
+  position: absolute;
+  left: 12.52%;
+  right: 12.49%;
+  top: 12.49%;
+  bottom: 12.52%;
+
+  border: 2.75px solid var(--color-brand-500);
+  border-radius: 100%;
+}
+
+.icono-no-hay-resultado-vector3 {
+  position: absolute;
+  left: 13.5%;
+  right: 13.5%;
+  top: 32px;
+  bottom: 12.5%;
+
+  border: 1.75px solid var(--color-brand-500);
+  height: 1px;
+}
+
+.icono-no-hay-resultado-vector4 {
+  position: absolute;
+  left: 37.52%;
+  right: 38.77%;
+  top: 38.7%;
+  bottom: 37.51%;
+
+  border: 2.75px solid var(--color-brand-500);
+  border-radius: 100%;
+  background-color: var(--color-brand-0);
+}
+
+.icono-no-hay-resultado-vector5 {
+  position: absolute;
+  left: 7.5%;
+  right: 7.5%;
+  top: 45%;
+  bottom: 50%;
+
+  border-bottom: 2.75px solid var(--color-brand-500);
+  border-top: 2.75px solid var(--color-brand-0);
+  transform: rotate(45deg);
+}
+
+.icono-error-api-pokemon-vector2 {
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  top: 12.5%;
+  bottom: 12.5%;
+
+  border: 2.75px solid #989499;
+  border-radius: 100%;
+}
+
+.icono-error-api-pokemon-vector3 {
+  position: absolute;
+  left: 47%;
+  right: 50%;
+  top: 27.5%;
+  bottom: 43.83%;
+
+  border: 2px solid #989499;
+  border-radius: 30%;
+}
+.icono-error-api-pokemon-vector4 {
+  position: absolute;
+  left: 47%;
+  right: 50%;
+  top: 65.67%;
+  bottom: 33.29%;
+
+  border: 2px solid #989499;
+  border-radius: 100%;
+}
