@@ -21,6 +21,80 @@ async function obtenerPokemon(id) {
   return pokemon;
 }
 
+async function obtenerPokemonTipos(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const pokemon_tipos = {
+    tipos: data.types.map((t) => t.type.name),
+    tipos_url: data.types.map((t) => t.type.url),
+  };
+  return pokemon_tipos;
+}
+
+async function obtenerPokemonDebilidades(url) {
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const pokemon_debilidades = {
+    doble_daño: data.damage_relations.double_damage_from.map(d => d.name),
+    mitad_daño: data.damage_relations.half_damage_from.map(d => d.name),
+    no_daño: data.damage_relations.no_damage_from.map(d => d.name),
+  };
+  return pokemon_debilidades;
+}
+
+async function obtenerDobleDañoPokemon(id) {
+  const tiposData = await obtenerPokemonTipos(id);
+
+  let dobleDañoTotales = [];
+
+  for (const url of tiposData.tipos_url) {
+    const debilidades = await obtenerPokemonDebilidades(url);
+
+    dobleDañoTotales = dobleDañoTotales.concat(
+      debilidades.doble_daño
+    );
+  }
+
+  return [...new Set(dobleDañoTotales)];
+}
+
+async function obtenerMitadDañoPokemon(id) {
+  const tiposData = await obtenerPokemonTipos(id);
+
+  let mitadDañoTotales = [];
+
+  for (const url of tiposData.tipos_url) {
+    const debilidades = await obtenerPokemonDebilidades(url);
+
+    mitadDañoTotales = mitadDañoTotales.concat(
+      debilidades.mitad_daño
+    );
+  }
+
+  return [...new Set(mitadDañoTotales)];
+}
+
+async function obtenerNoDañoPokemon(id) {
+  const tiposData = await obtenerPokemonTipos(id);
+
+  let noDañoTotales = [];
+
+  for (const url of tiposData.tipos_url) {
+    const debilidades = await obtenerPokemonDebilidades(url);
+
+    noDañoTotales = noDañoTotales.concat(
+      debilidades.no_daño
+    );
+  }
+
+  return [...new Set(noDañoTotales)];
+}
+
 async function obtenerPokemonDescripcion(id) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
@@ -32,7 +106,6 @@ async function obtenerPokemonDescripcion(id) {
   );
   return englishEntry.flavor_text.replace(/[\n\f]/g, " ");
 }
-
 function sacarTipoDato(value) {
   value = value.toLowerCase().trim();
 
