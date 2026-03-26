@@ -170,20 +170,23 @@
   bottom: 18.26%;
 }
 
-.icono-no-hay-resultado, .icono-error-api-pokemon {
+.icono-no-hay-resultado,
+.icono-error-api-pokemon {
   width: 64px;
   height: 64px;
   position: absolute;
   top: calc(100vh / 2 - 197px);
 }
 
-.icono-no-hay-resultado-interior, .icono-error-api-pokemon-interior {
+.icono-no-hay-resultado-interior,
+.icono-error-api-pokemon-interior {
   flex: none;
   order: 0;
   flex-grow: 0;
 }
 
-.icono-no-hay-resultado-vector1, .icono-error-api-pokemon-vector1 {
+.icono-no-hay-resultado-vector1,
+.icono-error-api-pokemon-vector1 {
   position: absolute;
   left: 0%;
   right: 0%;
@@ -267,4 +270,121 @@
 
   border: 2px solid #989499;
   border-radius: 100%;
+}
+
+.carta-pokemon-vacia {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 361;
+  height: 400px;
+
+  border-radius: var(--radius-xl);
+
+  background-color: var(--color-brand-0);
+  box-shadow:
+    var(--shadow-s) 0px 2x 3px -1px rgba(125, 59, 236, 0.07),
+    var(--shadow-s) 0px 5px 10px -2px rgba(125, 59, 236, 0.15);
+}
+
+.carta-pokemon-vacia-interior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 345px;
+  height: 384px;
+
+  border-radius: var(--radius-l);
+  background-color: var(--color-brand-100);
+
+  margin-top: var(--spacing-s);
+  margin-right: var(--spacing-xs);
+  margin-bottom: var(--spacing-s);
+  margin-left: var(--spacing-xs);
+}
+
+.carta-pokemon-vacia-icono-interior {
+  width: 160px;
+  height: 160px;
+}
+
+.carta-pokemon-vacia-icono-interior-circulo-fuera {
+  position: absolute;
+
+  top: calc(384px / 2 - 120px / 2);
+  left: calc(345px / 2 - 120px / 2 + 8px);
+
+  width: 120px;
+  height: 120px;
+
+  border: solid 8px var(--color-brand-0);
+  border-radius: 100%;
+}
+
+.carta-pokemon-vacia-icono-interior-circulo-dentro {
+  position: absolute;
+
+  top: calc(384px / 2 - 40px / 2);
+  left: calc(345px / 2 - 40px / 2 + 8px);
+
+  width: 40px;
+  height: 40px;
+
+  border: solid 8px var(--color-brand-0);
+  border-radius: 100%;
+}
+
+.carta-pokemon-vacia-icono-interior-linea-derecha {
+  position: absolute;
+
+  top: calc(384px / 2 - 8px);
+  left: calc(345px / 2 - 48px );
+
+  width: 40px;
+
+  border: solid 8px var(--color-brand-0);
+}
+
+.carta-pokemon-vacia-icono-interior-linea-izquierda {
+  position: absolute;
+
+  top: calc(384px / 2 - 8px);
+  left: calc(345px / 2 + 27px);
+
+  width: 40px;
+
+  border: solid 8px var(--color-brand-0);
+}
+
+@media (min-width: 1219px) {
+  .carta-pokemon-vacia {
+    width: 285px;
+    height: 400px;
+  }
+
+  .carta-pokemon-vacia-interior {
+    width: 269px;
+    height: 384px;
+  }
+
+  .carta-pokemon-vacia-icono-interior-circulo-fuera {
+    top: calc(384px / 2 - 120px / 2);
+    left: calc(269px / 2 - 120px / 2 + 8px);
+  }
+
+  .carta-pokemon-vacia-icono-interior-circulo-dentro {
+    top: calc(384px / 2 - 40px / 2);
+    left: calc(269px / 2 - 40px / 2 + 8px);
+  }
+
+  .carta-pokemon-vacia-icono-interior-linea-derecha {
+    top: calc(384px / 2 - 8px);
+    left: calc(269px / 2 - 48px);
+  }
+
+  .carta-pokemon-vacia-icono-interior-linea-izquierda {
+    top: calc(384px / 2 - 8px);
+    left: calc(269px / 2 + 27px);
+  }
 }

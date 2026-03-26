@@ -6,6 +6,7 @@ body {
     "main"
     "footer";
   margin: 0;
+  background-color: var(--color-brand-50);
 }
 
 header {
@@ -73,6 +74,7 @@ main {
 
   padding: 20px;
   gap: 25px;
+
 }
 
 footer {

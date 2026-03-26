@@ -18,9 +18,14 @@ const tiposPokemon = [
   "dark",
   "steel",
 ];
+main();
+
+function main(){
+  mostrarCartasVacias();
+  setPokemons();
+}
 
 let listaPokemon;
-setPokemons();
 let timeoutId;
 
 async function obtenerPrimeraGeneracion() {

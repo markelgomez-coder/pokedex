@@ -37,14 +37,13 @@ async function obtenerPokemonTipos(id) {
 }
 
 async function obtenerPokemonDebilidades(url) {
-
   const res = await fetch(url);
   const data = await res.json();
 
   const pokemon_debilidades = {
-    doble_daño: data.damage_relations.double_damage_from.map(d => d.name),
-    mitad_daño: data.damage_relations.half_damage_from.map(d => d.name),
-    no_daño: data.damage_relations.no_damage_from.map(d => d.name),
+    doble_daño: data.damage_relations.double_damage_from.map((d) => d.name),
+    mitad_daño: data.damage_relations.half_damage_from.map((d) => d.name),
+    no_daño: data.damage_relations.no_damage_from.map((d) => d.name),
   };
   return pokemon_debilidades;
 }
@@ -57,9 +56,7 @@ async function obtenerDobleDañoPokemon(id) {
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
 
-    dobleDañoTotales = dobleDañoTotales.concat(
-      debilidades.doble_daño
-    );
+    dobleDañoTotales = dobleDañoTotales.concat(debilidades.doble_daño);
   }
 
   return [...new Set(dobleDañoTotales)];
@@ -73,9 +70,7 @@ async function obtenerMitadDañoPokemon(id) {
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
 
-    mitadDañoTotales = mitadDañoTotales.concat(
-      debilidades.mitad_daño
-    );
+    mitadDañoTotales = mitadDañoTotales.concat(debilidades.mitad_daño);
   }
 
   return [...new Set(mitadDañoTotales)];
@@ -89,9 +84,7 @@ async function obtenerNoDañoPokemon(id) {
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
 
-    noDañoTotales = noDañoTotales.concat(
-      debilidades.no_daño
-    );
+    noDañoTotales = noDañoTotales.concat(debilidades.no_daño);
   }
 
   return [...new Set(noDañoTotales)];
@@ -114,15 +107,13 @@ async function obtenerPokemonEvolucionesLink(id) {
   const res = await fetch(url);
   const data = await res.json();
 
- return data.evolution_chain.url
+  return data.evolution_chain.url;
 }
 
 async function obtenerPokemonEvoluciones(url) {
-
   const res = await fetch(url);
   const data = await res.json();
 
-  
   return extraerEvoluciones(data.chain);
 }
 
@@ -132,7 +123,7 @@ function extraerEvoluciones(chain) {
   function recorrer(nodo) {
     resultado.push(nodo.species.name);
 
-    nodo.evolves_to.forEach(evo => recorrer(evo));
+    nodo.evolves_to.forEach((evo) => recorrer(evo));
   }
 
   recorrer(chain);
@@ -159,6 +150,24 @@ function formatearNumero(numero) {
     return "#0" + numero;
   }
   return "#" + numero;
+}
+
+function mostrarCartasVacias() {
+  document.getElementById("resultado-busqueda").innerHTML = "";
+  for (let i = 0; i < 9; i++) {
+    document.getElementById("resultado-busqueda").innerHTML += `
+    <div class="carta-pokemon-vacia">
+      <div class="carta-pokemon-vacia-interior"> 
+          <div class="carta-pokemon-vacia-icono-interior">
+            <div class="carta-pokemon-vacia-icono-interior-circulo-fuera"></div>
+            <div class="carta-pokemon-vacia-icono-interior-circulo-dentro"></div>
+            <div class="carta-pokemon-vacia-icono-interior-linea-derecha"></div>
+            <div class="carta-pokemon-vacia-icono-interior-linea-izquierda"></div>
+          <div>
+      </div>
+    </div>
+    `;
+  }
 }
 
 function mostrarPokemonSinLink(pokemon, lugar) {
