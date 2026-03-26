@@ -21,7 +21,6 @@ const tiposPokemon = [
 
 let listaPokemon;
 setPokemons();
-console.log(listaPokemon);
 let timeoutId;
 
 async function obtenerPrimeraGeneracion() {
