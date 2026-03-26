@@ -18,6 +18,8 @@ async function obtenerPokemon(id) {
     sdf: data.stats[4].base_stat,
     spd: data.stats[5].base_stat,
   };
+  console.log(pokemon);
+  console.log(data);
   return pokemon;
 }
 
@@ -106,6 +108,37 @@ async function obtenerPokemonDescripcion(id) {
   );
   return englishEntry.flavor_text.replace(/[\n\f]/g, " ");
 }
+async function obtenerPokemonEvolucionesLink(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+ return data.evolution_chain.url
+}
+
+async function obtenerPokemonEvoluciones(url) {
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  
+  return extraerEvoluciones(data.chain);
+}
+
+function extraerEvoluciones(chain) {
+  const resultado = [];
+
+  function recorrer(nodo) {
+    resultado.push(nodo.species.name);
+
+    nodo.evolves_to.forEach(evo => recorrer(evo));
+  }
+
+  recorrer(chain);
+  return resultado;
+}
+
 function sacarTipoDato(value) {
   value = value.toLowerCase().trim();
 
@@ -214,7 +247,7 @@ function mostrarPokemonSinLink(pokemon, lugar) {
 
 function mostrarPokemonConLink(pokemon, lugar) {
   document.getElementById(lugar).innerHTML += `
-    <a class="carta-pokemon ${pokemon.tipos[0]}" href="panel-pokemon.html?pokemon=${pokemon.numero}">
+    <a class="carta-pokemon ${pokemon.tipos[0]}" href="panel-pokemon.html?pokemon=${pokemon.nombre}">
           <header>
             <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
             <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>

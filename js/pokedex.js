@@ -19,7 +19,9 @@ const tiposPokemon = [
   "steel",
 ];
 
-let listaPokemon = [];
+let listaPokemon;
+setPokemons();
+console.log(listaPokemon);
 let timeoutId;
 
 async function obtenerPrimeraGeneracion() {
@@ -32,13 +34,15 @@ async function obtenerPrimeraGeneracion() {
     const pokemons = await Promise.all(promesas);
     enseñarCartas(pokemons);
 
-    listaPokemon = pokemons;
+    return pokemons;
   } catch (error) {
     enseñarErrorAPI();
   }
 }
 
-obtenerPrimeraGeneracion();
+async function setPokemons(){
+  listaPokemon = await obtenerPrimeraGeneracion();
+}
 
 function formatearNumero(numero) {
   if (numero < 10) {

@@ -258,6 +258,10 @@ a:hover {
   width: 361px;
 }
 
+  #resultado-busqueda:last-child{
+    padding-bottom: 84px;
+  }
+
 .no-hay-resultado,.error-api-pokemon {
   display: flex;
   flex-direction: column;
@@ -339,6 +343,7 @@ a:hover {
     grid-template-columns: repeat(3, auto);
     row-gap: var(--spacing-l);
     column-gap: var(--spacing-l);
+    
   }
 
   .buscador {

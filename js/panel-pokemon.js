@@ -12,11 +12,25 @@ obtenerPokemon(numeroPokemon).then(async (pokemon) => {
   const dobleDaño = await obtenerDobleDañoPokemon(numeroPokemon);
   const mitadDaño = await obtenerMitadDañoPokemon(numeroPokemon);
   const noDaño = await obtenerNoDañoPokemon(numeroPokemon);
+  const evolucionesLink = await obtenerPokemonEvolucionesLink(numeroPokemon);
+  const evolucion = await obtenerPokemonEvoluciones(evolucionesLink);
 
-  mostrarPanelDerecha(descripcion, dobleDaño, mitadDaño, noDaño);
+  const evoluciones = await Promise.all(
+    evolucion.map((evo) => obtenerPokemon(evo)),
+  );
+
+  console.log(evoluciones);
+
+  mostrarPanelDerecha(descripcion, dobleDaño, mitadDaño, noDaño, evoluciones);
 });
 
-async function mostrarPanelDerecha(descripcion, dobleDaño, mitadDaño, noDaño) {
+async function mostrarPanelDerecha(
+  descripcion,
+  dobleDaño,
+  mitadDaño,
+  noDaño,
+  evoluciones,
+) {
   const dobleDañoHTML = dobleDaño
     .map((d) => `<span class="daño ${d}">${d}</span>`)
     .join("");
@@ -33,7 +47,17 @@ async function mostrarPanelDerecha(descripcion, dobleDaño, mitadDaño, noDaño)
     <p class="descripcion-pokemon">${descripcion}</p>
 
     <p class="subtitulo-panel-pokemon">Evoluciones</p>
-    <div class="panel-evoluciones"></div>
+    <div class="panel-evoluciones">
+      ${evoluciones
+        .map(
+          (evo) => `
+      <a class="evolucion-pokemon" href="panel-pokemon.html?pokemon=${evo.nombre}">
+        <img src=${evo.imagen}>
+        <p class="evolucion-pokemon-nombre">${evo.nombre.charAt(0).toUpperCase() + evo.nombre.slice(1)}</p>
+      </a>`,
+        )
+        .join("")}
+    </div>
 
     <p class="subtitulo-panel-pokemon">Debilidades</p>
     <div class="panel-debilidades">
