@@ -9,9 +9,9 @@ obtenerPokemon(numeroPokemon).then(async (pokemon) => {
   mostrarPokemonSinLink(pokemon, "panel-pokemon-izquierda");
 
   const descripcion = await obtenerPokemonDescripcion(numeroPokemon);
-  const dobleDaño = await obtenerDobleDañoPokemon(numeroPokemon);
-  const mitadDaño = await obtenerMitadDañoPokemon(numeroPokemon);
-  const noDaño = await obtenerNoDañoPokemon(numeroPokemon);
+  const dobleDano = await obtenerDobleDanoPokemon(numeroPokemon);
+  const mitadDano = await obtenerMitadDanoPokemon(numeroPokemon);
+  const noDano = await obtenerNoDanoPokemon(numeroPokemon);
   const evolucionesLink = await obtenerPokemonEvolucionesLink(numeroPokemon);
   const evolucion = await obtenerPokemonEvoluciones(evolucionesLink);
 
@@ -21,26 +21,26 @@ obtenerPokemon(numeroPokemon).then(async (pokemon) => {
 
   console.log(evoluciones);
 
-  mostrarPanelDerecha(descripcion, dobleDaño, mitadDaño, noDaño, evoluciones);
+  mostrarPanelDerecha(descripcion, dobleDano, mitadDano, noDano, evoluciones);
 });
 
 async function mostrarPanelDerecha(
   descripcion,
-  dobleDaño,
-  mitadDaño,
-  noDaño,
+  dobleDano,
+  mitadDano,
+  noDano,
   evoluciones,
 ) {
-  const dobleDañoHTML = dobleDaño
-    .map((d) => `<span class="daño ${d}">${d}</span>`)
+  const dobleDanoHTML = dobleDano
+    .map((d) => `<span class="dano ${d}">${d}</span>`)
     .join("");
 
-  const mitadDañoHTML = mitadDaño
-    .map((d) => `<span class="daño ${d}">${d}</span>`)
+  const mitadDanoHTML = mitadDano
+    .map((d) => `<span class="dano ${d}">${d}</span>`)
     .join("");
 
-  const noDañoHTML = noDaño
-    .map((d) => `<span class="daño ${d}">${d}</span>`)
+  const noDanoHTML = noDano
+    .map((d) => `<span class="dano ${d}">${d}</span>`)
     .join("");
 
   document.getElementById("panel-pokemon-derecha").innerHTML += `
@@ -61,22 +61,22 @@ async function mostrarPanelDerecha(
 
     <p class="subtitulo-panel-pokemon">Debilidades</p>
     <div class="panel-debilidades">
-      <div class="panel-doble-daño">
-        <p class="debilidades-subtitulo"> DOBLE DAÑO </p>
-        <div class="tipos-daño">
-        ${dobleDañoHTML}
+      <div class="panel-doble-dano">
+        <p class="debilidades-subtitulo"> DEBILIDAD </p>
+        <div class="tipos-dano">
+        ${dobleDanoHTML}
         </div>
       </div>
-      <div class="panel-mitad-daño">
-        <p class="debilidades-subtitulo"> MITAD DAÑO </p>
-        <div class="tipos-daño">
-        ${mitadDañoHTML}
+      <div class="panel-mitad-dano">
+        <p class="debilidades-subtitulo"> RESISTENCIA </p>
+        <div class="tipos-dano">
+        ${mitadDanoHTML}
         </div>
       </div>
-      <div class="panel-no-daño">
-        <p class="debilidades-subtitulo"> NO DAÑO </p>
-        <div class="tipos-daño">
-        ${noDañoHTML}
+      <div class="panel-no-dano">
+        <p class="debilidades-subtitulo"> INMUNIDAD </p>
+        <div class="tipos-dano">
+        ${noDanoHTML}
         </div>
       </div>
       

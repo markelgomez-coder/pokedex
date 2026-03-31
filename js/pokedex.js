@@ -36,11 +36,12 @@ async function obtenerPrimeraGeneracion() {
     }
 
     const pokemons = await Promise.all(promesas);
-    enseñarCartas(pokemons);
+    ensenarCartas(pokemons);
 
     return pokemons;
   } catch (error) {
-    enseñarErrorAPI();
+    document.getElementById("resultado-busqueda").innerHTML = "";
+    ensenarErrorAPI();
   }
 }
 
@@ -65,7 +66,7 @@ document.addEventListener("keyup", (e) => {
       const value = e.target.value;
 
       if (value === "") {
-        enseñarCartas(listaPokemon);
+        ensenarCartas(listaPokemon);
       } else {
         const tipoDato = sacarTipoDato(value);
         document.getElementById("resultado-busqueda").innerHTML += "";
@@ -92,7 +93,7 @@ function filtraPorTipo(value) {
       filtrados.push(pokemon);
     }
   });
-  enseñarCartas(filtrados);
+  ensenarCartas(filtrados);
 }
 
 function filtraPorNumero(value) {
@@ -105,7 +106,7 @@ function filtraPorNumero(value) {
     if (pokemon.numero.toString().includes(value)) {
       filtrados.push(pokemon);
     }
-    enseñarCartas(filtrados);
+    ensenarCartas(filtrados);
   });
 }
 
@@ -115,14 +116,14 @@ function filtraPorNombre(value) {
     if (pokemon.nombre.includes(value)) {
       filtrados.push(pokemon);
     }
-    enseñarCartas(filtrados);
+    ensenarCartas(filtrados);
   });
 }
 
-function enseñarCartas(pokemons) {
+function ensenarCartas(pokemons) {
   document.getElementById("resultado-busqueda").innerHTML = "";
   if (pokemons.length === 0) {
-    enseñarNoHayResultado();
+    ensenarNoHayResultado();
   } else {
     pokemons.forEach((pokemon) => {
       mostrarPokemonConLink(pokemon,"resultado-busqueda");

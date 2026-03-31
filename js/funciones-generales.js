@@ -41,53 +41,53 @@ async function obtenerPokemonDebilidades(url) {
   const data = await res.json();
 
   const pokemon_debilidades = {
-    doble_daño: data.damage_relations.double_damage_from.map((d) => d.name),
-    mitad_daño: data.damage_relations.half_damage_from.map((d) => d.name),
-    no_daño: data.damage_relations.no_damage_from.map((d) => d.name),
+    doble_dano: data.damage_relations.double_damage_from.map((d) => d.name),
+    mitad_dano: data.damage_relations.half_damage_from.map((d) => d.name),
+    no_dano: data.damage_relations.no_damage_from.map((d) => d.name),
   };
-  return pokemon_debilidades;
+  return pokemon_debilidades; 
 }
 
-async function obtenerDobleDañoPokemon(id) {
+async function obtenerDobleDanoPokemon(id) {
   const tiposData = await obtenerPokemonTipos(id);
 
-  let dobleDañoTotales = [];
+  let dobleDanoTotales = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
 
-    dobleDañoTotales = dobleDañoTotales.concat(debilidades.doble_daño);
+    dobleDanoTotales = dobleDanoTotales.concat(debilidades.doble_dano);
   }
 
-  return [...new Set(dobleDañoTotales)];
+  return [...new Set(dobleDanoTotales)];
 }
 
-async function obtenerMitadDañoPokemon(id) {
+async function obtenerMitadDanoPokemon(id) {
   const tiposData = await obtenerPokemonTipos(id);
 
-  let mitadDañoTotales = [];
+  let mitadDanoTotales = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
 
-    mitadDañoTotales = mitadDañoTotales.concat(debilidades.mitad_daño);
+    mitadDanoTotales = mitadDanoTotales.concat(debilidades.mitad_dano);
   }
 
-  return [...new Set(mitadDañoTotales)];
+  return [...new Set(mitadDanoTotales)];
 }
 
-async function obtenerNoDañoPokemon(id) {
+async function obtenerNoDanoPokemon(id) {
   const tiposData = await obtenerPokemonTipos(id);
 
-  let noDañoTotales = [];
+  let noDanoTotales = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
 
-    noDañoTotales = noDañoTotales.concat(debilidades.no_daño);
+    noDanoTotales = noDanoTotales.concat(debilidades.no_dano);
   }
 
-  return [...new Set(noDañoTotales)];
+  return [...new Set(noDanoTotales)];
 }
 
 async function obtenerPokemonDescripcion(id) {
@@ -339,7 +339,7 @@ function mostrarPokemonConLink(pokemon, lugar) {
     `;
 }
 
-function enseñarNoHayResultado() {
+function ensenarNoHayResultado() {
   document.getElementById("resultado-busqueda").innerHTML += `
   <div class="no-hay-resultado">
     <div class="icono-no-hay-resultado">
@@ -355,7 +355,7 @@ function enseñarNoHayResultado() {
   `;
 }
 
-function enseñarErrorAPI() {
+function ensenarErrorAPI() {
   document.getElementById("resultado-busqueda").innerHTML += `
   <div class="error-api-pokemon">
     <div class="icono-error-api-pokemon">
