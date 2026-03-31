@@ -1,6 +1,7 @@
 import type { Pokemon } from "./tipos";
 import type { TipoPokemon } from "./tipos";
 import type { DanoPokemon } from "./tipos";
+import { tiposPokemon } from "./pokedex"; 
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -128,11 +129,10 @@ export async function obtenerPokemonEvoluciones(url:string) {
 }
 
 export function extraerEvoluciones(chain) {
-  const resultado = [];
+  const resultado:Array<Pokemon> = [];
 
   function recorrer(nodo) {
     resultado.push(nodo.species.name);
-
     nodo.evolves_to.forEach((evo) => recorrer(evo));
   }
 

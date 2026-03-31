@@ -1,4 +1,4 @@
-import type { Pokemon } from "./tipos";
+import type { DanoPokemon, Pokemon } from "./tipos";
 import * as funciones from "./funciones-generales";
 
 function inicializarPanelVacio(){
@@ -38,21 +38,21 @@ funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
 
 async function mostrarPanelDerecha(
   descripcion:string,
-  dobleDano:Array<string>,
-  mitadDano:Array<string>,
-  noDano:Array<string>,
+  dobleDano:Array<DanoPokemon>,
+  mitadDano:Array<DanoPokemon>,
+  noDano:Array<DanoPokemon>,
   evoluciones:Array<Pokemon>,
 ) {
   const dobleDanoHTML = dobleDano
-    .map((d:string) => `<span class="dano ${d}">${d}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.nombre}">${d.nombre}</span>`)
     .join("");
 
   const mitadDanoHTML = mitadDano
-    .map((d:string) => `<span class="dano ${d}">${d}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.nombre}">${d.nombre}</span>`)
     .join("");
 
   const noDanoHTML = noDano
-    .map((d:string) => `<span class="dano ${d}">${d}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.nombre}">${d.nombre}</span>`)
     .join("");
 
     const container = document.getElementById("panel-pokemon-derecha");

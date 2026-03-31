@@ -1,7 +1,7 @@
 import * as funciones from "./funciones-generales";
 import type { Pokemon } from "./tipos";
 
-const tiposPokemon = [
+export const tiposPokemon = [
   "grass",
   "bug",
   "electric",
