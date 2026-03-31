@@ -1,3 +1,6 @@
+import * as funciones from "./funciones-generales";
+import type { Pokemon } from "./tipos";
+
 const tiposPokemon = [
   "grass",
   "bug",
@@ -20,36 +23,38 @@ const tiposPokemon = [
 ];
 main();
 
-function main(){
-  mostrarCartasVacias();
+function main() {
+  funciones.mostrarCartasVacias();
   setPokemons();
 }
 
-let listaPokemon;
-let timeoutId;
+let listaPokemon: Array<Pokemon>;
+let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
 async function obtenerPrimeraGeneracion() {
+  const container = document.getElementById("resultado-busqueda");
   const promesas = [];
   try {
     for (let i = 1; i <= 151; i++) {
-      promesas.push(obtenerPokemon(i));
+      promesas.push(funciones.obtenerPokemon(i + ""));
     }
 
-    const pokemons = await Promise.all(promesas);
+    const pokemons: Array<Pokemon> = await Promise.all(promesas);
     ensenarCartas(pokemons);
 
     return pokemons;
   } catch (error) {
-    document.getElementById("resultado-busqueda").innerHTML = "";
-    ensenarErrorAPI();
+    if (container != null) container.innerHTML = "";
+    funciones.ensenarErrorAPI();
+    return [];
   }
 }
 
-async function setPokemons(){
+async function setPokemons() {
   listaPokemon = await obtenerPrimeraGeneracion();
 }
 
-function formatearNumero(numero) {
+function formatearNumero(numero: number) {
   if (numero < 10) {
     return "#00" + numero;
   }
@@ -60,34 +65,40 @@ function formatearNumero(numero) {
 }
 
 document.addEventListener("keyup", (e) => {
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(() => {
-    if (e.target.matches("#input-busqueda")) {
-      const value = e.target.value;
+  const container = document.getElementById("resultado-busqueda");
+  const target = e.target as HTMLInputElement;
+  if (target != null && container != null) {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      if (target.matches("#input-busqueda")) {
+        const value = target.value;
 
-      if (value === "") {
-        ensenarCartas(listaPokemon);
-      } else {
-        const tipoDato = sacarTipoDato(value);
-        document.getElementById("resultado-busqueda").innerHTML += "";
-        switch (tipoDato) {
-          case "tipo":
-            filtraPorTipo(value);
-            break;
-          case "numero":
-            filtraPorNumero(value);
-            break;
-          case "nombre":
-            filtraPorNombre(value);
-            break;
+        if (value === "") {
+          ensenarCartas(listaPokemon);
+        } else {
+          const tipoDato = funciones.sacarTipoDato(value);
+          container.innerHTML += "";
+          switch (tipoDato) {
+            case "tipo":
+              filtraPorTipo(value);
+              break;
+            case "numero":
+              filtraPorNumero(value);
+              break;
+            case "nombre":
+              filtraPorNombre(value);
+              break;
+          }
         }
       }
-    }
-  }, 1000);
+    }, 1000);
+  }
 });
 
-function filtraPorTipo(value) {
-  const filtrados = [];
+function filtraPorTipo(value: string) {
+  const filtrados: Array<Pokemon> = [];
   listaPokemon.forEach((pokemon) => {
     if (pokemon.tipos.includes(value)) {
       filtrados.push(pokemon);
@@ -96,8 +107,8 @@ function filtraPorTipo(value) {
   ensenarCartas(filtrados);
 }
 
-function filtraPorNumero(value) {
-  const filtrados = [];
+function filtraPorNumero(value: string) {
+  const filtrados: Array<Pokemon> = [];
   listaPokemon.forEach((pokemon) => {
     if (value.charAt(0) === "#") {
       value = value.slice(1);
@@ -110,8 +121,8 @@ function filtraPorNumero(value) {
   });
 }
 
-function filtraPorNombre(value) {
-  const filtrados = [];
+function filtraPorNombre(value: string) {
+  const filtrados: Array<Pokemon> = [];
   listaPokemon.forEach((pokemon) => {
     if (pokemon.nombre.includes(value)) {
       filtrados.push(pokemon);
@@ -120,13 +131,14 @@ function filtraPorNombre(value) {
   });
 }
 
-function ensenarCartas(pokemons) {
-  document.getElementById("resultado-busqueda").innerHTML = "";
+function ensenarCartas(pokemons: Array<Pokemon>) {
+  const container = document.getElementById("resultado-busqueda");
+  if (container != null) container.innerHTML = "";
   if (pokemons.length === 0) {
-    ensenarNoHayResultado();
+    funciones.ensenarNoHayResultado();
   } else {
     pokemons.forEach((pokemon) => {
-      mostrarPokemonConLink(pokemon,"resultado-busqueda");
+      funciones.mostrarPokemonConLink(pokemon, "resultado-busqueda");
     });
   }
 }

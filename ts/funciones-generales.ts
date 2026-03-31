@@ -1,4 +1,8 @@
-async function obtenerPokemon(id) {
+import type { Pokemon } from "./tipos";
+import type { TipoPokemon } from "./tipos";
+import type { DanoPokemon } from "./tipos";
+
+export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
   const res = await fetch(url);
@@ -8,7 +12,7 @@ async function obtenerPokemon(id) {
     nombre: data.name,
     numero: data.id,
     imagen: data.sprites.other["official-artwork"].front_default,
-    tipos: data.types.map((t) => t.type.name),
+    tipos: data.types.map((t: TipoPokemon) => t.type.nombre),
     peso: data.weight,
     altura: data.height,
     hp: data.stats[0].base_stat,
@@ -23,35 +27,41 @@ async function obtenerPokemon(id) {
   return pokemon;
 }
 
-async function obtenerPokemonTipos(id) {
+export async function obtenerPokemonTipos(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
   const res = await fetch(url);
   const data = await res.json();
 
   const pokemon_tipos = {
-    tipos: data.types.map((t) => t.type.name),
-    tipos_url: data.types.map((t) => t.type.url),
+    tipos: data.types.map((t: TipoPokemon) => t.type.nombre),
+    tipos_url: data.types.map((t: TipoPokemon) => t.type.url),
   };
   return pokemon_tipos;
 }
 
-async function obtenerPokemonDebilidades(url) {
+export async function obtenerPokemonDebilidades(url: string) {
   const res = await fetch(url);
   const data = await res.json();
 
   const pokemon_debilidades = {
-    doble_dano: data.damage_relations.double_damage_from.map((d) => d.name),
-    mitad_dano: data.damage_relations.half_damage_from.map((d) => d.name),
-    no_dano: data.damage_relations.no_damage_from.map((d) => d.name),
+    doble_dano: data.damage_relations.double_damage_from.map(
+      (d: DanoPokemon) => d.nombre,
+    ),
+    mitad_dano: data.damage_relations.half_damage_from.map(
+      (d: DanoPokemon) => d.nombre,
+    ),
+    no_dano: data.damage_relations.no_damage_from.map(
+      (d: DanoPokemon) => d.nombre,
+    ),
   };
   return pokemon_debilidades;
 }
 
-async function obtenerDobleDanoPokemon(id) {
+export async function obtenerDobleDanoPokemon(id:string) {
   const tiposData = await obtenerPokemonTipos(id);
 
-  let dobleDanoTotales = [];
+  let dobleDanoTotales: Array<DanoPokemon> = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
@@ -62,10 +72,10 @@ async function obtenerDobleDanoPokemon(id) {
   return [...new Set(dobleDanoTotales)];
 }
 
-async function obtenerMitadDanoPokemon(id) {
+export async function obtenerMitadDanoPokemon(id:string) {
   const tiposData = await obtenerPokemonTipos(id);
 
-  let mitadDanoTotales = [];
+  let mitadDanoTotales: Array<DanoPokemon> = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
@@ -76,10 +86,10 @@ async function obtenerMitadDanoPokemon(id) {
   return [...new Set(mitadDanoTotales)];
 }
 
-async function obtenerNoDanoPokemon(id) {
+export async function obtenerNoDanoPokemon(id:string) {
   const tiposData = await obtenerPokemonTipos(id);
 
-  let noDanoTotales = [];
+  let noDanoTotales: Array<DanoPokemon> = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
@@ -90,7 +100,7 @@ async function obtenerNoDanoPokemon(id) {
   return [...new Set(noDanoTotales)];
 }
 
-async function obtenerPokemonDescripcion(id) {
+export async function obtenerPokemonDescripcion(id:string) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
   const res = await fetch(url);
@@ -101,7 +111,7 @@ async function obtenerPokemonDescripcion(id) {
   );
   return englishEntry.flavor_text.replace(/[\n\f]/g, " ");
 }
-async function obtenerPokemonEvolucionesLink(id) {
+export async function obtenerPokemonEvolucionesLink(id:string) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
   const res = await fetch(url);
@@ -110,14 +120,14 @@ async function obtenerPokemonEvolucionesLink(id) {
   return data.evolution_chain.url;
 }
 
-async function obtenerPokemonEvoluciones(url) {
+export async function obtenerPokemonEvoluciones(url:string) {
   const res = await fetch(url);
   const data = await res.json();
 
   return extraerEvoluciones(data.chain);
 }
 
-function extraerEvoluciones(chain) {
+export function extraerEvoluciones(chain) {
   const resultado = [];
 
   function recorrer(nodo) {
@@ -130,7 +140,7 @@ function extraerEvoluciones(chain) {
   return resultado;
 }
 
-function sacarTipoDato(value) {
+export function sacarTipoDato(value:string) {
   value = value.toLowerCase().trim();
 
   if (tiposPokemon.includes(value)) {
@@ -142,7 +152,7 @@ function sacarTipoDato(value) {
   return "nombre";
 }
 
-function formatearNumero(numero) {
+export function formatearNumero(numero:number) {
   if (numero < 10) {
     return "#00" + numero;
   }
@@ -152,110 +162,122 @@ function formatearNumero(numero) {
   return "#" + numero;
 }
 
-function mostrarCartasVacias() {
-  document.getElementById("resultado-busqueda").innerHTML = "";
-  for (let i = 0; i < 9; i++) {
-    document.getElementById("resultado-busqueda").innerHTML += `
-    <div class="carta-pokemon-vacia">
-      <div class="carta-pokemon-vacia-interior"> 
+export function mostrarCartasVacias() {
+  const container = document.getElementById("resultado-busqueda");
+
+  if (container != null) {
+    container.innerHTML = "";
+
+    let vaciasHtml = "";
+
+    for (let i = 0; i < 9; i++) {
+      vaciasHtml += `
+      <div class="carta-pokemon-vacia">
+        <div class="carta-pokemon-vacia-interior"> 
           <div class="carta-pokemon-vacia-icono-interior">
             <div class="carta-pokemon-vacia-icono-interior-circulo-fuera"></div>
             <div class="carta-pokemon-vacia-icono-interior-circulo-dentro"></div>
             <div class="carta-pokemon-vacia-icono-interior-linea-derecha"></div>
             <div class="carta-pokemon-vacia-icono-interior-linea-izquierda"></div>
-          <div>
+          </div>
+        </div>
       </div>
-    </div>
-    `;
+      `;
+    }
+
+    container.innerHTML = vaciasHtml;
   }
 }
 
-function mostrarPokemonSinLink(pokemon, lugar) {
-  document.getElementById(lugar).innerHTML += `
-          <div class="carta-pokemon ${pokemon.tipos[0]}">
-            <header>
-            <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
-            <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>
-          </header>
-          <img
-            class="pokemon-image"
-            src="${pokemon.imagen}"
-            alt="Imagen ${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}"
-          />
-          <div class="pokemon-info">
-            <div class="tipo-pokemon">
-              ${pokemon.tipos
-                .map(
-                  (tipo) => `
-                <div class="icono-tipo ${tipo}">
-                  <p class="texto-tipo">${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</p>
-                </div>`,
-                )
-                .join("")}
-            </div>
-            <div class="medidas-pokemon">
-              <div class="icono-peso"></div>
-              <p>${pokemon.peso} Kg</p>
-              <div class="separador-tipos"></div>
-              <div class="icono-altura"></div>
-              <p>${pokemon.altura} m</p>
-            </div>
-            <div class="estadisticas-pokemon">
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">HP</p>
-                  <p class="estadistica-valor">${pokemon.hp}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.hp / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">ATK</p>
-                  <p class="estadistica-valor">${pokemon.atk}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.atk / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">DEF</p>
-                  <p class="estadistica-valor">${pokemon.def}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.def / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">SAT</p>
-                  <p class="estadistica-valor">${pokemon.sat}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sat / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">SDF</p>
-                  <p class="estadistica-valor">${pokemon.sdf}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sdf / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">SPD</p>
-                  <p class="estadistica-valor">${pokemon.spd}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.spd / 255) - 16 + "px"}"></div>
-              </div>
-            </div>
-          </div>
-          `;
-}
-function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
+export function mostrarPokemonSinLink(pokemon: Pokemon, lugar: string) {
   const container = document.getElementById(lugar);
-  if (container != null) {
+
+  if (container != null)
+    container.innerHTML += `
+            <div class="carta-pokemon ${pokemon.tipos[0]}">
+              <header>
+              <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
+              <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>
+            </header>
+            <img
+              class="pokemon-image"
+              src="${pokemon.imagen}"
+              alt="Imagen ${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}"
+            />
+            <div class="pokemon-info">
+              <div class="tipo-pokemon">
+                ${pokemon.tipos
+                  .map(
+                    (tipo) => `
+                  <div class="icono-tipo ${tipo}">
+                    <p class="texto-tipo">${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</p>
+                  </div>`,
+                  )
+                  .join("")}
+              </div>
+              <div class="medidas-pokemon">
+                <div class="icono-peso"></div>
+                <p>${pokemon.peso} Kg</p>
+                <div class="separador-tipos"></div>
+                <div class="icono-altura"></div>
+                <p>${pokemon.altura} m</p>
+              </div>
+              <div class="estadisticas-pokemon">
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">HP</p>
+                    <p class="estadistica-valor">${pokemon.hp}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.hp / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">ATK</p>
+                    <p class="estadistica-valor">${pokemon.atk}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.atk / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">DEF</p>
+                    <p class="estadistica-valor">${pokemon.def}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.def / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">SAT</p>
+                    <p class="estadistica-valor">${pokemon.sat}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sat / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">SDF</p>
+                    <p class="estadistica-valor">${pokemon.sdf}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sdf / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">SPD</p>
+                    <p class="estadistica-valor">${pokemon.spd}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.spd / 255) - 16 + "px"}"></div>
+                </div>
+              </div>
+            </div>
+            `;
+}
+export function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
+  const container = document.getElementById(lugar);
+  if (container != null)
     container.innerHTML += `
       <a class="carta-pokemon ${pokemon.tipos[0]}" href="panel-pokemon.html?pokemon=${pokemon.nombre}">
             <header>
@@ -338,27 +360,32 @@ function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
             </div>
           </a>
       `;
-  }
 }
 
-function ensenarNoHayResultado() {
-  document.getElementById("resultado-busqueda").innerHTML += `
-  <div class="no-hay-resultado">
-    <div class="icono-no-hay-resultado">
-      <div class="icono-no-hay-resultado-interior"></div>
-      <div class="icono-no-hay-resultado-vector1"></div>
-      <div class="icono-no-hay-resultado-vector2"></div>
-      <div class="icono-no-hay-resultado-vector3"></div>
-      <div class="icono-no-hay-resultado-vector4"></div>
-      <div class="icono-no-hay-resultado-vector5"></div>
+export function ensenarNoHayResultado() {
+  const container = document.getElementById("resultado-busqueda");
+  const input = document.getElementById("mi-input") as HTMLInputElement;
+
+  if (container != null && input != null)
+    container.innerHTML += `
+    <div class="no-hay-resultado">
+      <div class="icono-no-hay-resultado">
+        <div class="icono-no-hay-resultado-interior"></div>
+        <div class="icono-no-hay-resultado-vector1"></div>
+        <div class="icono-no-hay-resultado-vector2"></div>
+        <div class="icono-no-hay-resultado-vector3"></div>
+        <div class="icono-no-hay-resultado-vector4"></div>
+        <div class="icono-no-hay-resultado-vector5"></div>
+      </div>
+      <p> There is no results for "${input}" </p>
     </div>
-    <p> There is no results for "${document.getElementById("input-busqueda").value}" </p>
-  </div>
-  `;
+    `;
 }
 
-function ensenarErrorAPI() {
-  document.getElementById("resultado-busqueda").innerHTML += `
+export function ensenarErrorAPI() {
+  const container = document.getElementById("resultado-busqueda");
+  if(container != null)
+  container.innerHTML += `
   <div class="error-api-pokemon">
     <div class="icono-error-api-pokemon">
       <div class="icono-error-api-pokemon-interior"></div>

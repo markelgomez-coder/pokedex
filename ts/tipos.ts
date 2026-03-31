@@ -12,3 +12,17 @@ export type Pokemon = {
     sdf: number,
     spd: number,
 }
+
+export type Type = {
+    nombre: string,
+    url: string,
+}
+
+export type TipoPokemon = {
+    nombre: string,
+    type:Type,
+}
+
+export type DanoPokemon = {
+    nombre: string,
+}
