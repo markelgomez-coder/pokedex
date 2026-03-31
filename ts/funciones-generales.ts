@@ -45,7 +45,7 @@ async function obtenerPokemonDebilidades(url) {
     mitad_dano: data.damage_relations.half_damage_from.map((d) => d.name),
     no_dano: data.damage_relations.no_damage_from.map((d) => d.name),
   };
-  return pokemon_debilidades; 
+  return pokemon_debilidades;
 }
 
 async function obtenerDobleDanoPokemon(id) {
@@ -253,90 +253,92 @@ function mostrarPokemonSinLink(pokemon, lugar) {
           </div>
           `;
 }
-
-function mostrarPokemonConLink(pokemon, lugar) {
-  document.getElementById(lugar).innerHTML += `
-    <a class="carta-pokemon ${pokemon.tipos[0]}" href="panel-pokemon.html?pokemon=${pokemon.nombre}">
-          <header>
-            <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
-            <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>
-          </header>
-          <img
-            class="pokemon-image"
-            src="${pokemon.imagen}"
-            alt="Imagen ${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}"
-          />
-          <div class="pokemon-info">
-            <div class="tipo-pokemon">
-              ${pokemon.tipos
-                .map(
-                  (tipo) => `
-                <div class="icono-tipo ${tipo}">
-                  <p class="texto-tipo">${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</p>
-                </div>`,
-                )
-                .join("")}
+function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
+  const container = document.getElementById(lugar);
+  if (container != null) {
+    container.innerHTML += `
+      <a class="carta-pokemon ${pokemon.tipos[0]}" href="panel-pokemon.html?pokemon=${pokemon.nombre}">
+            <header>
+              <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
+              <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>
+            </header>
+            <img
+              class="pokemon-image"
+              src="${pokemon.imagen}"
+              alt="Imagen ${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}"
+            />
+            <div class="pokemon-info">
+              <div class="tipo-pokemon">
+                ${pokemon.tipos
+                  .map(
+                    (tipo) => `
+                  <div class="icono-tipo ${tipo}">
+                    <p class="texto-tipo">${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</p>
+                  </div>`,
+                  )
+                  .join("")}
+              </div>
+              <div class="medidas-pokemon">
+                <div class="icono-peso"></div>
+                <p>${pokemon.peso} Kg</p>
+                <div class="separador-tipos"></div>
+                <div class="icono-altura"></div>
+                <p>${pokemon.altura} m</p>
+              </div>
+              <div class="estadisticas-pokemon">
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">HP</p>
+                    <p class="estadistica-valor">${pokemon.hp}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.hp / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">ATK</p>
+                    <p class="estadistica-valor">${pokemon.atk}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.atk / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">DEF</p>
+                    <p class="estadistica-valor">${pokemon.def}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.def / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">SAT</p>
+                    <p class="estadistica-valor">${pokemon.sat}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sat / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">SDF</p>
+                    <p class="estadistica-valor">${pokemon.sdf}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sdf / 255) - 16 + "px"}"></div>
+                </div>
+                <div class="estadistica">
+                  <div class="estadistica-datos">
+                    <p class="estadistica-nombre">SPD</p>
+                    <p class="estadistica-valor">${pokemon.spd}</p>
+                  </div>
+                  <div class="barra-estadistica-total"></div>
+                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.spd / 255) - 16 + "px"}"></div>
+                </div>
+              </div>
             </div>
-            <div class="medidas-pokemon">
-              <div class="icono-peso"></div>
-              <p>${pokemon.peso} Kg</p>
-              <div class="separador-tipos"></div>
-              <div class="icono-altura"></div>
-              <p>${pokemon.altura} m</p>
-            </div>
-            <div class="estadisticas-pokemon">
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">HP</p>
-                  <p class="estadistica-valor">${pokemon.hp}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.hp / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">ATK</p>
-                  <p class="estadistica-valor">${pokemon.atk}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.atk / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">DEF</p>
-                  <p class="estadistica-valor">${pokemon.def}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.def / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">SAT</p>
-                  <p class="estadistica-valor">${pokemon.sat}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sat / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">SDF</p>
-                  <p class="estadistica-valor">${pokemon.sdf}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sdf / 255) - 16 + "px"}"></div>
-              </div>
-              <div class="estadistica">
-                <div class="estadistica-datos">
-                  <p class="estadistica-nombre">SPD</p>
-                  <p class="estadistica-valor">${pokemon.spd}</p>
-                </div>
-                <div class="barra-estadistica-total"></div>
-                <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.spd / 255) - 16 + "px"}"></div>
-              </div>
-            </div>
-          </div>
-        </a>
-    `;
+          </a>
+      `;
+  }
 }
 
 function ensenarNoHayResultado() {
