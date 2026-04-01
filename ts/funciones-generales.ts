@@ -1,7 +1,11 @@
-import type { EvolutionNode, FlavorTextEntry, Pokemon } from "./tipos";
-import type { TipoPokemon } from "./tipos";
-import type { DanoPokemon } from "./tipos";
-import { tiposPokemon } from "./pokedex.js"; 
+import type {
+  EvolutionNode,
+  FlavorTextEntry,
+  Pokemon,
+  TipoPokemon,
+  DanoPokemon,
+} from "./tipos";
+import { tiposPokemon } from "./pokedex.js";
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -45,63 +49,63 @@ export async function obtenerPokemonDebilidades(url: string) {
   const res = await fetch(url);
   const data = await res.json();
 
-  const pokemon_debilidades = {
-    doble_dano: data.damage_relations.double_damage_from.map(
-      (d: DanoPokemon) => d.name,
-    ),
-    mitad_dano: data.damage_relations.half_damage_from.map(
-      (d: DanoPokemon) => d.name,
-    ),
-    no_dano: data.damage_relations.no_damage_from.map(
-      (d: DanoPokemon) => d.name,
-    ),
+  return {
+    doble_dano: data.damage_relations.double_damage_from as DanoPokemon[],
+    mitad_dano: data.damage_relations.half_damage_from as DanoPokemon[],
+    no_dano: data.damage_relations.no_damage_from as DanoPokemon[],
   };
-  return pokemon_debilidades;
 }
 
-export async function obtenerDobleDanoPokemon(id:string) {
+export async function obtenerDobleDanoPokemon(
+  id: string,
+): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
-
-  let dobleDanoTotales: Array<DanoPokemon> = [];
+  let dobleDanoTotales: DanoPokemon[] = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
-
     dobleDanoTotales = dobleDanoTotales.concat(debilidades.doble_dano);
   }
 
-  return [...new Set(dobleDanoTotales)];
+  const unique = Array.from(
+    new Map(dobleDanoTotales.map((d) => [d.name, d])).values(),
+  );
+  return unique;
 }
 
-export async function obtenerMitadDanoPokemon(id:string) {
+export async function obtenerMitadDanoPokemon(
+  id: string,
+): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
-
-  let mitadDanoTotales: Array<DanoPokemon> = [];
+  let mitadDanoTotales: DanoPokemon[] = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
-
     mitadDanoTotales = mitadDanoTotales.concat(debilidades.mitad_dano);
   }
 
-  return [...new Set(mitadDanoTotales)];
+  const unique = Array.from(
+    new Map(mitadDanoTotales.map((d) => [d.name, d])).values(),
+  );
+  return unique;
 }
 
-export async function obtenerNoDanoPokemon(id:string) {
+export async function obtenerNoDanoPokemon(id: string): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
-
-  let noDanoTotales: Array<DanoPokemon> = [];
+  let noDanoTotales: DanoPokemon[] = [];
 
   for (const url of tiposData.tipos_url) {
     const debilidades = await obtenerPokemonDebilidades(url);
-
     noDanoTotales = noDanoTotales.concat(debilidades.no_dano);
   }
 
-  return [...new Set(noDanoTotales)];
+  const unique = Array.from(
+    new Map(noDanoTotales.map((d) => [d.name, d])).values(),
+  );
+  return unique;
 }
 
-export async function obtenerPokemonDescripcion(id:string) {
+export async function obtenerPokemonDescripcion(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
   const res = await fetch(url);
@@ -112,7 +116,7 @@ export async function obtenerPokemonDescripcion(id:string) {
   );
   return englishEntry.flavor_text.replace(/[\n\f]/g, " ");
 }
-export async function obtenerPokemonEvolucionesLink(id:string) {
+export async function obtenerPokemonEvolucionesLink(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
   const res = await fetch(url);
@@ -121,27 +125,35 @@ export async function obtenerPokemonEvolucionesLink(id:string) {
   return data.evolution_chain.url;
 }
 
-export async function obtenerPokemonEvoluciones(url:string) {
+export async function obtenerPokemonEvoluciones(
+  url: string,
+): Promise<Pokemon[]> {
   const res = await fetch(url);
   const data = await res.json();
 
-  return extraerEvoluciones(data.chain);
+  const evoluciones = await extraerEvoluciones(data.chain);
+  return evoluciones;
 }
 
-export function extraerEvoluciones(chain: EvolutionNode) {
-  const resultado:Array<Pokemon> = [];
+export async function extraerEvoluciones(
+  chain: EvolutionNode,
+): Promise<Pokemon[]> {
+  const resultado: Pokemon[] = [];
 
   async function recorrer(nodo: EvolutionNode) {
-    const pokemon = await obtenerPokemon(nodo.species.name); // trae nombre, tipos, stats, imagen
+    const pokemon = await obtenerPokemon(nodo.species.name);
     resultado.push(pokemon);
-    nodo.evolves_to.forEach((evo) => recorrer(evo));
+
+    for (const evo of nodo.evolves_to) {
+      await recorrer(evo);
+    }
   }
 
-  recorrer(chain);
+  await recorrer(chain);
   return resultado;
 }
 
-export function sacarTipoDato(value:string) {
+export function sacarTipoDato(value: string) {
   value = value.toLowerCase().trim();
 
   if (tiposPokemon.includes(value)) {
@@ -153,7 +165,7 @@ export function sacarTipoDato(value:string) {
   return "nombre";
 }
 
-export function formatearNumero(numero:number) {
+export function formatearNumero(numero: number) {
   if (numero < 10) {
     return "#00" + numero;
   }
@@ -385,8 +397,8 @@ export function ensenarNoHayResultado() {
 
 export function ensenarErrorAPI() {
   const container = document.getElementById("resultado-busqueda");
-  if(container != null)
-  container.innerHTML += `
+  if (container != null)
+    container.innerHTML += `
   <div class="error-api-pokemon">
     <div class="icono-error-api-pokemon">
       <div class="icono-error-api-pokemon-interior"></div>
