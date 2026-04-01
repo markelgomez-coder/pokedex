@@ -1,4 +1,4 @@
-import * as funciones from "./funciones-generales";
+import * as funciones from "./funciones-generales.js";
 import type { Pokemon } from "./tipos";
 
 export const tiposPokemon = [

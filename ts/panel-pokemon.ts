@@ -1,5 +1,5 @@
 import type { DanoPokemon, Pokemon } from "./tipos";
-import * as funciones from "./funciones-generales";
+import * as funciones from "./funciones-generales.js";
 
 function inicializarPanelVacio(){
   const containerIzquierda = document.getElementById("panel-pokemon-izquierda");

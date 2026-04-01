@@ -1,7 +1,7 @@
 import type { Pokemon } from "./tipos";
 import type { TipoPokemon } from "./tipos";
 import type { DanoPokemon } from "./tipos";
-import { tiposPokemon } from "./pokedex"; 
+import { tiposPokemon } from "./pokedex.js"; 
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -108,7 +108,7 @@ export async function obtenerPokemonDescripcion(id:string) {
   const data = await res.json();
 
   const englishEntry = data.flavor_text_entries.find(
-    (entry) => entry.language.name === "en",
+    (entry:any) => entry.language.name === "en",
   );
   return englishEntry.flavor_text.replace(/[\n\f]/g, " ");
 }
@@ -128,12 +128,12 @@ export async function obtenerPokemonEvoluciones(url:string) {
   return extraerEvoluciones(data.chain);
 }
 
-export function extraerEvoluciones(chain) {
+export function extraerEvoluciones(chain:any) {
   const resultado:Array<Pokemon> = [];
 
-  function recorrer(nodo) {
+  function recorrer(nodo:any) {
     resultado.push(nodo.species.name);
-    nodo.evolves_to.forEach((evo) => recorrer(evo));
+    nodo.evolves_to.forEach((evo:any) => recorrer(evo));
   }
 
   recorrer(chain);
