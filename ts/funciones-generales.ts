@@ -1,4 +1,4 @@
-import type { Pokemon } from "./tipos";
+import type { EvolutionNode, FlavorTextEntry, Pokemon } from "./tipos";
 import type { TipoPokemon } from "./tipos";
 import type { DanoPokemon } from "./tipos";
 import { tiposPokemon } from "./pokedex.js"; 
@@ -13,7 +13,7 @@ export async function obtenerPokemon(id: string) {
     nombre: data.name,
     numero: data.id,
     imagen: data.sprites.other["official-artwork"].front_default,
-    tipos: data.types.map((t: TipoPokemon) => t.type.nombre),
+    tipos: data.types.map((t: TipoPokemon) => t.type.name),
     peso: data.weight,
     altura: data.height,
     hp: data.stats[0].base_stat,
@@ -35,7 +35,7 @@ export async function obtenerPokemonTipos(id: string) {
   const data = await res.json();
 
   const pokemon_tipos = {
-    tipos: data.types.map((t: TipoPokemon) => t.type.nombre),
+    tipos: data.types.map((t: TipoPokemon) => t.type.name),
     tipos_url: data.types.map((t: TipoPokemon) => t.type.url),
   };
   return pokemon_tipos;
@@ -47,13 +47,13 @@ export async function obtenerPokemonDebilidades(url: string) {
 
   const pokemon_debilidades = {
     doble_dano: data.damage_relations.double_damage_from.map(
-      (d: DanoPokemon) => d.nombre,
+      (d: DanoPokemon) => d.name,
     ),
     mitad_dano: data.damage_relations.half_damage_from.map(
-      (d: DanoPokemon) => d.nombre,
+      (d: DanoPokemon) => d.name,
     ),
     no_dano: data.damage_relations.no_damage_from.map(
-      (d: DanoPokemon) => d.nombre,
+      (d: DanoPokemon) => d.name,
     ),
   };
   return pokemon_debilidades;
@@ -108,7 +108,7 @@ export async function obtenerPokemonDescripcion(id:string) {
   const data = await res.json();
 
   const englishEntry = data.flavor_text_entries.find(
-    (entry:any) => entry.language.name === "en",
+    (entry: FlavorTextEntry) => entry.language.name === "en",
   );
   return englishEntry.flavor_text.replace(/[\n\f]/g, " ");
 }
@@ -128,12 +128,13 @@ export async function obtenerPokemonEvoluciones(url:string) {
   return extraerEvoluciones(data.chain);
 }
 
-export function extraerEvoluciones(chain:any) {
+export function extraerEvoluciones(chain: EvolutionNode) {
   const resultado:Array<Pokemon> = [];
 
-  function recorrer(nodo:any) {
-    resultado.push(nodo.species.name);
-    nodo.evolves_to.forEach((evo:any) => recorrer(evo));
+  async function recorrer(nodo: EvolutionNode) {
+    const pokemon = await obtenerPokemon(nodo.species.name); // trae nombre, tipos, stats, imagen
+    resultado.push(pokemon);
+    nodo.evolves_to.forEach((evo) => recorrer(evo));
   }
 
   recorrer(chain);

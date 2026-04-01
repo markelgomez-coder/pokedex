@@ -44,15 +44,15 @@ async function mostrarPanelDerecha(
   evoluciones:Array<Pokemon>,
 ) {
   const dobleDanoHTML = dobleDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.nombre}">${d.nombre}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name}</span>`)
     .join("");
 
   const mitadDanoHTML = mitadDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.nombre}">${d.nombre}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name}</span>`)
     .join("");
 
   const noDanoHTML = noDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.nombre}">${d.nombre}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name}</span>`)
     .join("");
 
     const container = document.getElementById("panel-pokemon-derecha");

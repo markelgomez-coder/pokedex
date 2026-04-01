@@ -14,15 +14,36 @@ export type Pokemon = {
 }
 
 export type Type = {
-    nombre: string,
-    url: string,
+    name: string,  
+    url: string,   
 }
 
 export type TipoPokemon = {
-    nombre: string,
-    type:Type,
+    slot: number,  
+    type: Type,    
 }
 
 export type DanoPokemon = {
-    nombre: string,
+    name: string,
+    url: string,
 }
+
+export type EvolutionNode = {
+  species: {
+    name: string;
+    url: string;
+  };
+  evolves_to: EvolutionNode[];
+};
+
+export type FlavorTextEntry = {
+  flavor_text: string;
+  language: {
+    name: string;
+    url: string;
+  };
+  version: {
+    name: string;
+    url: string;
+  };
+};
