@@ -88,6 +88,72 @@
   transform: rotate(45deg);
 }
 
+.icono-dream-team {
+  position: relative;
+
+  left: 125px;
+}
+
+.icono-dream-team-interior {
+  position: absolute;
+
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+}
+
+.icono-dream-team-interior:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.icono-dream-team-vector1 {
+  position: absolute;
+  left: 2.5px;
+  top: 2.5px;
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--color-brand-900);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.icono-dream-team-vector2 {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+
+  background-color: var(--color-brand-0);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.icono-dream-team-vector2:active{
+  background-color: var(--color-brand-900);
+}
+
 .icono-poison {
   position: absolute;
   left: 20.83%;
@@ -339,7 +405,7 @@
   position: absolute;
 
   top: calc(384px / 2 - 8px);
-  left: calc(345px / 2 - 48px );
+  left: calc(345px / 2 - 48px);
 
   width: 40px;
 

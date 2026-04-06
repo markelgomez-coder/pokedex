@@ -1,8 +1,62 @@
-.dream-team{
-    position: absolute;
-    width: 888px;
-    height: 499px;
+.dream-team {
+  position: absolute;
+  width: 888px;
+  height: 499px;
 
-    background-color: var(--color-brand-50);
-    border-radius: 16px;
+  background-color: var(--color-brand-0);
+  border-radius: 16px;
+  top: calc(402px - 249.5px - 20px);
+}
+
+.dream-team-interior {
+  position: relative;
+  width: 872px;
+  height: 483px;
+
+  top: 8px;
+  left: 8px;
+  background: linear-gradient(45deg,#fde4db,#f3d9d5,#d9d0f9, #d2ccff);
+  border-radius: 16px;
+}
+
+.dream-team-grandes{
+  display: flex;
+  gap: 20px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 785px;
+  height: 433px;
+  top: 0;
+  left: calc((872px - 785px)/2);
+  background-color: red;
+}
+
+.dream-team-grandes-img{
+  position: relative;
+  width: 100px;
+  height: 100px;
+
+}
+
+.dream-team-pequenos{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:15px;
+
+    bottom: 0;
+    left: calc(436px - 175px);
+    height: 50px;
+    width: 350px;
+    background-color: var(--color-brand-0);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.dream-team-pequenos-img{
+    height: 40px;
+    width: auto;
 }

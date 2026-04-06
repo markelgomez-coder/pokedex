@@ -142,3 +142,15 @@ function ensenarCartas(pokemons: Array<Pokemon>) {
     });
   }
 }
+
+document.addEventListener("click", (e) => {
+    const container = document.getElementsByClassName("pokemon-card");
+    const target = e.target as HTMLElement;
+    container.forEach(card => {
+      if(target != null){
+        getPokemon(card.getId).setDreamTeam(true);
+      }
+    });
+
+
+})

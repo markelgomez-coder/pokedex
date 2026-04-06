@@ -26,6 +26,7 @@ export async function obtenerPokemon(id: string) {
     sat: data.stats[3].base_stat,
     sdf: data.stats[4].base_stat,
     spd: data.stats[5].base_stat,
+    dream_team: false,
   };
   console.log(pokemon);
   console.log(data);
@@ -303,6 +304,12 @@ export function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
               alt="Imagen ${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}"
             />
             <div class="pokemon-info">
+              <div class="icono-dream-team">
+                <diV class="icono-dream-team-interior">
+                  <div class="icono-dream-team-vector1"></div>
+                  <div class="icono-dream-team-vector2"></div>
+                </div>
+              </div>
               <div class="tipo-pokemon">
                 ${pokemon.tipos
                   .map(

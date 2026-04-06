@@ -11,6 +11,7 @@ export type Pokemon = {
     sat: number,
     sdf: number,
     spd: number,
+    dream_team:boolean,
 }
 
 export type Type = {
