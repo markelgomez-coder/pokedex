@@ -104,25 +104,55 @@ function guardarDreamTeamEnStorage() {
 
 function pokemonGrandeDreamTeam() {
   const contenedorGrande = document.getElementById("dream-team-grandes");
+  const dreamTeamOrdenadoTamano = [...dreamTeam].sort(
+    (a, b) => a.altura - b.altura,
+  );
+  const ordenBonito = [1, 5, 4, 2, 3, 6];
 
   if (contenedorGrande != null) {
-    const htmlGrande = dreamTeam
-      .map(
-        (p: Pokemon) =>
-          `<img class="dream-team-grandes-img" src="${p.imagen}" />`,
-      )
+    const htmlGrande = dreamTeamOrdenadoTamano
+      .map((p: Pokemon, index: number) => {
+        const angle = index * (Math.PI / 3);
+        const radius = 80;
+
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+
+        let inicial = 25;
+        let suma = 1.25;
+
+        if (p.peso >= 100) {
+          inicial = 150;
+          suma = 0.2;
+        }
+
+        return `<img 
+          class="dream-team-grandes-img" 
+          src="${p.imagen}" 
+          style="
+            position: absolute;
+            width: calc(${inicial}px + ${suma} * ${p.peso}px);
+            left: calc(50% + ${x}px);
+            bottom: calc(10% + ${y}px);
+            z-index: ${6 - index};
+            transform: translate(-50%, -50%);
+          " 
+        />`;
+      })
       .join("");
 
-    contenedorGrande.innerHTML = "";
-    contenedorGrande.innerHTML += htmlGrande;
+    contenedorGrande.innerHTML = htmlGrande;
   }
 }
 
 function pokemonPequenoDreamTeam() {
   const contenedorPequeno = document.getElementById("dream-team-pequenos");
+  const dreamTeamOrdenadoNumero = [...dreamTeam].sort(
+    (a, b) => a.numero - b.numero,
+  );
 
   if (contenedorPequeno != null) {
-    const htmlPequeno = dreamTeam
+    const htmlPequeno = dreamTeamOrdenadoNumero
       .map(
         (p: Pokemon) =>
           ` <img class="dream-team-pequenos-img" src="${p.imagen}" />`,

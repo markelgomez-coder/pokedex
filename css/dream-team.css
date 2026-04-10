@@ -33,9 +33,8 @@
 }
 
 .dream-team-grandes-img {
-  position: relative;
-  width: 70px;
-  height: 70px;
+  position: absolute;
+
 }
 
 .dream-team-pequenos {
@@ -77,11 +76,6 @@
     width: 785px;
     height: 433px;
     gap: 20px;
-  }
-
-  .dream-team-grandes-img {
-    width: 100px;
-    height: 100px;
   }
 
   .dream-team-pequenos {
