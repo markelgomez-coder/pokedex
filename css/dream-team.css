@@ -1,7 +1,7 @@
 .dream-team {
   position: absolute;
-  width: 888px;
-  height: 499px;
+  width: 70vw;
+  height: 45vh;
 
   background-color: var(--color-brand-0);
   border-radius: 16px;
@@ -10,52 +10,87 @@
 
 .dream-team-interior {
   position: relative;
-  width: 872px;
-  height: 483px;
+  width: calc(70vw - 16px);
+  height: calc(45vh - 16px);
 
   top: 8px;
   left: 8px;
-  background: linear-gradient(45deg,#fde4db,#f3d9d5,#d9d0f9, #d2ccff);
+  background: linear-gradient(45deg, #fde4db, #f3d9d5, #d9d0f9, #d2ccff);
   border-radius: 16px;
 }
 
-.dream-team-grandes{
+.dream-team-grandes {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
   position: relative;
   justify-content: center;
   align-items: center;
-  width: 785px;
-  height: 433px;
+
+  width: calc(70vw - 103px);
+  height: calc(45vh - 66px);
+  left: calc(((70vw - 16px) - (70vw - 103px)) / 2);
   top: 0;
-  left: calc((872px - 785px)/2);
 }
 
-.dream-team-grandes-img{
+.dream-team-grandes-img {
   position: relative;
-  width: 100px;
-  height: 100px;
-
+  width: 70px;
+  height: 70px;
 }
 
-.dream-team-pequenos{
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap:15px;
+.dream-team-pequenos {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 
-    bottom: 0;
+  bottom: 0;
+  height: 50px;
+  width: 300px;
+  left: calc(((70vw - 16px) / 2) - 150px);
+
+  background-color: var(--color-brand-0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.dream-team-pequenos-img {
+  height: 30px;
+  width: auto;
+}
+
+@media (min-width: 1219px) {
+  .dream-team {
+    width: 888px;
+    height: 499px;
+  }
+
+  .dream-team-interior {
+    width: 872px;
+    height: 483px;
+  }
+
+  .dream-team-grandes {
+    left: calc((872px - 785px) / 2);
+    width: 785px;
+    height: 433px;
+    gap: 20px;
+  }
+
+  .dream-team-grandes-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .dream-team-pequenos {
     left: calc(436px - 175px);
     height: 50px;
     width: 350px;
-    background-color: var(--color-brand-0);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
+  }
 
-.dream-team-pequenos-img{
+  .dream-team-pequenos-img {
     height: 40px;
-    width: auto;
+  }
 }

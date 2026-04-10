@@ -183,11 +183,18 @@ document.addEventListener("click", (e) => {
         }
       }
     }
-  } else if (target.classList.contains("carta-pokemon")) {
-    irPanelPokemon(1);
+  } else if (target.classList.contains("carta-pokemon") || target.classList.contains("pokemon-name") || target.classList.contains("pokemon-image") || target.classList.contains("pokemon-number") || target.classList.contains("pokemon-info")) {
+    const card = target.closest(".carta-pokemon") as HTMLElement;
+
+    if (card) {
+      const nombrePokemon = card.querySelector(".pokemon-name");
+      if (nombrePokemon) {
+        irPanelPokemon(nombrePokemon.textContent.toLowerCase());
+      }
+    }
   }
 });
 
-function irPanelPokemon(id: number) {
+function irPanelPokemon(id: string) {
   window.location.href = `panel-pokemon.html?pokemon=${id}`;
 }
