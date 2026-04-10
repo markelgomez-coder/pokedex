@@ -6,6 +6,7 @@ import type {
   DanoPokemon,
 } from "./tipos";
 import { tiposPokemon } from "./pokedex.js";
+import { dreamTeam } from "./dream-team.js";
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -203,97 +204,15 @@ export function mostrarCartasVacias() {
   }
 }
 
-export function mostrarPokemonSinLink(pokemon: Pokemon, lugar: string) {
+export function mostrarPokemon(pokemon: Pokemon, lugar: string) {
   const container = document.getElementById(lugar);
+  const htmlDreamTeam = `
+  <div class="icono-dream-team-vector2 ${dreamTeam.includes(pokemon) ? "activo" : ""}"></div>
+`;
 
   if (container != null)
     container.innerHTML += `
-            <div class="carta-pokemon ${pokemon.tipos[0]}">
-              <header>
-              <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
-              <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>
-            </header>
-            <img
-              class="pokemon-image"
-              src="${pokemon.imagen}"
-              alt="Imagen ${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}"
-            />
-            <div class="pokemon-info">
-              <div class="tipo-pokemon">
-                ${pokemon.tipos
-                  .map(
-                    (tipo) => `
-                  <div class="icono-tipo ${tipo}">
-                    <p class="texto-tipo">${tipo.charAt(0).toUpperCase() + tipo.slice(1)}</p>
-                  </div>`,
-                  )
-                  .join("")}
-              </div>
-              <div class="medidas-pokemon">
-                <div class="icono-peso"></div>
-                <p>${pokemon.peso} Kg</p>
-                <div class="separador-tipos"></div>
-                <div class="icono-altura"></div>
-                <p>${pokemon.altura} m</p>
-              </div>
-              <div class="estadisticas-pokemon">
-                <div class="estadistica">
-                  <div class="estadistica-datos">
-                    <p class="estadistica-nombre">HP</p>
-                    <p class="estadistica-valor">${pokemon.hp}</p>
-                  </div>
-                  <div class="barra-estadistica-total"></div>
-                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.hp / 255) - 16 + "px"}"></div>
-                </div>
-                <div class="estadistica">
-                  <div class="estadistica-datos">
-                    <p class="estadistica-nombre">ATK</p>
-                    <p class="estadistica-valor">${pokemon.atk}</p>
-                  </div>
-                  <div class="barra-estadistica-total"></div>
-                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.atk / 255) - 16 + "px"}"></div>
-                </div>
-                <div class="estadistica">
-                  <div class="estadistica-datos">
-                    <p class="estadistica-nombre">DEF</p>
-                    <p class="estadistica-valor">${pokemon.def}</p>
-                  </div>
-                  <div class="barra-estadistica-total"></div>
-                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.def / 255) - 16 + "px"}"></div>
-                </div>
-                <div class="estadistica">
-                  <div class="estadistica-datos">
-                    <p class="estadistica-nombre">SAT</p>
-                    <p class="estadistica-valor">${pokemon.sat}</p>
-                  </div>
-                  <div class="barra-estadistica-total"></div>
-                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sat / 255) - 16 + "px"}"></div>
-                </div>
-                <div class="estadistica">
-                  <div class="estadistica-datos">
-                    <p class="estadistica-nombre">SDF</p>
-                    <p class="estadistica-valor">${pokemon.sdf}</p>
-                  </div>
-                  <div class="barra-estadistica-total"></div>
-                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.sdf / 255) - 16 + "px"}"></div>
-                </div>
-                <div class="estadistica">
-                  <div class="estadistica-datos">
-                    <p class="estadistica-nombre">SPD</p>
-                    <p class="estadistica-valor">${pokemon.spd}</p>
-                  </div>
-                  <div class="barra-estadistica-total"></div>
-                  <div class="barra-estadistica-llena" style="width: ${270 * (pokemon.spd / 255) - 16 + "px"}"></div>
-                </div>
-              </div>
-            </div>
-            `;
-}
-export function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
-  const container = document.getElementById(lugar);
-  if (container != null)
-    container.innerHTML += `
-      <a class="carta-pokemon ${pokemon.tipos[0]}" href="panel-pokemon.html?pokemon=${pokemon.nombre}">
+      <a class="carta-pokemon ${pokemon.tipos[0]}">
             <header>
               <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>
               <p class="pokemon-number">${formatearNumero(pokemon.numero)}</p>
@@ -305,9 +224,9 @@ export function mostrarPokemonConLink(pokemon: Pokemon, lugar: string) {
             />
             <div class="pokemon-info">
               <div class="icono-dream-team">
-                <diV class="icono-dream-team-interior">
+                <div class="icono-dream-team-interior">
                   <div class="icono-dream-team-vector1"></div>
-                  <div class="icono-dream-team-vector2"></div>
+                  ${htmlDreamTeam}
                 </div>
               </div>
               <div class="tipo-pokemon">

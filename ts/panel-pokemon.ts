@@ -18,7 +18,7 @@ const numeroPokemon = new URLSearchParams(window.location.search).get(
 
 if(numeroPokemon!= null)
 funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
-  funciones.mostrarPokemonSinLink(pokemon, "panel-pokemon-izquierda");
+  funciones.mostrarPokemon(pokemon, "panel-pokemon-izquierda");
 
   const descripcion = await funciones.obtenerPokemonDescripcion(numeroPokemon);
   const dobleDano = await funciones.obtenerDobleDanoPokemon(numeroPokemon);

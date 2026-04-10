@@ -1,4 +1,5 @@
 import * as funciones from "./funciones-generales.js";
+import * as funcionesDreamTeam from "./dream-team.js";
 import type { Pokemon } from "./tipos";
 
 export const tiposPokemon = [
@@ -28,7 +29,7 @@ function main() {
   setPokemons();
 }
 
-let listaPokemon: Array<Pokemon>;
+export let listaPokemon: Array<Pokemon>;
 let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
 async function obtenerPrimeraGeneracion() {
@@ -138,19 +139,55 @@ function ensenarCartas(pokemons: Array<Pokemon>) {
     funciones.ensenarNoHayResultado();
   } else {
     pokemons.forEach((pokemon) => {
-      funciones.mostrarPokemonConLink(pokemon, "resultado-busqueda");
+      funciones.mostrarPokemon(pokemon, "resultado-busqueda");
     });
   }
 }
 
 document.addEventListener("click", (e) => {
-    const container = document.getElementsByClassName("pokemon-card");
-    const target = e.target as HTMLElement;
-    container.forEach(card => {
-      if(target != null){
-        getPokemon(card.getId).setDreamTeam(true);
+  const target = e.target as HTMLElement;
+
+  if (
+    target.classList.contains("icono-dream-team-interior") ||
+    target.classList.contains("icono-dream-team-vector1") ||
+    target.classList.contains("icono-dream-team-vector2")
+  ) {
+    const card = target.closest(".carta-pokemon") as HTMLElement;
+
+    if (card) {
+      const nombrePokemon = card.querySelector(".pokemon-name");
+      if (nombrePokemon) {
+        const nombrePokemonMinusculas = nombrePokemon.textContent.toLowerCase();
+
+        const sumaDreamTeam = funcionesDreamTeam.sumarDreamTeam(
+          nombrePokemonMinusculas,
+        );
+        const icono = card.getElementsByClassName(
+          "icono-dream-team-vector2",
+        )[0] as HTMLElement;
+
+        switch (sumaDreamTeam) {
+          case 0:
+            if (icono) {
+              icono.classList.add("activo");
+            }
+            console.log("Se ha añadido el pokemon");
+            break;
+
+          case 1:
+            if (icono) {
+              icono.classList.remove("activo");
+            }
+            console.log("Se ha borrado el pokemon");
+            break;
+        }
       }
-    });
+    }
+  } else if (target.classList.contains("carta-pokemon")) {
+    irPanelPokemon(1);
+  }
+});
 
-
-})
+function irPanelPokemon(id: number) {
+  window.location.href = `panel-pokemon.html?pokemon=${id}`;
+}
