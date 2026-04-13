@@ -107,8 +107,6 @@ function pokemonGrandeDreamTeam() {
   const dreamTeamOrdenadoTamano = [...dreamTeam].sort(
     (a, b) => a.altura - b.altura,
   );
-  const ordenBonito = [1, 5, 4, 2, 3, 6];
-
   if (contenedorGrande != null) {
     const htmlGrande = dreamTeamOrdenadoTamano
       .map((p: Pokemon, index: number) => {

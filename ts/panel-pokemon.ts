@@ -1,17 +1,6 @@
 import type { DanoPokemon, Pokemon } from "./tipos";
 import * as funciones from "./funciones-generales.js";
 
-function inicializarPanelVacio(){
-  const containerIzquierda = document.getElementById("panel-pokemon-izquierda");
-  if(containerIzquierda != null){
-    containerIzquierda.innerHTML = "";
-  }
-    const containerDerecha = document.getElementById("panel-pokemon-derecha");
-  if(containerDerecha != null){
-    containerDerecha.innerHTML = "";
-  }
-}
-
 const numeroPokemon = new URLSearchParams(window.location.search).get(
   "pokemon",
 );
@@ -20,9 +9,6 @@ if(numeroPokemon!= null)
 funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
   let html = funciones.mostrarPokemon(pokemon);
   const container = document.getElementById("panel-pokemon-izquierda");
-  if (container != null) {
-    container.innerHTML += html;
-  }
 
   const descripcion = await funciones.obtenerPokemonDescripcion(numeroPokemon);
   const dobleDano = await funciones.obtenerDobleDanoPokemon(numeroPokemon);
@@ -33,10 +19,10 @@ funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
 
   const evoluciones = await Promise.all(
     evolucion.map((evo:Pokemon) => funciones.obtenerPokemon(evo.nombre)),
-  );
-
-  console.log(evoluciones);
-
+  );  
+  if (container != null) {
+    container.innerHTML += html;
+  }
   mostrarPanelDerecha(descripcion, dobleDano, mitadDano, noDano, evoluciones);
 });
 
