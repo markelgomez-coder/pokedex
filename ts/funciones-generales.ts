@@ -299,10 +299,10 @@ export function mostrarPokemon(pokemon: Pokemon) {
 
 export function ensenarNoHayResultado() {
   const container = document.getElementById("resultado-busqueda");
-  const input = document.getElementById("mi-input") as HTMLInputElement;
+  const input = document.getElementById("input-busqueda") as HTMLInputElement;
 
-  if (container != null && input != null)
-    container.innerHTML += `
+  if (container != null)
+    container.innerHTML = `
     <div class="no-hay-resultado">
       <div class="icono-no-hay-resultado">
         <div class="icono-no-hay-resultado-interior"></div>
@@ -312,7 +312,7 @@ export function ensenarNoHayResultado() {
         <div class="icono-no-hay-resultado-vector4"></div>
         <div class="icono-no-hay-resultado-vector5"></div>
       </div>
-      <p> There is no results for "${input}" </p>
+      <p> There is no results for "${input.value}" </p>
     </div>
     `;
 }

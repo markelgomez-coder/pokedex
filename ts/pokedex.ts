@@ -115,10 +115,11 @@ document.addEventListener("keyup", (e) => {
         const value = target.value;
 
         if (value === "") {
+          container.innerHTML = "";
           ensenarCartas(listaPokemon);
         } else {
           const tipoDato = funciones.sacarTipoDato(value);
-          container.innerHTML += "";
+          container.innerHTML = "";
           switch (tipoDato) {
             case "tipo":
               filtraPorTipo(value);
@@ -152,12 +153,11 @@ function filtraPorNumero(value: string) {
     if (value.charAt(0) === "#") {
       value = value.slice(1);
     }
-
     if (pokemon.numero.toString().includes(value)) {
       filtrados.push(pokemon);
     }
-    ensenarCartas(filtrados);
   });
+  ensenarCartas(filtrados);
 }
 
 function filtraPorNombre(value: string) {
@@ -166,8 +166,8 @@ function filtraPorNombre(value: string) {
     if (pokemon.nombre.includes(value)) {
       filtrados.push(pokemon);
     }
-    ensenarCartas(filtrados);
   });
+  ensenarCartas(filtrados);
 }
 
 function ensenarCartas(pokemons: Array<Pokemon>) {
@@ -179,9 +179,9 @@ function ensenarCartas(pokemons: Array<Pokemon>) {
     pokemons.forEach((pokemon) => {
       html += funciones.mostrarPokemon(pokemon);
     });
-  }
-  if (container != null) {
-    container.innerHTML += html;
+    if (container != null) {
+      container.innerHTML += html;
+    }
   }
 }
 
