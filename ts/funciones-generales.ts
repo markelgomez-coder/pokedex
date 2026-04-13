@@ -19,8 +19,8 @@ export async function obtenerPokemon(id: string) {
     numero: data.id,
     imagen: data.sprites.other["official-artwork"].front_default,
     tipos: data.types.map((t: TipoPokemon) => t.type.name),
-    peso: data.weight/10,
-    altura: data.height/10,
+    peso: data.weight / 10,
+    altura: data.height / 10,
     hp: data.stats[0].base_stat,
     atk: data.stats[1].base_stat,
     def: data.stats[2].base_stat,
@@ -204,14 +204,10 @@ export function mostrarCartasVacias() {
   }
 }
 
-export function mostrarPokemon(pokemon: Pokemon, lugar: string) {
-  const container = document.getElementById(lugar);
+export function mostrarPokemon(pokemon: Pokemon) {
   const htmlDreamTeam = `
-  <div class="icono-dream-team-vector2 ${dreamTeam.includes(pokemon) ? "activo" : ""}"></div>
-`;
-
-  if (container != null)
-    container.innerHTML += `
+  <div class="icono-dream-team-vector2 ${dreamTeam.includes(pokemon) ? "activo" : ""}"></div>`;
+  return `
       <a class="carta-pokemon ${pokemon.tipos[0]}">
             <header>
               <p class="pokemon-name">${pokemon.nombre.charAt(0).toUpperCase() + pokemon.nombre.slice(1)}</p>

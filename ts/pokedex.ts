@@ -22,6 +22,22 @@ export const tiposPokemon = [
   "dark",
   "steel",
 ];
+
+export const generaciones = [
+  { id: 1, nombre: "Generación 1", cantidadPokemon: 151 },
+  { id: 2, nombre: "Generación 2", cantidadPokemon: 100 },
+  { id: 3, nombre: "Generación 3", cantidadPokemon: 135 },
+  { id: 4, nombre: "Generación 4", cantidadPokemon: 107 },
+  { id: 5, nombre: "Generación 5", cantidadPokemon: 156 },
+  { id: 6, nombre: "Generación 6", cantidadPokemon: 72 },
+  { id: 7, nombre: "Generación 7", cantidadPokemon: 81 },
+  { id: 8, nombre: "Generación 8", cantidadPokemon: 89 },
+  { id: 9, nombre: "Generación 9", cantidadPokemon: 103 },
+];
+
+export let listaPokemon: Array<Pokemon> = [];
+let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
+
 main();
 
 function main() {
@@ -29,18 +45,21 @@ function main() {
   setPokemons();
 }
 
-export let listaPokemon: Array<Pokemon>;
-let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
-
-async function obtenerPrimeraGeneracion() {
+async function obtenerGeneracion(id: number) {
   const container = document.getElementById("resultado-busqueda");
   const promesas = [];
+  let pokemonsAnteriores: number = sacarPokemonsAnteriores(id);
   try {
-    for (let i = 1; i <= 151; i++) {
+    for (
+      let i = pokemonsAnteriores;
+      i <= pokemonsAnteriores + generaciones[id - 1].cantidadPokemon - 1;
+      i++
+    ) {
       promesas.push(funciones.obtenerPokemon(i + ""));
     }
 
     const pokemons: Array<Pokemon> = await Promise.all(promesas);
+    if (container != null && pokemonsAnteriores == 1) container.innerHTML = "";
     ensenarCartas(pokemons);
 
     return pokemons;
@@ -51,8 +70,27 @@ async function obtenerPrimeraGeneracion() {
   }
 }
 
+function sacarPokemonsAnteriores(id: number) {
+  let pokemonsAnteriores = 0;
+  for (let i = 1; i < id; i++) {
+    pokemonsAnteriores += generaciones[i - 1].cantidadPokemon;
+  }
+  if (pokemonsAnteriores == 0) {
+    return 1;
+  }
+  return pokemonsAnteriores;
+}
+
 async function setPokemons() {
-  listaPokemon = await obtenerPrimeraGeneracion();
+  listaPokemon.push(...(await obtenerGeneracion(1)));
+  listaPokemon.push(...(await obtenerGeneracion(2)));
+  listaPokemon.push(...(await obtenerGeneracion(3)));
+  listaPokemon.push(...(await obtenerGeneracion(4)));
+  listaPokemon.push(...(await obtenerGeneracion(5)));
+  listaPokemon.push(...(await obtenerGeneracion(6)));
+  listaPokemon.push(...(await obtenerGeneracion(7)));
+  listaPokemon.push(...(await obtenerGeneracion(8)));
+  listaPokemon.push(...(await obtenerGeneracion(9)));
 }
 
 function formatearNumero(numero: number) {
@@ -133,14 +171,17 @@ function filtraPorNombre(value: string) {
 }
 
 function ensenarCartas(pokemons: Array<Pokemon>) {
+  let html = "";
   const container = document.getElementById("resultado-busqueda");
-  if (container != null) container.innerHTML = "";
   if (pokemons.length === 0) {
     funciones.ensenarNoHayResultado();
   } else {
     pokemons.forEach((pokemon) => {
-      funciones.mostrarPokemon(pokemon, "resultado-busqueda");
+      html += funciones.mostrarPokemon(pokemon);
     });
+  }
+  if (container != null) {
+    container.innerHTML += html;
   }
 }
 
@@ -183,7 +224,13 @@ document.addEventListener("click", (e) => {
         }
       }
     }
-  } else if (target.classList.contains("carta-pokemon") || target.classList.contains("pokemon-name") || target.classList.contains("pokemon-image") || target.classList.contains("pokemon-number") || target.classList.contains("pokemon-info")) {
+  } else if (
+    target.classList.contains("carta-pokemon") ||
+    target.classList.contains("pokemon-name") ||
+    target.classList.contains("pokemon-image") ||
+    target.classList.contains("pokemon-number") ||
+    target.classList.contains("pokemon-info")
+  ) {
     const card = target.closest(".carta-pokemon") as HTMLElement;
 
     if (card) {

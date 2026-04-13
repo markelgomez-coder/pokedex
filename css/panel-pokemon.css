@@ -11,7 +11,10 @@
   position: relative;
 
   width: 361px;
-  height: 361px;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #panel-pokemon-derecha {
@@ -138,6 +141,7 @@
   }
 
   #panel-pokemon-izquierda {
+    min-width: 361px;
     width: calc(30vw - 20px);
     display: flex;
     justify-content: center;
