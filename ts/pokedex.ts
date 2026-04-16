@@ -38,7 +38,9 @@ export const generaciones = [
 export let listaPokemon: Array<Pokemon> = [];
 let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
-main();
+if (!(import.meta as any).vitest) {
+  main();
+}
 
 function main() {
   funciones.mostrarCartasVacias();
@@ -137,7 +139,7 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
-function filtraPorTipo(value: string) {
+export function filtraPorTipo(value: string) {
   const filtrados: Array<Pokemon> = [];
   listaPokemon.forEach((pokemon) => {
     if (pokemon.tipos.includes(value)) {
@@ -145,9 +147,10 @@ function filtraPorTipo(value: string) {
     }
   });
   ensenarCartas(filtrados);
+  return filtrados;
 }
 
-function filtraPorNumero(value: string) {
+export function filtraPorNumero(value: string) {
   const filtrados: Array<Pokemon> = [];
   listaPokemon.forEach((pokemon) => {
     if (value.charAt(0) === "#") {
@@ -158,9 +161,10 @@ function filtraPorNumero(value: string) {
     }
   });
   ensenarCartas(filtrados);
+  return filtrados;
 }
 
-function filtraPorNombre(value: string) {
+export function filtraPorNombre(value: string) {
   const filtrados: Array<Pokemon> = [];
   listaPokemon.forEach((pokemon) => {
     if (pokemon.nombre.includes(value)) {
@@ -168,6 +172,7 @@ function filtraPorNombre(value: string) {
     }
   });
   ensenarCartas(filtrados);
+  return filtrados;
 }
 
 function ensenarCartas(pokemons: Array<Pokemon>) {

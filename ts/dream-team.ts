@@ -6,9 +6,11 @@ const DREAM_TEAM_STORAGE_KEY = "dreamTeam";
 export let dreamTeam: Array<Pokemon> = [];
 export let maxDreamTeam: number = 6;
 
-window.addEventListener("load", () => {
+export function initDreamTeam() {
   cargarDreamTeamDesdeStorage();
-});
+}
+
+window.addEventListener("load",initDreamTeam);
 
 export function sumarDreamTeam(nombre: string) {
   const pokemon = listaPokemon.find((p) => p.nombre === nombre);

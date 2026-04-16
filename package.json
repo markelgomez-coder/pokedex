@@ -5,12 +5,15 @@
   "private": true,
   "devDependencies": {
     "@types/bun": "latest",
-    "live-server": "^1.2.2"
+    "jsdom": "^29.0.2",
+    "live-server": "^1.2.2",
+    "vitest": "^4.1.4"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "scripts": {
-    "dev": "bunx live-server --port=3000"
+    "dev": "bunx live-server --port=3000",
+    "test": "vitest"
   }
 }
