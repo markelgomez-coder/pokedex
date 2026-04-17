@@ -44,7 +44,24 @@ if (!(import.meta as any).vitest) {
 
 function main() {
   funciones.mostrarCartasVacias();
-  setPokemons();
+  setPokemons("pokedex");
+}
+
+export async function setPokemons(containerId: string) {
+  let pokemonsGuardados: Array<Pokemon> = [];
+  listaPokemon = [];
+  for (let i = 1; i <= 9; i++) {
+    pokemonsGuardados.push(...(await obtenerGeneracion(i)));
+    listaPokemon.push(...pokemonsGuardados);
+    if(containerId === "pokedex"){
+      funcionesDreamTeam.cargarDreamTeamDesdeStorage();
+    ensenarCartas(pokemonsGuardados);
+    }
+    pokemonsGuardados = [];
+  }
+  if(containerId === "dreamTeam"){
+        funcionesDreamTeam.cargarDreamTeamDesdeStorage();
+  }
 }
 
 async function obtenerGeneracion(id: number) {
@@ -62,7 +79,6 @@ async function obtenerGeneracion(id: number) {
 
     const pokemons: Array<Pokemon> = await Promise.all(promesas);
     if (container != null && pokemonsAnteriores == 1) container.innerHTML = "";
-    ensenarCartas(pokemons);
 
     return pokemons;
   } catch (error) {
@@ -81,28 +97,6 @@ function sacarPokemonsAnteriores(id: number) {
     return 1;
   }
   return pokemonsAnteriores;
-}
-
-async function setPokemons() {
-  listaPokemon.push(...(await obtenerGeneracion(1)));
-  listaPokemon.push(...(await obtenerGeneracion(2)));
-  listaPokemon.push(...(await obtenerGeneracion(3)));
-  listaPokemon.push(...(await obtenerGeneracion(4)));
-  listaPokemon.push(...(await obtenerGeneracion(5)));
-  listaPokemon.push(...(await obtenerGeneracion(6)));
-  listaPokemon.push(...(await obtenerGeneracion(7)));
-  listaPokemon.push(...(await obtenerGeneracion(8)));
-  listaPokemon.push(...(await obtenerGeneracion(9)));
-}
-
-function formatearNumero(numero: number) {
-  if (numero < 10) {
-    return "#00" + numero;
-  }
-  if (numero < 100) {
-    return "#0" + numero;
-  }
-  return "#" + numero;
 }
 
 document.addEventListener("keyup", (e) => {
@@ -176,13 +170,17 @@ export function filtraPorNombre(value: string) {
 }
 
 function ensenarCartas(pokemons: Array<Pokemon>) {
+  funcionesDreamTeam.cargarDreamTeamDesdeStorage();
   let html = "";
   const container = document.getElementById("resultado-busqueda");
+  let gogokoa = false;
   if (pokemons.length === 0) {
     funciones.ensenarNoHayResultado();
   } else {
     pokemons.forEach((pokemon) => {
-      html += funciones.mostrarPokemon(pokemon);
+      if (funcionesDreamTeam.dreamTeam.includes(pokemon)) gogokoa = true;
+      html += funciones.mostrarPokemon(pokemon, gogokoa);
+      gogokoa = false;
     });
     if (container != null) {
       container.innerHTML += html;

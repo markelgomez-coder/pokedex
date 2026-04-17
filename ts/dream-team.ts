@@ -1,16 +1,12 @@
 import type { Pokemon } from "./tipos";
-import { listaPokemon } from "./pokedex.js";
+import { listaPokemon, setPokemons } from "./pokedex.js";
 
 const DREAM_TEAM_STORAGE_KEY = "dreamTeam";
 
 export let dreamTeam: Array<Pokemon> = [];
 export let maxDreamTeam: number = 6;
 
-export function initDreamTeam() {
-  cargarDreamTeamDesdeStorage();
-}
-
-window.addEventListener("load",initDreamTeam);
+mostrarDreamTeam();
 
 export function sumarDreamTeam(nombre: string) {
   const pokemon = listaPokemon.find((p) => p.nombre === nombre);
@@ -39,11 +35,13 @@ export function sumarDreamTeam(nombre: string) {
 }
 
 function mostrarDreamTeam() {
-  pokemonGrandeDreamTeam();
-  pokemonPequenoDreamTeam();
+  setPokemons("dreamTeam").then(() => {
+    pokemonGrandeDreamTeam();
+    pokemonPequenoDreamTeam();
+  });
 }
 
-function cargarDreamTeamDesdeStorage() {
+export function cargarDreamTeamDesdeStorage() {
   const storageValue = localStorage.getItem(DREAM_TEAM_STORAGE_KEY);
   if (!storageValue) return;
 
@@ -67,17 +65,16 @@ function cargarDreamTeamDesdeStorage() {
 }
 
 function restaurarDreamTeam(nombres: Array<string>) {
-  dreamTeam = listaPokemon.filter((pokemon) =>
-    nombres.includes(pokemon.nombre),
-  );
-  dreamTeam.forEach((pokemon) => {
-    pokemon.dream_team = true;
+  dreamTeam = [];
+  listaPokemon.forEach((pokemon) => {
+    if (nombres.includes(pokemon.nombre) && !dreamTeam.includes(pokemon)) {
+      dreamTeam.push(pokemon);
+      pokemon.dream_team = true;
+    }
   });
-  actualizarIconosDreamTeamEnDOM();
-  mostrarDreamTeam();
 }
 
-function actualizarIconosDreamTeamEnDOM() {
+export function actualizarIconosDreamTeamEnDOM() {
   const iconos = document.querySelectorAll(".icono-dream-team-vector2");
   iconos.forEach((icono) => {
     const carta = icono.closest(".carta-pokemon");

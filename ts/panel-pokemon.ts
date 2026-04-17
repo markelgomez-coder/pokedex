@@ -1,5 +1,6 @@
 import type { DanoPokemon, Pokemon } from "./tipos";
 import * as funciones from "./funciones-generales.js";
+import { dreamTeam } from "./dream-team";
 
 const numeroPokemon = new URLSearchParams(window.location.search).get(
   "pokemon",
@@ -7,7 +8,7 @@ const numeroPokemon = new URLSearchParams(window.location.search).get(
 
 if(numeroPokemon!= null)
 funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
-  let html = funciones.mostrarPokemon(pokemon);
+  let html = funciones.mostrarPokemon(pokemon, dreamTeam.includes(pokemon)? true : false  );
   const container = document.getElementById("panel-pokemon-izquierda");
 
   const descripcion = await funciones.obtenerPokemonDescripcion(numeroPokemon);

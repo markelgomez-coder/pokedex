@@ -204,9 +204,9 @@ export function mostrarCartasVacias() {
   }
 }
 
-export function mostrarPokemon(pokemon: Pokemon) {
+export function mostrarPokemon(pokemon: Pokemon,gogokoa:boolean) {
   const htmlDreamTeam = `
-  <div class="icono-dream-team-vector2 ${dreamTeam.includes(pokemon) ? "activo" : ""}"></div>`;
+  <div class="icono-dream-team-vector2 ${gogokoa ? "activo" : ""}"></div>`;
   return `
       <a class="carta-pokemon ${pokemon.tipos[0]}">
             <header>
