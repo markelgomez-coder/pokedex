@@ -107,13 +107,18 @@ function pokemonGrandeDreamTeam() {
     (a, b) => a.altura - b.altura,
   );
   if (contenedorGrande != null) {
+    const posiciones = [
+      { x: -120, y: 120 }, 
+      { x: 0, y: 140 }, 
+      { x: 120, y: 120 }, 
+      { x: -70, y: 20 }, 
+      { x: 70, y: 20 }, 
+      { x: 0, y: 70 }, 
+    ];
+
     const htmlGrande = dreamTeamOrdenadoTamano
       .map((p: Pokemon, index: number) => {
-        const angle = index * (Math.PI / 3);
-        const radius = 80;
-
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
+        const pos = posiciones[index];
 
         let inicial = 25;
         let suma = 1.25;
@@ -124,17 +129,17 @@ function pokemonGrandeDreamTeam() {
         }
 
         return `<img 
-          class="dream-team-grandes-img" 
-          src="${p.imagen}" 
-          style="
-            position: absolute;
-            width: calc(${inicial}px + ${suma} * ${p.peso}px);
-            left: calc(50% + ${x}px);
-            bottom: calc(10% + ${y}px);
-            z-index: ${6 - index};
-            transform: translate(-50%, -50%);
-          " 
-        />`;
+      class="dream-team-grandes-img" 
+      src="${p.imagen}" 
+      style="
+        position: absolute;
+        width: calc(${inicial}px + ${suma} * ${p.peso}px);
+        left: calc(50% + ${pos.x}px);
+        bottom: calc(${pos.y}px);
+        z-index: ${6 - index};
+        transform: translate(-50%, -50%);
+      " 
+    />`;
       })
       .join("");
 

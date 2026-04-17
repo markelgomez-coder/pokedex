@@ -39,7 +39,9 @@ export let listaPokemon: Array<Pokemon> = [];
 let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
 if (!(import.meta as any).vitest) {
-  main();
+  if (window.location.pathname.endsWith("pokedex.html")) {
+    main();
+  }
 }
 
 function main() {
@@ -53,14 +55,14 @@ export async function setPokemons(containerId: string) {
   for (let i = 1; i <= 9; i++) {
     pokemonsGuardados.push(...(await obtenerGeneracion(i)));
     listaPokemon.push(...pokemonsGuardados);
-    if(containerId === "pokedex"){
+    if (containerId === "pokedex") {
       funcionesDreamTeam.cargarDreamTeamDesdeStorage();
-    ensenarCartas(pokemonsGuardados);
+      ensenarCartas(pokemonsGuardados);
     }
     pokemonsGuardados = [];
   }
-  if(containerId === "dreamTeam"){
-        funcionesDreamTeam.cargarDreamTeamDesdeStorage();
+  if (containerId === "dreamTeam") {
+    funcionesDreamTeam.cargarDreamTeamDesdeStorage();
   }
 }
 
