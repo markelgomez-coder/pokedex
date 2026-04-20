@@ -1,6 +1,6 @@
 import type { DanoPokemon, Pokemon } from "./tipos";
 import * as funciones from "./funciones-generales.js";
-import { dreamTeam } from "./dream-team";
+import { dreamTeam } from "./dream-team.js";
 
 const numeroPokemon = new URLSearchParams(window.location.search).get(
   "pokemon",
@@ -12,9 +12,9 @@ funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
   const container = document.getElementById("panel-pokemon-izquierda");
 
   const descripcion = await funciones.obtenerPokemonDescripcion(numeroPokemon);
-  const dobleDano = await funciones.obtenerDobleDanoPokemon(numeroPokemon);
-  const mitadDano = await funciones.obtenerMitadDanoPokemon(numeroPokemon);
-  const noDano = await funciones.obtenerNoDanoPokemon(numeroPokemon);
+  const dobleDano = await funciones.obtenerDebilidadPokemon(numeroPokemon);
+  const mitadDano = await funciones.obtenerResistenciaPokemon(numeroPokemon);
+  const noDano = await funciones.obtenerInmunidadPokemon(numeroPokemon);
   const evolucionesLink = await funciones.obtenerPokemonEvolucionesLink(numeroPokemon);
   const evolucion = await funciones.obtenerPokemonEvoluciones(evolucionesLink);
 
@@ -35,15 +35,15 @@ async function mostrarPanelDerecha(
   evoluciones:Array<Pokemon>,
 ) {
   const dobleDanoHTML = dobleDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`)
     .join("");
 
   const mitadDanoHTML = mitadDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`)
     .join("");
 
   const noDanoHTML = noDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name}</span>`)
+    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`)
     .join("");
 
     const container = document.getElementById("panel-pokemon-derecha");

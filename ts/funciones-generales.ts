@@ -47,7 +47,7 @@ export async function obtenerPokemonTipos(id: string) {
   return pokemon_tipos;
 }
 
-export async function obtenerPokemonDebilidades(url: string) {
+export async function obtenerEficaciaPokemon(url: string) {
   const res = await fetch(url);
   const data = await res.json();
 
@@ -58,14 +58,14 @@ export async function obtenerPokemonDebilidades(url: string) {
   };
 }
 
-export async function obtenerDobleDanoPokemon(
+export async function obtenerDebilidadPokemon(
   id: string,
 ): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
   let dobleDanoTotales: DanoPokemon[] = [];
 
   for (const url of tiposData.tipos_url) {
-    const debilidades = await obtenerPokemonDebilidades(url);
+    const debilidades = await obtenerEficaciaPokemon(url);
     dobleDanoTotales = dobleDanoTotales.concat(debilidades.doble_dano);
   }
 
@@ -75,14 +75,14 @@ export async function obtenerDobleDanoPokemon(
   return unique;
 }
 
-export async function obtenerMitadDanoPokemon(
+export async function obtenerResistenciaPokemon(
   id: string,
 ): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
   let mitadDanoTotales: DanoPokemon[] = [];
 
   for (const url of tiposData.tipos_url) {
-    const debilidades = await obtenerPokemonDebilidades(url);
+    const debilidades = await obtenerEficaciaPokemon(url);
     mitadDanoTotales = mitadDanoTotales.concat(debilidades.mitad_dano);
   }
 
@@ -92,12 +92,12 @@ export async function obtenerMitadDanoPokemon(
   return unique;
 }
 
-export async function obtenerNoDanoPokemon(id: string): Promise<DanoPokemon[]> {
+export async function obtenerInmunidadPokemon(id: string): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
   let noDanoTotales: DanoPokemon[] = [];
 
   for (const url of tiposData.tipos_url) {
-    const debilidades = await obtenerPokemonDebilidades(url);
+    const debilidades = await obtenerEficaciaPokemon(url);
     noDanoTotales = noDanoTotales.concat(debilidades.no_dano);
   }
 
