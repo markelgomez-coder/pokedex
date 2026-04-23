@@ -1,34 +1,30 @@
+import * as funcionesGenerales from "./funciones-generales.js";
+import * as datosGenerales from "./datos-generales.js";
+import * as funcionesStorage from "./storage-funciones.js";
+
 import type { Pokemon } from "./tipos";
-import { listaPokemon, setPokemons } from "./pokedex.js";
 
-const DREAM_TEAM_STORAGE_KEY = "dreamTeam";
-
-export let dreamTeam: Array<Pokemon> = [];
-export let maxDreamTeam: number = 6;
-
-if (false) {
-  mostrarDreamTeam();
-}
+mostrarDreamTeam();
 
 export function sumarDreamTeam(nombre: string) {
-  const pokemon = listaPokemon.find((p) => p.nombre === nombre);
+  const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
 
   if (
     pokemon != null &&
-    !dreamTeam.includes(pokemon) &&
-    dreamTeam.length < maxDreamTeam
+    !datosGenerales.dreamTeam.includes(pokemon) &&
+    datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
   ) {
-    dreamTeam.push(pokemon);
+    datosGenerales.dreamTeam.push(pokemon);
     pokemon.dream_team = true;
-    guardarDreamTeamEnStorage();
+    funcionesStorage.guardarDreamTeamEnStorage();
     return 0;
   }
 
-  if (pokemon != null && dreamTeam.includes(pokemon)) {
-    const index = dreamTeam.indexOf(pokemon);
-    dreamTeam.splice(index, 1);
+  if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
+    const index = datosGenerales.dreamTeam.indexOf(pokemon);
+    datosGenerales.dreamTeam.splice(index, 1);
     pokemon.dream_team = false;
-    guardarDreamTeamEnStorage();
+    funcionesStorage.guardarDreamTeamEnStorage();
 
     return 1;
   }
@@ -37,40 +33,19 @@ export function sumarDreamTeam(nombre: string) {
 }
 
 function mostrarDreamTeam() {
-  setPokemons("dreamTeam").then(() => {
+  funcionesGenerales.setPokemons("dreamTeam").then(() => {
     pokemonGrandeDreamTeam();
     pokemonPequenoDreamTeam();
   });
 }
 
-export function cargarDreamTeamDesdeStorage() {
-  const storageValue = localStorage.getItem(DREAM_TEAM_STORAGE_KEY);
-  if (!storageValue) return;
 
-  try {
-    const nombresGuardados = JSON.parse(storageValue);
-    if (!Array.isArray(nombresGuardados)) return;
 
-    if (Array.isArray(listaPokemon) && listaPokemon.length > 0) {
-      restaurarDreamTeam(nombresGuardados);
-    } else {
-      const id = window.setInterval(() => {
-        if (Array.isArray(listaPokemon) && listaPokemon.length > 0) {
-          restaurarDreamTeam(nombresGuardados);
-          window.clearInterval(id);
-        }
-      }, 100);
-    }
-  } catch (error) {
-    console.warn("No se pudo cargar el Dream Team guardado:", error);
-  }
-}
-
-function restaurarDreamTeam(nombres: Array<string>) {
-  dreamTeam = [];
-  listaPokemon.forEach((pokemon) => {
-    if (nombres.includes(pokemon.nombre) && !dreamTeam.includes(pokemon)) {
-      dreamTeam.push(pokemon);
+export function restaurarDreamTeam(nombres: Array<string>) {
+  datosGenerales.VaciarDreamTeam();
+  datosGenerales.listaPokemon.forEach((pokemon) => {
+    if (nombres.includes(pokemon.nombre) && !datosGenerales.dreamTeam.includes(pokemon)) {
+      datosGenerales.dreamTeam.push(pokemon);
       pokemon.dream_team = true;
     }
   });
@@ -84,7 +59,7 @@ export function actualizarIconosDreamTeamEnDOM() {
       const nombreElement = carta.querySelector(".pokemon-name");
       if (nombreElement) {
         const nombrePokemon = nombreElement.textContent?.toLowerCase() || "";
-        const estaEnDreamTeam = dreamTeam.some(
+        const estaEnDreamTeam = datosGenerales.dreamTeam.some(
           (p) => p.nombre === nombrePokemon,
         );
 
@@ -98,24 +73,19 @@ export function actualizarIconosDreamTeamEnDOM() {
   });
 }
 
-function guardarDreamTeamEnStorage() {
-  const nombres = dreamTeam.map((pokemon) => pokemon.nombre);
-  localStorage.setItem(DREAM_TEAM_STORAGE_KEY, JSON.stringify(nombres));
-}
-
 function pokemonGrandeDreamTeam() {
   const contenedorGrande = document.getElementById("dream-team-grandes");
-  const dreamTeamOrdenadoTamano = [...dreamTeam].sort(
+  const dreamTeamOrdenadoTamano = [...datosGenerales.dreamTeam].sort(
     (a, b) => a.altura - b.altura,
   );
   if (contenedorGrande != null) {
     const posiciones = [
-      { x: -120, y: 120 }, 
-      { x: 0, y: 140 }, 
-      { x: 120, y: 120 }, 
-      { x: -70, y: 20 }, 
-      { x: 70, y: 20 }, 
-      { x: 0, y: 70 }, 
+      { x: -120, y: 120 },
+      { x: 0, y: 140 },
+      { x: 120, y: 120 },
+      { x: -70, y: 20 },
+      { x: 70, y: 20 },
+      { x: 0, y: 70 },
     ];
 
     const htmlGrande = dreamTeamOrdenadoTamano
@@ -151,7 +121,7 @@ function pokemonGrandeDreamTeam() {
 
 function pokemonPequenoDreamTeam() {
   const contenedorPequeno = document.getElementById("dream-team-pequenos");
-  const dreamTeamOrdenadoNumero = [...dreamTeam].sort(
+  const dreamTeamOrdenadoNumero = [...datosGenerales.dreamTeam].sort(
     (a, b) => a.numero - b.numero,
   );
 
@@ -167,3 +137,4 @@ function pokemonPequenoDreamTeam() {
     contenedorPequeno.innerHTML += htmlPequeno;
   }
 }
+

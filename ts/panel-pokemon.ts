@@ -1,62 +1,87 @@
+import * as funcionesGenerales from "./funciones-generales.js";
+import * as datosGenerales from "./datos-generales.js";
+import * as funcionesAPI from "./funciones-API.js";
+import * as funcionesDreamTeam from "./dream-team.js";
+import * as funcionesPokedex from "./pokedex.js";
+
 import type { DanoPokemon, Pokemon } from "./tipos";
-import * as funciones from "./funciones-generales.js";
-import { dreamTeam } from "./dream-team.js";
 
 const numeroPokemon = new URLSearchParams(window.location.search).get(
   "pokemon",
 );
 
-if(numeroPokemon!= null)
-funciones.obtenerPokemon(numeroPokemon).then(async (pokemon:Pokemon) => {
-  let html = funciones.mostrarPokemon(pokemon, dreamTeam.includes(pokemon)? true : false  );
-  const container = document.getElementById("panel-pokemon-izquierda");
+if (numeroPokemon != null)
+  funcionesAPI.obtenerPokemon(numeroPokemon).then(async (pokemon: Pokemon) => {
+    await funcionesGenerales.setPokemons("dreamTeam");
 
-  const descripcion = await funciones.obtenerPokemonDescripcion(numeroPokemon);
-  const dobleDano = await funciones.obtenerDebilidadPokemon(numeroPokemon);
-  const mitadDano = await funciones.obtenerResistenciaPokemon(numeroPokemon);
-  const noDano = await funciones.obtenerInmunidadPokemon(numeroPokemon);
-  const evolucionesLink = await funciones.obtenerPokemonEvolucionesLink(numeroPokemon);
-  const evolucion = await funciones.obtenerPokemonEvoluciones(evolucionesLink);
+    let gogokoa = false;
+    if (datosGenerales.dreamTeam.includes(pokemon)) {
+      gogokoa = true;
+    } else {
+      gogokoa = false;
+    }
 
-  const evoluciones = await Promise.all(
-    evolucion.map((evo:Pokemon) => funciones.obtenerPokemon(evo.nombre)),
-  );  
-  if (container != null) {
-    container.innerHTML += html;
-  }
-  mostrarPanelDerecha(descripcion, dobleDano, mitadDano, noDano, evoluciones);
-});
+    let html = funcionesGenerales.mostrarPokemon(pokemon, gogokoa);
+    const container = document.getElementById("panel-pokemon-izquierda");
+
+    const descripcion =
+      await funcionesAPI.obtenerPokemonDescripcion(numeroPokemon);
+    const dobleDano = await funcionesAPI.obtenerDebilidadPokemon(numeroPokemon);
+    const mitadDano = await funcionesAPI.obtenerResistenciaPokemon(numeroPokemon);
+    const noDano = await funcionesAPI.obtenerInmunidadPokemon(numeroPokemon);
+    const evolucionesLink =
+      await funcionesAPI.obtenerPokemonEvolucionesLink(numeroPokemon);
+    const evolucion =
+      await funcionesAPI.obtenerPokemonEvoluciones(evolucionesLink);
+
+    const evoluciones = await Promise.all(
+      evolucion.map((evo: Pokemon) => funcionesAPI.obtenerPokemon(evo.nombre)),
+    );
+    if (container != null) {
+      container.innerHTML += html;
+    }
+    mostrarPanelDerecha(descripcion, dobleDano, mitadDano, noDano, evoluciones);
+  });
 
 async function mostrarPanelDerecha(
-  descripcion:string,
-  dobleDano:Array<DanoPokemon>,
-  mitadDano:Array<DanoPokemon>,
-  noDano:Array<DanoPokemon>,
-  evoluciones:Array<Pokemon>,
+  descripcion: string,
+  dobleDano: Array<DanoPokemon>,
+  mitadDano: Array<DanoPokemon>,
+  noDano: Array<DanoPokemon>,
+  evoluciones: Array<Pokemon>,
 ) {
   const dobleDanoHTML = dobleDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`)
+    .map(
+      (d: DanoPokemon) =>
+        `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`,
+    )
     .join("");
 
   const mitadDanoHTML = mitadDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`)
+    .map(
+      (d: DanoPokemon) =>
+        `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`,
+    )
     .join("");
 
   const noDanoHTML = noDano
-    .map((d:DanoPokemon) => `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`)
+    .map(
+      (d: DanoPokemon) =>
+        `<span class="dano ${d.name}">${d.name.charAt(0).toUpperCase() + d.name.slice(1)}</span>`,
+    )
     .join("");
 
-    const container = document.getElementById("panel-pokemon-derecha");
+  const container = document.getElementById("panel-pokemon-derecha");
 
-    if(container!= null){
-      container.innerHTML += `
+  if (container != null) {
+    container.innerHTML += `
     <p class="descripcion-pokemon">${descripcion}</p>
 
     <p class="subtitulo-panel-pokemon">Evoluciones</p>
     <div class="panel-evoluciones">
       ${evoluciones
         .map(
-          (evo:Pokemon) => `
+          (evo: Pokemon) => `
       <a class="evolucion-pokemon" href="panel-pokemon.html?pokemon=${evo.nombre}">
         <img src=${evo.imagen}>
         <p class="evolucion-pokemon-nombre">${evo.nombre.charAt(0).toUpperCase() + evo.nombre.slice(1)}</p>
@@ -88,6 +113,61 @@ async function mostrarPanelDerecha(
       
     </div>
   `;
-    }
-  
+  }
 }
+document.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
+
+  if (
+    target.classList.contains("icono-dream-team-interior") ||
+    target.classList.contains("icono-dream-team-vector1") ||
+    target.classList.contains("icono-dream-team-vector2")
+  ) {
+    const card = target.closest(".carta-pokemon") as HTMLElement;
+
+    if (card) {
+      const nombrePokemon = card.querySelector(".pokemon-name");
+      if (nombrePokemon) {
+        const nombrePokemonMinusculas = nombrePokemon.textContent.toLowerCase();
+
+        const sumaDreamTeam = funcionesDreamTeam.sumarDreamTeam(
+          nombrePokemonMinusculas,
+        );
+        const icono = card.getElementsByClassName(
+          "icono-dream-team-vector2",
+        )[0] as HTMLElement;
+
+        switch (sumaDreamTeam) {
+          case 0:
+            if (icono) {
+              icono.classList.add("activo");
+            }
+            console.log("Se ha añadido el pokemon");
+            break;
+
+          case 1:
+            if (icono) {
+              icono.classList.remove("activo");
+            }
+            console.log("Se ha borrado el pokemon");
+            break;
+        }
+      }
+    }
+  } else if (
+    target.classList.contains("carta-pokemon") ||
+    target.classList.contains("pokemon-name") ||
+    target.classList.contains("pokemon-image") ||
+    target.classList.contains("pokemon-number") ||
+    target.classList.contains("pokemon-info")
+  ) {
+    const card = target.closest(".carta-pokemon") as HTMLElement;
+
+    if (card) {
+      const nombrePokemon = card.querySelector(".pokemon-name");
+      if (nombrePokemon) {
+        funcionesPokedex.irPanelPokemon(nombrePokemon.textContent.toLowerCase());
+      }
+    }
+  }
+});
