@@ -1,10 +1,21 @@
-import type { Pokemon, TipoPokemon, DanoPokemon, FlavorTextEntry, EvolutionNode } from "./tipos";
+import type {
+  Pokemon,
+  TipoPokemon,
+  DanoPokemon,
+  FlavorTextEntry,
+  EvolutionNode,
+} from "./tipos";
+
+async function hacerFetch(url: string) {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}
 
 export async function obtenerPokemon(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await hacerFetch(url);
 
   const pokemon = {
     nombre: data.name,
@@ -29,8 +40,7 @@ export async function obtenerPokemon(id: string) {
 export async function obtenerPokemonDescripcion(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await hacerFetch(url);
 
   const englishEntry = data.flavor_text_entries.find(
     (entry: FlavorTextEntry) => entry.language.name === "en",
@@ -41,8 +51,7 @@ export async function obtenerPokemonDescripcion(id: string) {
 export async function obtenerPokemonTipos(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await hacerFetch(url);
 
   const pokemon_tipos = {
     tipos: data.types.map((t: TipoPokemon) => t.type.name),
@@ -52,8 +61,7 @@ export async function obtenerPokemonTipos(id: string) {
 }
 
 export async function obtenerEficaciaPokemon(url: string) {
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await hacerFetch(url);
 
   return {
     doble_dano: data.damage_relations.double_damage_from as DanoPokemon[],
@@ -96,7 +104,9 @@ export async function obtenerResistenciaPokemon(
   return unique;
 }
 
-export async function obtenerInmunidadPokemon(id: string): Promise<DanoPokemon[]> {
+export async function obtenerInmunidadPokemon(
+  id: string,
+): Promise<DanoPokemon[]> {
   const tiposData = await obtenerPokemonTipos(id);
   let noDanoTotales: DanoPokemon[] = [];
 
@@ -114,8 +124,7 @@ export async function obtenerInmunidadPokemon(id: string): Promise<DanoPokemon[]
 export async function obtenerPokemonEvolucionesLink(id: string) {
   const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await hacerFetch(url);
 
   return data.evolution_chain.url;
 }
@@ -123,8 +132,7 @@ export async function obtenerPokemonEvolucionesLink(id: string) {
 export async function obtenerPokemonEvoluciones(
   url: string,
 ): Promise<Pokemon[]> {
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await hacerFetch(url);
 
   const evoluciones = await extraerEvoluciones(data.chain);
   return evoluciones;
