@@ -1,6 +1,7 @@
 import * as funcionesGenerales from "./funciones-generales.js";
 import * as datosGenerales from "./datos-generales.js";
 import * as funcionesStorage from "./storage-funciones.js";
+import * as mostrarHTML from "./mostrar-html.js";
 import * as funcionesPokedex from "./pokedex.js";
 import * as funcionesDreamTeam from "./dream-team.js";
 
@@ -15,11 +16,9 @@ if (!(import.meta as any).vitest) {
 }
 
 function main() {
-  funcionesGenerales.mostrarCartasVacias();
+  mostrarHTML.mostrarCartasVacias();
   funcionesGenerales.setPokemons("pokedex");
 }
-
-
 
 document.addEventListener("keyup", (e) => {
   const container = document.getElementById("resultado-busqueda");
@@ -97,11 +96,11 @@ export function ensenarCartas(pokemons: Array<Pokemon>) {
   const container = document.getElementById("resultado-busqueda");
   let gogokoa = false;
   if (pokemons.length === 0) {
-    funcionesGenerales.ensenarNoHayResultado();
+    mostrarHTML.mostrarNoHayResultado();
   } else {
     pokemons.forEach((pokemon) => {
       if (datosGenerales.dreamTeam.includes(pokemon)) gogokoa = true;
-      html += funcionesGenerales.mostrarPokemon(pokemon, gogokoa);
+      html += mostrarHTML.mostrarPokemon(pokemon, gogokoa);
       gogokoa = false;
     });
     if (container != null) {
