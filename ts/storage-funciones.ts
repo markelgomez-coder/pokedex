@@ -1,11 +1,6 @@
 import * as datosGenerales from "./datos-generales.js";
 import * as funcionesDreamTeam from "./dream-team.js";
 
-export function guardarDreamTeamEnStorage() {
-  const nombres = datosGenerales.dreamTeam.map((pokemon) => pokemon.nombre);
-  localStorage.setItem(datosGenerales.DREAM_TEAM_STORAGE_KEY, JSON.stringify(nombres));
-}
-
 export function cargarDreamTeamDesdeStorage() {
   const storageValue = localStorage.getItem(datosGenerales.DREAM_TEAM_STORAGE_KEY);
   if (!storageValue) return;
@@ -27,4 +22,9 @@ export function cargarDreamTeamDesdeStorage() {
   } catch (error) {
     console.warn("No se pudo cargar el Dream Team guardado:", error);
   }
+}
+
+export function guardarDreamTeamEnStorage() {
+  const nombres = datosGenerales.dreamTeam.map((pokemon) => pokemon.nombre);
+  localStorage.setItem(datosGenerales.DREAM_TEAM_STORAGE_KEY, JSON.stringify(nombres));
 }
