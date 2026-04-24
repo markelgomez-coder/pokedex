@@ -3,6 +3,7 @@ import * as datosGenerales from "./datos-generales.js";
 import * as funcionesAPI from "./funciones-API.js";
 import * as funcionesDreamTeam from "./dream-team.js";
 import * as funcionesPokedex from "./pokedex.js";
+import * as mostrarHTML from "./mostrar-html.js";
 
 import type { DanoPokemon, Pokemon } from "./tipos";
 
@@ -21,7 +22,7 @@ if (numeroPokemon != null)
       gogokoa = false;
     }
 
-    let html = funcionesGenerales.mostrarPokemon(pokemon, gogokoa);
+    let html = mostrarHTML.mostrarPokemon(pokemon, gogokoa);
     const container = document.getElementById("panel-pokemon-izquierda");
 
     const descripcion =
