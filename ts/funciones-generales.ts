@@ -40,11 +40,11 @@ async function obtenerGeneracion(id: number) {
       i <= pokemonsAnteriores + datosGenerales.generaciones[id - 1].cantidadPokemon - 1;
       i++
     ) {
-      promesas.push(funcionesAPI.obtenerPokemon(i + ""));
+      promesas.push(funcionesAPI.obtenerPokemon(String(i)));
     }
 
     const pokemons: Array<Pokemon> = await Promise.all(promesas);
-    if (container != null && pokemonsAnteriores == 1) container.innerHTML = "";
+    if (container != null && pokemonsAnteriores === 1) container.innerHTML = "";
 
     return pokemons;
   } catch (error) {
@@ -62,7 +62,7 @@ function sacarPokemonsAnteriores(id: number) {
   if (pokemonsAnteriores == 0) {
     return 1;
   }
-  return pokemonsAnteriores;
+  return pokemonsAnteriores+1;
 }
 
 export function sacarTipoDato(value: string) {
