@@ -86,3 +86,7 @@ export function formatearNumero(numero: number) {
   }
   return "#" + numero;
 }
+
+export function pokemonDentroDeLaLista(lista: Array<Pokemon>, pokemon: Pokemon) {
+  return lista.some((p) => p.nombre === pokemon.nombre);
+}

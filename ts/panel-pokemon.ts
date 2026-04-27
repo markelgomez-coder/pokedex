@@ -15,12 +15,8 @@ if (numeroPokemon != null)
   funcionesAPI.obtenerPokemon(numeroPokemon).then(async (pokemon: Pokemon) => {
     await funcionesGenerales.setPokemons("dreamTeam");
 
-    let gogokoa = false;
-    if (datosGenerales.dreamTeam.includes(pokemon)) {
-      gogokoa = true;
-    } else {
-      gogokoa = false;
-    }
+    let gogokoa: boolean = false;
+    gogokoa = funcionesGenerales.pokemonDentroDeLaLista(datosGenerales.dreamTeam, pokemon);
 
     let html = mostrarHTML.mostrarPokemon(pokemon, gogokoa);
     const container = document.getElementById("panel-pokemon-izquierda");
@@ -118,7 +114,6 @@ async function mostrarPanelDerecha(
   }
 }
 
-if (!(import.meta as any).vitest) {
   if (window.location.pathname.endsWith("panel-pokemon.html")) {
     document.addEventListener("click", (e) => {
       const target = e.target as HTMLElement;
@@ -179,5 +174,4 @@ if (!(import.meta as any).vitest) {
         }
       }
     });
-  }
 }
