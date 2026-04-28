@@ -8,7 +8,8 @@ mostrarDreamTeam();
 
 export function sumarDreamTeam(nombre: string) {
   const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
-
+  datosGenerales.quitarRepetidosDreamTeam();
+  
   if (
     pokemon != null &&
     !datosGenerales.dreamTeam.includes(pokemon) &&
@@ -39,12 +40,13 @@ function mostrarDreamTeam() {
   });
 }
 
-
-
 export function restaurarDreamTeam(nombres: Array<string>) {
   datosGenerales.VaciarDreamTeam();
   datosGenerales.listaPokemon.forEach((pokemon) => {
-    if (nombres.includes(pokemon.nombre) && !datosGenerales.dreamTeam.includes(pokemon)) {
+    if (
+      nombres.includes(pokemon.nombre) &&
+      !datosGenerales.dreamTeam.includes(pokemon)
+    ) {
       datosGenerales.dreamTeam.push(pokemon);
       pokemon.dream_team = true;
     }
@@ -137,4 +139,3 @@ function pokemonPequenoDreamTeam() {
     contenedorPequeno.innerHTML += htmlPequeno;
   }
 }
-

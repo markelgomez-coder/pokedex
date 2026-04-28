@@ -9,11 +9,9 @@ import type { Pokemon } from "./tipos";
 
 let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
-if (!(import.meta as any).vitest) {
   if (window.location.pathname.endsWith("pokedex.html")) {
     main();
   }
-}
 
 function main() {
   mostrarHTML.mostrarCartasVacias();
@@ -109,67 +107,65 @@ export function ensenarCartas(pokemons: Array<Pokemon>) {
   }
 }
 
-if (!(import.meta as any).vitest) {
+document.addEventListener("click", (e) => {
   if (window.location.pathname.endsWith("pokedex.html")) {
-    document.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement;
+    const target = e.target as HTMLElement;
 
-      if (
-        target.classList.contains("icono-dream-team-interior") ||
-        target.classList.contains("icono-dream-team-vector1") ||
-        target.classList.contains("icono-dream-team-vector2")
-      ) {
-        const card = target.closest(".carta-pokemon") as HTMLElement;
+    if (
+      target.classList.contains("icono-dream-team-interior") ||
+      target.classList.contains("icono-dream-team-vector1") ||
+      target.classList.contains("icono-dream-team-vector2")
+    ) {
+      const card = target.closest(".carta-pokemon") as HTMLElement;
 
-        if (card) {
-          const nombrePokemon = card.querySelector(".pokemon-name");
-          if (nombrePokemon) {
-            const nombrePokemonMinusculas =
-              nombrePokemon.textContent.toLowerCase();
+      if (card) {
+        const nombrePokemon = card.querySelector(".pokemon-name");
+        if (nombrePokemon) {
+          const nombrePokemonMinusculas =
+            nombrePokemon.textContent.toLowerCase();
 
-            const sumaDreamTeam = funcionesDreamTeam.sumarDreamTeam(
-              nombrePokemonMinusculas,
-            );
-            const icono = card.getElementsByClassName(
-              "icono-dream-team-vector2",
-            )[0] as HTMLElement;
+          const sumaDreamTeam = funcionesDreamTeam.sumarDreamTeam(
+            nombrePokemonMinusculas,
+          );
+          const icono = card.getElementsByClassName(
+            "icono-dream-team-vector2",
+          )[0] as HTMLElement;
 
-            switch (sumaDreamTeam) {
-              case 0:
-                if (icono) {
-                  icono.classList.add("activo");
-                }
-                console.log("Se ha añadido el pokemon");
-                break;
+          switch (sumaDreamTeam) {
+            case 0:
+              if (icono) {
+                icono.classList.add("activo");
+              }
+              console.log("Se ha añadido el pokemon");
+              break;
 
-              case 1:
-                if (icono) {
-                  icono.classList.remove("activo");
-                }
-                console.log("Se ha borrado el pokemon");
-                break;
-            }
-          }
-        }
-      } else if (
-        target.classList.contains("carta-pokemon") ||
-        target.classList.contains("pokemon-name") ||
-        target.classList.contains("pokemon-image") ||
-        target.classList.contains("pokemon-number") ||
-        target.classList.contains("pokemon-info")
-      ) {
-        const card = target.closest(".carta-pokemon") as HTMLElement;
-
-        if (card) {
-          const nombrePokemon = card.querySelector(".pokemon-name");
-          if (nombrePokemon) {
-            irPanelPokemon(nombrePokemon.textContent.toLowerCase());
+            case 1:
+              if (icono) {
+                icono.classList.remove("activo");
+              }
+              console.log("Se ha borrado el pokemon");
+              break;
           }
         }
       }
-    });
+    } else if (
+      target.classList.contains("carta-pokemon") ||
+      target.classList.contains("pokemon-name") ||
+      target.classList.contains("pokemon-image") ||
+      target.classList.contains("pokemon-number") ||
+      target.classList.contains("pokemon-info")
+    ) {
+      const card = target.closest(".carta-pokemon") as HTMLElement;
+
+      if (card) {
+        const nombrePokemon = card.querySelector(".pokemon-name");
+        if (nombrePokemon) {
+          irPanelPokemon(nombrePokemon.textContent.toLowerCase());
+        }
+      }
+    }
   }
-}
+});
 
 export function irPanelPokemon(id: string) {
   window.location.href = `panel-pokemon.html?pokemon=${id}`;

@@ -51,3 +51,15 @@ export let maxDreamTeam: number = 6;
 export function VaciarDreamTeam() {
   dreamTeam = [];
 }
+
+export function quitarRepetidosDreamTeam() {
+  const nombresVistos = new Set<string>();
+
+  dreamTeam = dreamTeam.filter((pokemon) => {
+    if (nombresVistos.has(pokemon.nombre)) {
+      return false;
+    }
+    nombresVistos.add(pokemon.nombre);
+    return true;
+  });
+}
