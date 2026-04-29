@@ -117,7 +117,7 @@ function pokemonGrandeDreamTeam() {
       })
       .join("");
 
-    contenedorGrande.innerHTML = htmlGrande;
+    funcionesGenerales.meterAlHtmlConId("dream-team-grandes", htmlGrande);
   }
 }
 
@@ -136,6 +136,6 @@ function pokemonPequenoDreamTeam() {
       .join("");
 
     funcionesGenerales.vaciarHtmlConId("dream-team-pequenos");
-    contenedorPequeno.innerHTML += htmlPequeno;
+    funcionesGenerales.meterAlHtmlConId("dream-team-pequenos", htmlPequeno);
   }
 }

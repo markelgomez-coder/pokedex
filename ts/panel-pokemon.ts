@@ -36,7 +36,7 @@ if (numeroPokemon != null)
       evolucion.map((evo: Pokemon) => funcionesAPI.obtenerPokemon(evo.nombre)),
     );
     if (container != null) {
-      container.innerHTML += html;
+      funcionesGenerales.meterAlHtmlConId("panel-pokemon-izquierda", html);
     }
     mostrarPanelDerecha(descripcion, dobleDano, mitadDano, noDano, evoluciones);
   });

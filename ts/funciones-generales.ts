@@ -73,6 +73,13 @@ export function vaciarHtmlConId(htmlId:string) {
   }
 }
 
+export function meterAlHtmlConId(htmlId:string, html:string) {
+  const container = document.getElementById(htmlId);
+  if (container != null) {
+    container.innerHTML += html;
+  }
+}
+
 function sacarPokemonsAnteriores(id: number) {
   let pokemonsAnteriores = 0;
   for (let i = 1; i < id; i++) {

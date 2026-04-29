@@ -99,7 +99,7 @@ export function mostrarCartasVacias() {
   const container = document.getElementById("resultado-busqueda");
 
   if (container != null) {
-    container.innerHTML = "";
+    funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
 
     let vaciasHtml = "";
 
@@ -118,7 +118,7 @@ export function mostrarCartasVacias() {
       `;
     }
 
-    container.innerHTML = vaciasHtml;
+    funcionesGenerales.meterAlHtmlConId("resultado-busqueda", vaciasHtml);
   }
 }
 
@@ -126,8 +126,7 @@ export function mostrarNoHayResultado() {
   const container = document.getElementById("resultado-busqueda");
   const input = document.getElementById("input-busqueda") as HTMLInputElement;
 
-  if (container != null)
-    container.innerHTML = `
+  let htmlNoHayResultado = `
     <div class="no-hay-resultado">
       <div class="icono-no-hay-resultado">
         <div class="icono-no-hay-resultado-interior"></div>
@@ -140,12 +139,20 @@ export function mostrarNoHayResultado() {
       <p> There is no results for "${input.value}" </p>
     </div>
     `;
+
+  if (container != null) {
+    funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
+    funcionesGenerales.meterAlHtmlConId(
+      "resultado-busqueda",
+      htmlNoHayResultado,
+    );
+  }
 }
 
 export function mostrarErrorAPI() {
   const container = document.getElementById("resultado-busqueda");
-  if (container != null)
-    container.innerHTML += `
+  
+  const htmlErrorAPI = `
   <div class="error-api-pokemon">
     <div class="icono-error-api-pokemon">
       <div class="icono-error-api-pokemon-interior"></div>
@@ -158,4 +165,12 @@ export function mostrarErrorAPI() {
     <p> <br>Please try later</p>
   </div>
   `;
-}
+
+
+  if (container != null){
+    funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
+    funcionesGenerales.meterAlHtmlConId(
+      "resultado-busqueda",
+      htmlErrorAPI,
+    );
+  }}

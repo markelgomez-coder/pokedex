@@ -9,9 +9,9 @@ import type { Pokemon } from "./tipos";
 
 let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
-  if (window.location.pathname.endsWith("pokedex.html")) {
-    main();
-  }
+if (window.location.pathname.endsWith("pokedex.html")) {
+  main();
+}
 
 function main() {
   mostrarHTML.mostrarCartasVacias();
@@ -102,7 +102,7 @@ export function ensenarCartas(pokemons: Array<Pokemon>) {
       gogokoa = false;
     });
     if (container != null) {
-      container.innerHTML += html;
+      funcionesGenerales.meterAlHtmlConId("resultado-busqueda", html);
     }
   }
 }
