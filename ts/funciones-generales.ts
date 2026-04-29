@@ -59,12 +59,12 @@ async function obtenerGeneracion(id: number) {
 function sacarPokemonsAnteriores(id: number) {
   let pokemonsAnteriores = 0;
   for (let i = 1; i < id; i++) {
-    pokemonsAnteriores += datosGenerales.generaciones[i - 1].cantidadPokemon + 1;
+    pokemonsAnteriores += datosGenerales.generaciones[i - 1].cantidadPokemon;
   }
   if (pokemonsAnteriores === 0) {
     return 1;
   }
-  return pokemonsAnteriores;
+  return pokemonsAnteriores + 1;
 }
 
 export function sacarTipoDato(value: string) {
