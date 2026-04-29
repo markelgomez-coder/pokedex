@@ -15,7 +15,7 @@ let timeoutId: ReturnType<typeof window.setTimeout> | null = null;
 
 function main() {
   mostrarHTML.mostrarCartasVacias();
-  funcionesGenerales.setPokemons("pokedex");
+  funcionesGenerales.setPokemonsPokedex();
 }
 
 document.addEventListener("keyup", (e) => {

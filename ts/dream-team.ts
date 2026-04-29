@@ -34,7 +34,7 @@ export function sumarDreamTeam(nombre: string) {
 }
 
 function mostrarDreamTeam() {
-  funcionesGenerales.setPokemons("dreamTeam").then(() => {
+  funcionesGenerales.setPokemonsDreamTeam().then(() => {
     pokemonGrandeDreamTeam();
     pokemonPequenoDreamTeam();
   });

@@ -12,41 +12,45 @@ import type {
   DanoPokemon,
 } from "./tipos";
 
-export async function setPokemons(containerId: string) {
+export async function setPokemonsPokedex() {
   let pokemonsGuardados: Array<Pokemon> = [];
   datosGenerales.VaciarListaPokemon();
 
-  if (containerId === "pokedex") {
-    const container = document.getElementById("resultado-busqueda");
-    if (container != null) {
-      container.innerHTML = "";
-    }
-  }
+  vaciarHtmlConId("resultado-busqueda");
 
   for (let i = 1; i <= 9; i++) {
     pokemonsGuardados.push(...(await obtenerGeneracion(i)));
     datosGenerales.listaPokemon.push(...pokemonsGuardados);
-    if (containerId === "pokedex") {
-      funcionesStorage.cargarDreamTeamDesdeStorage();
-      funcionesPokedex.ensenarCartas(pokemonsGuardados);
-    }
-    pokemonsGuardados = [];
-  }
-  if (containerId === "dreamTeam") {
     funcionesStorage.cargarDreamTeamDesdeStorage();
+    funcionesPokedex.ensenarCartas(pokemonsGuardados);
+
+    pokemonsGuardados = [];
   }
 
   datosGenerales.quitarRepetidosListaPokemon();
 }
 
+export async function setPokemonsDreamTeam() {
+  let pokemonsGuardados: Array<Pokemon> = [];
+  datosGenerales.VaciarListaPokemon();
+
+  for (let i = 1; i <= 9; i++) {
+    pokemonsGuardados.push(...(await obtenerGeneracion(i)));
+    datosGenerales.listaPokemon.push(...pokemonsGuardados);
+    pokemonsGuardados = [];
+  }
+  funcionesStorage.cargarDreamTeamDesdeStorage();
+  datosGenerales.quitarRepetidosListaPokemon();
+}
+
 async function obtenerGeneracion(id: number) {
-  const container = document.getElementById("resultado-busqueda");
   const promesas = [];
   let pokemonsAnteriores: number = sacarPokemonsAnteriores(id);
   try {
     for (
       let i = pokemonsAnteriores;
-      i <= pokemonsAnteriores + datosGenerales.generaciones[id - 1].cantidadPokemon;
+      i <=
+      pokemonsAnteriores + datosGenerales.generaciones[id - 1].cantidadPokemon;
       i++
     ) {
       promesas.push(funcionesAPI.obtenerPokemon(String(i)));
@@ -56,9 +60,16 @@ async function obtenerGeneracion(id: number) {
 
     return pokemons;
   } catch (error) {
-    if (container != null) container.innerHTML = "";
+    vaciarHtmlConId("resultado-busqueda");
     mostrarHTML.mostrarErrorAPI();
     return [];
+  }
+}
+
+export function vaciarHtmlConId(htmlId:string) {
+  const container = document.getElementById(htmlId);
+  if (container != null) {
+    container.innerHTML = "";
   }
 }
 
@@ -95,6 +106,9 @@ export function formatearNumero(numero: number) {
   return "#" + numero;
 }
 
-export function pokemonDentroDeLaLista(lista: Array<Pokemon>, pokemon: Pokemon) {
+export function pokemonDentroDeLaLista(
+  lista: Array<Pokemon>,
+  pokemon: Pokemon,
+) {
   return lista.some((p) => p.nombre === pokemon.nombre);
 }

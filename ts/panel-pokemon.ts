@@ -13,7 +13,7 @@ const numeroPokemon = new URLSearchParams(window.location.search).get(
 
 if (numeroPokemon != null)
   funcionesAPI.obtenerPokemon(numeroPokemon).then(async (pokemon: Pokemon) => {
-    await funcionesGenerales.setPokemons("dreamTeam");
+    await funcionesGenerales.setPokemonsDreamTeam();
 
     let gogokoa: boolean = false;
     gogokoa = funcionesGenerales.pokemonDentroDeLaLista(datosGenerales.dreamTeam, pokemon);
