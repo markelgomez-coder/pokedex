@@ -28,6 +28,8 @@ export async function setPokemons(containerId: string) {
   if (containerId === "dreamTeam") {
     funcionesStorage.cargarDreamTeamDesdeStorage();
   }
+
+  datosGenerales.quitarRepetidosListaPokemon();
 }
 
 async function obtenerGeneracion(id: number) {
@@ -37,7 +39,7 @@ async function obtenerGeneracion(id: number) {
   try {
     for (
       let i = pokemonsAnteriores;
-      i <= pokemonsAnteriores + datosGenerales.generaciones[id - 1].cantidadPokemon - 1;
+      i <= pokemonsAnteriores + datosGenerales.generaciones[id - 1].cantidadPokemon;
       i++
     ) {
       promesas.push(funcionesAPI.obtenerPokemon(String(i)));
@@ -57,12 +59,12 @@ async function obtenerGeneracion(id: number) {
 function sacarPokemonsAnteriores(id: number) {
   let pokemonsAnteriores = 0;
   for (let i = 1; i < id; i++) {
-    pokemonsAnteriores += datosGenerales.generaciones[i - 1].cantidadPokemon;
+    pokemonsAnteriores += datosGenerales.generaciones[i - 1].cantidadPokemon + 1;
   }
-  if (pokemonsAnteriores == 0) {
+  if (pokemonsAnteriores === 0) {
     return 1;
   }
-  return pokemonsAnteriores+1;
+  return pokemonsAnteriores;
 }
 
 export function sacarTipoDato(value: string) {

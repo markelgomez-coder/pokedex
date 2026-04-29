@@ -41,6 +41,18 @@ export function VaciarListaPokemon() {
   listaPokemon = [];
 }
 
+export function quitarRepetidosListaPokemon(){
+  const nombresVistos = new Set<string>();
+
+  listaPokemon = listaPokemon.filter((pokemon) => {
+    if (nombresVistos.has(pokemon.nombre)) {
+      return false;
+    }
+    nombresVistos.add(pokemon.nombre);
+    return true;
+  });
+}
+
 //================================ DREAM TEAM =================================
 
 export const DREAM_TEAM_STORAGE_KEY = "dreamTeam";
