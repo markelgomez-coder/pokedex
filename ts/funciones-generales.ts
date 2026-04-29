@@ -16,6 +16,13 @@ export async function setPokemons(containerId: string) {
   let pokemonsGuardados: Array<Pokemon> = [];
   datosGenerales.VaciarListaPokemon();
 
+  if (containerId === "pokedex") {
+    const container = document.getElementById("resultado-busqueda");
+    if (container != null) {
+      container.innerHTML = "";
+    }
+  }
+
   for (let i = 1; i <= 9; i++) {
     pokemonsGuardados.push(...(await obtenerGeneracion(i)));
     datosGenerales.listaPokemon.push(...pokemonsGuardados);
@@ -46,7 +53,6 @@ async function obtenerGeneracion(id: number) {
     }
 
     const pokemons: Array<Pokemon> = await Promise.all(promesas);
-    if (container != null && pokemonsAnteriores === 1) container.innerHTML = "";
 
     return pokemons;
   } catch (error) {
