@@ -30,11 +30,11 @@ document.addEventListener("keyup", (e) => {
         const value = target.value;
 
         if (value === "") {
-          container.innerHTML = "";
+          funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
           funcionesPokedex.ensenarCartas(datosGenerales.listaPokemon);
         } else {
           const tipoDato = funcionesGenerales.sacarTipoDato(value);
-          container.innerHTML = "";
+          funcionesGenerales.vaciarHtmlConId("resultado-busqueda");
           switch (tipoDato) {
             case "tipo":
               filtraPorTipo(value);

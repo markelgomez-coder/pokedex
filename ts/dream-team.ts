@@ -135,7 +135,7 @@ function pokemonPequenoDreamTeam() {
       )
       .join("");
 
-    contenedorPequeno.innerHTML = "";
+    funcionesGenerales.vaciarHtmlConId("dream-team-pequenos");
     contenedorPequeno.innerHTML += htmlPequeno;
   }
 }
