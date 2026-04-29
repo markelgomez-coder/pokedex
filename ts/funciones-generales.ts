@@ -16,14 +16,12 @@ export async function setPokemonsPokedex() {
   let pokemonsGuardados: Array<Pokemon> = [];
   datosGenerales.VaciarListaPokemon();
 
-  vaciarHtmlConId("resultado-busqueda");
-
   for (let i = 1; i <= 9; i++) {
     pokemonsGuardados.push(...(await obtenerGeneracion(i)));
     datosGenerales.listaPokemon.push(...pokemonsGuardados);
     funcionesStorage.cargarDreamTeamDesdeStorage();
+    if (i === 1) vaciarHtmlConId("resultado-busqueda");
     funcionesPokedex.ensenarCartas(pokemonsGuardados);
-
     pokemonsGuardados = [];
   }
 
@@ -66,14 +64,14 @@ async function obtenerGeneracion(id: number) {
   }
 }
 
-export function vaciarHtmlConId(htmlId:string) {
+export function vaciarHtmlConId(htmlId: string) {
   const container = document.getElementById(htmlId);
   if (container != null) {
     container.innerHTML = "";
   }
 }
 
-export function meterAlHtmlConId(htmlId:string, html:string) {
+export function meterAlHtmlConId(htmlId: string, html: string) {
   const container = document.getElementById(htmlId);
   if (container != null) {
     container.innerHTML += html;
