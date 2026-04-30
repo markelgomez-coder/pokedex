@@ -32,8 +32,7 @@ export async function obtenerPokemon(id: string) {
     spd: data.stats[5].base_stat,
     dream_team: false,
   };
-  console.log(pokemon);
-  console.log(data);
+
   return pokemon;
 }
 

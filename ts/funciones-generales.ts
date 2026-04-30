@@ -110,7 +110,9 @@ export function formatearNumero(numero: number) {
   }
   return "#" + numero;
 }
-
+export function sacarPokemonDeListaConElNombre(nombre:string, lista: Array<Pokemon>) {
+  return lista.find((p) => p.nombre === nombre);
+}
 export function pokemonDentroDeLaLista(
   lista: Array<Pokemon>,
   pokemon: Pokemon,

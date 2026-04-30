@@ -16,7 +16,7 @@ export function modificarPokemonDreamTeam(nombre: string, icono: HTMLElement) {
     datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
   ) {
     sumarAlDreamTeam(pokemon, icono);
-  }else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
+  } else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
     quitarDelDreamTeam(pokemon, icono);
   }
 }
@@ -113,7 +113,10 @@ function pokemonPequenoDreamTeam() {
     const htmlPequeno = dreamTeamOrdenadoNumero
       .map(
         (p: Pokemon) =>
-          ` <img class="dream-team-pequenos-img" src="${p.imagen}" />`,
+          ` <img class="dream-team-pequenos-img" src="${p.imagen}" />
+            <div class="sumar-eliminar-dream-team">
+              <div id="${p.nombre}" class="eliminar-dream-team"></div>
+            </div>`,
       )
       .join("");
 
@@ -121,3 +124,16 @@ function pokemonPequenoDreamTeam() {
     funcionesGenerales.meterAlHtmlConId("dream-team-pequenos", htmlPequeno);
   }
 }
+
+document.addEventListener("click", (e) => {
+  if (window.location.pathname.endsWith("dream-team.html")) {
+    const target = e.target as HTMLElement;
+
+if (target.classList.contains("eliminar-dream-team")) {
+      const pokemon = funcionesGenerales.sacarPokemonDeListaConElNombre(target.id, datosGenerales.listaPokemon);
+      if (pokemon) {
+        quitarDelDreamTeam(pokemon, target);
+      }
+    }
+  }
+});
