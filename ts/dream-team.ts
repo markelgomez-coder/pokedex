@@ -6,54 +6,10 @@ import type { Pokemon } from "./tipos";
 
 mostrarDreamTeam();
 
-export function modificarPokemonDreamTeam(nombre: string, icono: HTMLElement) {
-  const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
-  datosGenerales.quitarRepetidosDreamTeam();
-
-  if (
-    pokemon != null &&
-    !datosGenerales.dreamTeam.includes(pokemon) &&
-    datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
-  ) {
-    sumarAlDreamTeam(pokemon, icono);
-  } else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
-    quitarDelDreamTeam(pokemon, icono);
-  }
-}
-
-export function sumarAlDreamTeam(pokemon: Pokemon, icono: HTMLElement) {
-  datosGenerales.dreamTeam.push(pokemon);
-  pokemon.dream_team = true;
-  funcionesStorage.guardarDreamTeamEnStorage();
-
-  icono.classList.add("activo");
-}
-
-export function quitarDelDreamTeam(pokemon: Pokemon, icono: HTMLElement) {
-  const index = datosGenerales.dreamTeam.indexOf(pokemon);
-  datosGenerales.dreamTeam.splice(index, 1);
-  pokemon.dream_team = false;
-  funcionesStorage.guardarDreamTeamEnStorage();
-  icono.classList.remove("activo");
-}
-
 function mostrarDreamTeam() {
   funcionesGenerales.setPokemonsDreamTeam().then(() => {
     pokemonGrandeDreamTeam();
     pokemonPequenoDreamTeam();
-  });
-}
-
-export function restaurarDreamTeam(nombres: Array<string>) {
-  datosGenerales.VaciarDreamTeam();
-  datosGenerales.listaPokemon.forEach((pokemon) => {
-    if (
-      nombres.includes(pokemon.nombre) &&
-      !datosGenerales.dreamTeam.includes(pokemon)
-    ) {
-      datosGenerales.dreamTeam.push(pokemon);
-      pokemon.dream_team = true;
-    }
   });
 }
 
@@ -140,8 +96,43 @@ document.addEventListener("click", (e) => {
         datosGenerales.listaPokemon,
       );
       if (pokemon) {
-        quitarDelDreamTeam(pokemon, target);
+        funcionesGenerales.quitarDelDreamTeam(pokemon);
       }
     }
   }
 });
+
+export function modificarPokemonDreamTeamDesdeCarta(
+  nombre: string,
+  icono: HTMLElement,
+) {
+  const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
+  datosGenerales.quitarRepetidosDreamTeam();
+
+  if (
+    pokemon != null &&
+    !datosGenerales.dreamTeam.includes(pokemon) &&
+    datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
+  ) {
+    sumarAlDreamTeamDesdeCarta(pokemon, icono);
+  } else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
+    quitarDelDreamTeamDesdeCarta(pokemon, icono);
+  }
+}
+
+export function sumarAlDreamTeamDesdeCarta(
+  pokemon: Pokemon,
+  icono: HTMLElement,
+) {
+  funcionesGenerales.sumarAlDreamTeam(pokemon);
+  icono.classList.add("activo");
+}
+
+export function quitarDelDreamTeamDesdeCarta(
+  pokemon: Pokemon,
+  icono: HTMLElement,
+) {
+  funcionesGenerales.quitarDelDreamTeam(pokemon);
+  icono.classList.remove("activo");
+}
+

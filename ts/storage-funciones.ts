@@ -18,14 +18,14 @@ export function cargarDreamTeamDesdeStorage() {
       Array.isArray(datosGenerales.listaPokemon) &&
       datosGenerales.listaPokemon.length > 0
     ) {
-      funcionesDreamTeam.restaurarDreamTeam(nombresGuardados);
+      restaurarDreamTeam(nombresGuardados);
     } else {
       const id = window.setInterval(() => {
         if (
           Array.isArray(datosGenerales.listaPokemon) &&
           datosGenerales.listaPokemon.length > 0
         ) {
-          funcionesDreamTeam.restaurarDreamTeam(nombresGuardados);
+          restaurarDreamTeam(nombresGuardados);
           window.clearInterval(id);
         }
       }, 100);
@@ -34,6 +34,19 @@ export function cargarDreamTeamDesdeStorage() {
     console.warn("No se pudo cargar el Dream Team guardado:", error);
   }
 
+}
+
+export function restaurarDreamTeam(nombres: Array<string>) {
+  datosGenerales.VaciarDreamTeam();
+  datosGenerales.listaPokemon.forEach((pokemon) => {
+    if (
+      nombres.includes(pokemon.nombre) &&
+      !datosGenerales.dreamTeam.includes(pokemon)
+    ) {
+      datosGenerales.dreamTeam.push(pokemon);
+      pokemon.dream_team = true;
+    }
+  });
 }
 
 export function guardarDreamTeamEnStorage() {

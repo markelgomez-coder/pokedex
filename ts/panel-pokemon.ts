@@ -138,7 +138,7 @@ if (window.location.pathname.endsWith("panel-pokemon.html")) {
             "icono-dream-team-vector2",
           )[0] as HTMLElement;
 
-          funcionesDreamTeam.modificarPokemonDreamTeam(
+          funcionesDreamTeam.modificarPokemonDreamTeamDesdeCarta(
             nombrePokemonMinusculas,
             icono,
           );

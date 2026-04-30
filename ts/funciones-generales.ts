@@ -64,6 +64,18 @@ async function obtenerGeneracion(id: number) {
   }
 }
 
+export function sumarAlDreamTeam(pokemon: Pokemon) {
+  datosGenerales.dreamTeam.push(pokemon);
+  pokemon.dream_team = true;
+  funcionesStorage.guardarDreamTeamEnStorage();
+}
+export function quitarDelDreamTeam(pokemon: Pokemon) {
+  const index = datosGenerales.dreamTeam.indexOf(pokemon);
+  datosGenerales.dreamTeam.splice(index, 1);
+  pokemon.dream_team = false;
+  funcionesStorage.guardarDreamTeamEnStorage();
+}
+
 export function vaciarHtmlConId(htmlId: string) {
   const container = document.getElementById(htmlId);
   if (container != null) {

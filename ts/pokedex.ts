@@ -128,7 +128,7 @@ document.addEventListener("click", (e) => {
             "icono-dream-team-vector2",
           )[0] as HTMLElement;
 
-          funcionesDreamTeam.modificarPokemonDreamTeam(
+          funcionesDreamTeam.modificarPokemonDreamTeamDesdeCarta(
             nombrePokemonMinusculas,
             icono,
           );
