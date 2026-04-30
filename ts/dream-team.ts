@@ -88,19 +88,33 @@ function pokemonPequenoDreamTeam() {
 
 document.addEventListener("click", (e) => {
   if (window.location.pathname.endsWith("dream-team.html")) {
-    const target = e.target as HTMLElement;
+    let target = e.target as HTMLElement;
 
-    if (target.classList.contains("eliminar-dream-team")) {
+    if (
+      target.classList.contains("eliminar-dream-team") ||
+      target.classList.contains("eliminar-dream-team-icono-1") ||
+      target.classList.contains("eliminar-dream-team-icono-2") ||
+      target.classList.contains("eliminar-dream-team-icono-3")
+    ) {
+      if(!target.classList.contains("eliminar-dream-team")){
+        target = target.closest(".eliminar-dream-team") as HTMLElement;
+      }
+
       const pokemon = funcionesGenerales.sacarPokemonDeListaConElNombre(
         target.id,
         datosGenerales.listaPokemon,
       );
       if (pokemon) {
         funcionesGenerales.quitarDelDreamTeam(pokemon);
+        quitarGraficosDelDreamTeam(pokemon);
       }
     }
   }
 });
+
+export function quitarGraficosDelDreamTeam(pokemon: Pokemon) {
+  
+}
 
 export function modificarPokemonDreamTeamDesdeCarta(
   nombre: string,
@@ -135,4 +149,3 @@ export function quitarDelDreamTeamDesdeCarta(
   funcionesGenerales.quitarDelDreamTeam(pokemon);
   icono.classList.remove("activo");
 }
-
