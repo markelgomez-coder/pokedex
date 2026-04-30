@@ -34,7 +34,6 @@
 
 .dream-team-grandes-img {
   position: absolute;
-
 }
 
 .dream-team-pequenos {
@@ -55,10 +54,56 @@
   border-top-right-radius: 10px;
 }
 
+.dream-team-pequenos-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 50px;
+  width: 45px;
+}
+
 .dream-team-pequenos-img {
   height: 30px;
   width: auto;
 }
+
+.eliminar-dream-team {
+  position: relative;
+  height: 20px;
+  width: 20px;
+
+  background-color: red;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+.eliminar-dream-team-icono-1,
+.eliminar-dream-team-icono-2 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  height: 3px;
+  width: 14px;
+
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  transform-origin: center;
+}
+
+.eliminar-dream-team-icono-1 {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.eliminar-dream-team-icono-2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
 
 @media (min-width: 1219px) {
   .dream-team {
@@ -80,8 +125,12 @@
 
   .dream-team-pequenos {
     left: calc(436px - 175px);
-    height: 50px;
+    height: 60px;
     width: 350px;
+  }
+
+  .dream-team-pequenos-container{
+    height: 60px;
   }
 
   .dream-team-pequenos-img {

@@ -113,10 +113,15 @@ function pokemonPequenoDreamTeam() {
     const htmlPequeno = dreamTeamOrdenadoNumero
       .map(
         (p: Pokemon) =>
-          ` <img class="dream-team-pequenos-img" src="${p.imagen}" />
-            <div class="sumar-eliminar-dream-team">
-              <div id="${p.nombre}" class="eliminar-dream-team"></div>
-            </div>`,
+          ` 
+        <div class="dream-team-pequenos-container">
+          <img class="dream-team-pequenos-img" src="${p.imagen}" />
+          <div id="${p.nombre}" class="eliminar-dream-team">
+            <div class="eliminar-dream-team-icono-1"> </div>
+            <div class="eliminar-dream-team-icono-2"> </div>
+            <div class="eliminar-dream-team-icono-3"> </div>
+          </div>
+        </div>`,
       )
       .join("");
 
@@ -129,8 +134,11 @@ document.addEventListener("click", (e) => {
   if (window.location.pathname.endsWith("dream-team.html")) {
     const target = e.target as HTMLElement;
 
-if (target.classList.contains("eliminar-dream-team")) {
-      const pokemon = funcionesGenerales.sacarPokemonDeListaConElNombre(target.id, datosGenerales.listaPokemon);
+    if (target.classList.contains("eliminar-dream-team")) {
+      const pokemon = funcionesGenerales.sacarPokemonDeListaConElNombre(
+        target.id,
+        datosGenerales.listaPokemon,
+      );
       if (pokemon) {
         quitarDelDreamTeam(pokemon, target);
       }
