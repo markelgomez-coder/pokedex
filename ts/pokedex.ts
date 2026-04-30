@@ -124,28 +124,14 @@ document.addEventListener("click", (e) => {
           const nombrePokemonMinusculas =
             nombrePokemon.textContent.toLowerCase();
 
-          const sumaDreamTeam = funcionesDreamTeam.sumarDreamTeam(
-            nombrePokemonMinusculas,
-          );
           const icono = card.getElementsByClassName(
             "icono-dream-team-vector2",
           )[0] as HTMLElement;
 
-          switch (sumaDreamTeam) {
-            case 0:
-              if (icono) {
-                icono.classList.add("activo");
-              }
-              console.log("Se ha añadido el pokemon");
-              break;
-
-            case 1:
-              if (icono) {
-                icono.classList.remove("activo");
-              }
-              console.log("Se ha borrado el pokemon");
-              break;
-          }
+          funcionesDreamTeam.modificarPokemonDreamTeam(
+            nombrePokemonMinusculas,
+            icono,
+          );
         }
       }
     } else if (

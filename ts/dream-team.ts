@@ -6,31 +6,35 @@ import type { Pokemon } from "./tipos";
 
 mostrarDreamTeam();
 
-export function sumarDreamTeam(nombre: string) {
+export function modificarPokemonDreamTeam(nombre: string, icono: HTMLElement) {
   const pokemon = datosGenerales.listaPokemon.find((p) => p.nombre === nombre);
   datosGenerales.quitarRepetidosDreamTeam();
-  
+
   if (
     pokemon != null &&
     !datosGenerales.dreamTeam.includes(pokemon) &&
     datosGenerales.dreamTeam.length < datosGenerales.maxDreamTeam
   ) {
-    datosGenerales.dreamTeam.push(pokemon);
-    pokemon.dream_team = true;
-    funcionesStorage.guardarDreamTeamEnStorage();
-    return 0;
+    sumarAlDreamTeam(pokemon, icono);
+  }else if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
+    quitarDelDreamTeam(pokemon, icono);
   }
+}
 
-  if (pokemon != null && datosGenerales.dreamTeam.includes(pokemon)) {
-    const index = datosGenerales.dreamTeam.indexOf(pokemon);
-    datosGenerales.dreamTeam.splice(index, 1);
-    pokemon.dream_team = false;
-    funcionesStorage.guardarDreamTeamEnStorage();
+export function sumarAlDreamTeam(pokemon: Pokemon, icono: HTMLElement) {
+  datosGenerales.dreamTeam.push(pokemon);
+  pokemon.dream_team = true;
+  funcionesStorage.guardarDreamTeamEnStorage();
 
-    return 1;
-  }
+  icono.classList.add("activo");
+}
 
-  return 2;
+export function quitarDelDreamTeam(pokemon: Pokemon, icono: HTMLElement) {
+  const index = datosGenerales.dreamTeam.indexOf(pokemon);
+  datosGenerales.dreamTeam.splice(index, 1);
+  pokemon.dream_team = false;
+  funcionesStorage.guardarDreamTeamEnStorage();
+  icono.classList.remove("activo");
 }
 
 function mostrarDreamTeam() {
@@ -49,28 +53,6 @@ export function restaurarDreamTeam(nombres: Array<string>) {
     ) {
       datosGenerales.dreamTeam.push(pokemon);
       pokemon.dream_team = true;
-    }
-  });
-}
-
-export function actualizarIconosDreamTeamEnDOM() {
-  const iconos = document.querySelectorAll(".icono-dream-team-vector2");
-  iconos.forEach((icono) => {
-    const carta = icono.closest(".carta-pokemon");
-    if (carta) {
-      const nombreElement = carta.querySelector(".pokemon-name");
-      if (nombreElement) {
-        const nombrePokemon = nombreElement.textContent?.toLowerCase() || "";
-        const estaEnDreamTeam = datosGenerales.dreamTeam.some(
-          (p) => p.nombre === nombrePokemon,
-        );
-
-        if (estaEnDreamTeam) {
-          icono.classList.add("activo");
-        } else {
-          icono.classList.remove("activo");
-        }
-      }
     }
   });
 }

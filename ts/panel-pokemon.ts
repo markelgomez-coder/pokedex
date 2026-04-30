@@ -16,7 +16,10 @@ if (numeroPokemon != null)
     await funcionesGenerales.setPokemonsDreamTeam();
 
     let gogokoa: boolean = false;
-    gogokoa = funcionesGenerales.pokemonDentroDeLaLista(datosGenerales.dreamTeam, pokemon);
+    gogokoa = funcionesGenerales.pokemonDentroDeLaLista(
+      datosGenerales.dreamTeam,
+      pokemon,
+    );
 
     let html = mostrarHTML.mostrarPokemon(pokemon, gogokoa);
     const container = document.getElementById("panel-pokemon-izquierda");
@@ -114,64 +117,50 @@ async function mostrarPanelDerecha(
   }
 }
 
-  if (window.location.pathname.endsWith("panel-pokemon.html")) {
-    document.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement;
+if (window.location.pathname.endsWith("panel-pokemon.html")) {
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
 
-      if (
-        target.classList.contains("icono-dream-team-interior") ||
-        target.classList.contains("icono-dream-team-vector1") ||
-        target.classList.contains("icono-dream-team-vector2")
-      ) {
-        const card = target.closest(".carta-pokemon") as HTMLElement;
+    if (
+      target.classList.contains("icono-dream-team-interior") ||
+      target.classList.contains("icono-dream-team-vector1") ||
+      target.classList.contains("icono-dream-team-vector2")
+    ) {
+      const card = target.closest(".carta-pokemon") as HTMLElement;
 
-        if (card) {
-          const nombrePokemon = card.querySelector(".pokemon-name");
-          if (nombrePokemon) {
-            const nombrePokemonMinusculas =
-              nombrePokemon.textContent.toLowerCase();
+      if (card) {
+        const nombrePokemon = card.querySelector(".pokemon-name");
+        if (nombrePokemon) {
+          const nombrePokemonMinusculas =
+            nombrePokemon.textContent.toLowerCase();
 
-            const sumaDreamTeam = funcionesDreamTeam.sumarDreamTeam(
-              nombrePokemonMinusculas,
-            );
-            const icono = card.getElementsByClassName(
-              "icono-dream-team-vector2",
-            )[0] as HTMLElement;
+          const icono = card.getElementsByClassName(
+            "icono-dream-team-vector2",
+          )[0] as HTMLElement;
 
-            switch (sumaDreamTeam) {
-              case 0:
-                if (icono) {
-                  icono.classList.add("activo");
-                }
-                console.log("Se ha añadido el pokemon");
-                break;
-
-              case 1:
-                if (icono) {
-                  icono.classList.remove("activo");
-                }
-                console.log("Se ha borrado el pokemon");
-                break;
-            }
-          }
-        }
-      } else if (
-        target.classList.contains("carta-pokemon") ||
-        target.classList.contains("pokemon-name") ||
-        target.classList.contains("pokemon-image") ||
-        target.classList.contains("pokemon-number") ||
-        target.classList.contains("pokemon-info")
-      ) {
-        const card = target.closest(".carta-pokemon") as HTMLElement;
-
-        if (card) {
-          const nombrePokemon = card.querySelector(".pokemon-name");
-          if (nombrePokemon) {
-            funcionesPokedex.irPanelPokemon(
-              nombrePokemon.textContent.toLowerCase(),
-            );
-          }
+          funcionesDreamTeam.modificarPokemonDreamTeam(
+            nombrePokemonMinusculas,
+            icono,
+          );
         }
       }
-    });
+    } else if (
+      target.classList.contains("carta-pokemon") ||
+      target.classList.contains("pokemon-name") ||
+      target.classList.contains("pokemon-image") ||
+      target.classList.contains("pokemon-number") ||
+      target.classList.contains("pokemon-info")
+    ) {
+      const card = target.closest(".carta-pokemon") as HTMLElement;
+
+      if (card) {
+        const nombrePokemon = card.querySelector(".pokemon-name");
+        if (nombrePokemon) {
+          funcionesPokedex.irPanelPokemon(
+            nombrePokemon.textContent.toLowerCase(),
+          );
+        }
+      }
+    }
+  });
 }
