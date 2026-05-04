@@ -80,10 +80,10 @@ export async function obtenerDebilidadPokemon(
     dobleDanoTotales = dobleDanoTotales.concat(debilidades.doble_dano);
   }
 
-  const unique = Array.from(
+  const unificado = Array.from(
     new Map(dobleDanoTotales.map((d) => [d.name, d])).values(),
   );
-  return unique;
+  return unificado;
 }
 
 export async function obtenerResistenciaPokemon(
@@ -97,10 +97,10 @@ export async function obtenerResistenciaPokemon(
     mitadDanoTotales = mitadDanoTotales.concat(debilidades.mitad_dano);
   }
 
-  const unique = Array.from(
+  const unificado = Array.from(
     new Map(mitadDanoTotales.map((d) => [d.name, d])).values(),
   );
-  return unique;
+  return unificado;
 }
 
 export async function obtenerInmunidadPokemon(
@@ -114,10 +114,10 @@ export async function obtenerInmunidadPokemon(
     noDanoTotales = noDanoTotales.concat(debilidades.no_dano);
   }
 
-  const unique = Array.from(
+  const unificado = Array.from(
     new Map(noDanoTotales.map((d) => [d.name, d])).values(),
   );
-  return unique;
+  return unificado;
 }
 
 export async function obtenerPokemonEvolucionesLink(id: string) {

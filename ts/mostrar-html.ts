@@ -2,9 +2,9 @@ import * as funcionesGenerales from "./funciones-generales.js";
 
 import { Pokemon } from "./tipos";
 
-export function mostrarPokemon(pokemon: Pokemon, gogokoa: boolean) {
+export function mostrarPokemon(pokemon: Pokemon, dreamTeam: boolean) {
   const htmlDreamTeam = `
-  <div class="icono-dream-team-vector2 ${gogokoa ? "activo" : ""}"></div>`;
+  <div class="icono-dream-team-vector2 ${dreamTeam ? "activo" : ""}"></div>`;
   return `
       <a class="carta-pokemon ${pokemon.tipos[0]}">
             <header>
