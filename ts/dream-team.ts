@@ -14,6 +14,7 @@ function mostrarDreamTeam() {
 
 function pokemonGrandeDreamTeam() {
   const contenedorGrande = document.getElementById("dream-team-grandes");
+  funcionesGenerales.vaciarHtmlConId("dream-team-grandes");
   const dreamTeamOrdenadoTamano = [...datosGenerales.dreamTeam].sort(
     (a, b) => a.altura - b.altura,
   );
@@ -95,7 +96,7 @@ document.addEventListener("click", (e) => {
       target.classList.contains("eliminar-dream-team-icono-2") ||
       target.classList.contains("eliminar-dream-team-icono-3")
     ) {
-      if(!target.classList.contains("eliminar-dream-team")){
+      if (!target.classList.contains("eliminar-dream-team")) {
         target = target.closest(".eliminar-dream-team") as HTMLElement;
       }
 
@@ -105,14 +106,31 @@ document.addEventListener("click", (e) => {
       );
       if (pokemon) {
         funcionesGenerales.quitarDelDreamTeam(pokemon);
-        quitarGraficosDelDreamTeam(pokemon);
+        pokemonGrandeDreamTeam();
+        pokemonPequenoDreamTeam();
       }
     }
   }
 });
 
 export function quitarGraficosDelDreamTeam(pokemon: Pokemon) {
-  
+  const pokemonsGrandes = Array.from(
+    document.getElementsByClassName("dream-team-grandes-img"),
+  );
+  const pokemonsPequenos = Array.from(
+    document.getElementsByClassName("dream-team-pequenos-container"),
+  );
+
+  pokemonsGrandes.forEach((img) => {
+    let dreamTeamActualizado;
+    if (pokemon.imagen === img.getAttribute("src")) {
+    } else {
+    }
+  });
+
+  pokemonsPequenos.forEach((container) => {
+    const img = container.querySelector(".dream-team-pequenos-img");
+  });
 }
 
 export function modificarPokemonDreamTeamDesdeCarta(
