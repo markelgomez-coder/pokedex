@@ -113,26 +113,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-export function quitarGraficosDelDreamTeam(pokemon: Pokemon) {
-  const pokemonsGrandes = Array.from(
-    document.getElementsByClassName("dream-team-grandes-img"),
-  );
-  const pokemonsPequenos = Array.from(
-    document.getElementsByClassName("dream-team-pequenos-container"),
-  );
-
-  pokemonsGrandes.forEach((img) => {
-    let dreamTeamActualizado;
-    if (pokemon.imagen === img.getAttribute("src")) {
-    } else {
-    }
-  });
-
-  pokemonsPequenos.forEach((container) => {
-    const img = container.querySelector(".dream-team-pequenos-img");
-  });
-}
-
 export function modificarPokemonDreamTeamDesdeCarta(
   nombre: string,
   icono: HTMLElement,
