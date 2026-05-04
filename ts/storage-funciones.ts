@@ -1,5 +1,4 @@
 import * as datosGenerales from "./datos-generales.js";
-import * as funcionesDreamTeam from "./dream-team.js";
 
 export function cargarDreamTeamDesdeStorage() {
   const storageValue = localStorage.getItem(

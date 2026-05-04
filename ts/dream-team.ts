@@ -1,6 +1,5 @@
 import * as funcionesGenerales from "./funciones-generales.js";
 import * as datosGenerales from "./datos-generales.js";
-import * as funcionesStorage from "./storage-funciones.js";
 
 import type { Pokemon } from "./tipos";
 
