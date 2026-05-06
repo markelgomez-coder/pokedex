@@ -16,7 +16,6 @@ vi.mock("../dist/ts/fetch.js", () => ({
 import * as funcionesAPI from "../dist/ts/funciones-API.js";
 import { hacerFetch } from "../dist/ts/fetch.js";
 
-
 describe("Obtener diferentes datos de la API", () => {
   afterEach(() => {
     vi.clearAllMocks();
@@ -47,7 +46,7 @@ describe("Obtener diferentes datos de la API", () => {
     expect(result.nombre).toBe("bulbasaur");
   });
 
-  it("Obtener descripcion del pokemon", async () => {
+  it("Obtener descripcion del pokemon correctamente", async () => {
     hacerFetch.mockResolvedValue({
       flavor_text_entries: [
         {
@@ -64,8 +63,38 @@ describe("Obtener diferentes datos de la API", () => {
       "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.",
     );
   });
-  it("Obtener tipos del pokemon", () => {});
-  it("Obtener links de la eficacia ante diferentes tipos de pokemon", () => {});
+  it("Obtener tipos del pokemon correctamente", async () => {
+    hacerFetch.mockResolvedValue({
+      types: [
+        {
+          type: {
+            name: "grass",
+            url: "https://bulbasaur/grass",
+          },
+        },
+        {
+          type: {
+            name: "poison",
+            url: "https://bulbasaur/poison",
+          },
+        },
+      ],
+    });
+
+    const result = await funcionesAPI.obtenerPokemonTipos(1);
+
+    expect(result.tipos.length).toBeGreaterThan(0);
+    expect(result.tipos_url.length).toBeGreaterThan(0);
+    expect(result.tipos_url.length).toBe(result.tipos.length);
+
+    expect(result.tipos).toContain("grass");
+    expect(result.tipos_url).toContain("https://bulbasaur/grass");
+    expect(result.tipos).toContain("poison");
+    expect(result.tipos_url).toContain("https://bulbasaur/poison");
+  });
+  it("Obtener links de la eficacia ante diferentes tipos de pokemon", () => {
+    
+  });
   it("Obtener tipos a los que es debil el pokemon", () => {});
   it("Obtener tipos a los que resiste el pokemon", () => {});
   it("Obtener tipos a los que es inmune el pokemon", () => {});
