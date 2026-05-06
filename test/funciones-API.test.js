@@ -92,8 +92,22 @@ describe("Obtener diferentes datos de la API", () => {
     expect(result.tipos).toContain("poison");
     expect(result.tipos_url).toContain("https://bulbasaur/poison");
   });
-  it("Obtener links de la eficacia ante diferentes tipos de pokemon", () => {
-    
+  it("Obtener links de la eficacia ante diferentes tipos de pokemon", async () => {
+    hacerFetch.mockResolvedValue({
+      damage_relations: {
+        double_damage_from: [{ name: "grass" }],
+        half_damage_from: [{ name: "poison" }],
+        no_damage_from: [{ name: "metal" }],
+      },
+    });
+
+    const result = await funcionesAPI.obtenerEficaciaPokemon(
+      "https://pokeapi.co/api/v2/type/1",
+    );
+
+    expect(result.doble_dano.map((t) => t.name)).toContain("grass");
+    expect(result.mitad_dano.map((t) => t.name)).toContain("poison");
+    expect(result.no_dano.map((t) => t.name)).toContain("metal");
   });
   it("Obtener tipos a los que es debil el pokemon", () => {});
   it("Obtener tipos a los que resiste el pokemon", () => {});
