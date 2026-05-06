@@ -60,7 +60,16 @@ describe("Obtener diferentes datos de la API", () => {
 
     expect(result.nombre).toBe("bulbasaur");
   });
-  it("Obtener descripcion del pokemon", () => {});
+  it("Obtener descripcion del pokemon", async () => {
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      json: async () => ({
+        flavor_text: "A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.",
+      }),
+    });
+    const result = await funcionesAPI.obtenerPokemonDescripcion(1);
+
+    expect(result).toBe("A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON.")
+  });
   it("Obtener tipos del pokemon", () => {});
   it("Obtener links de la eficacia ante diferentes tipos de pokemon", () => {});
   it("Obtener tipos a los que es debil el pokemon", () => {});
