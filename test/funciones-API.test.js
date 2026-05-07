@@ -109,7 +109,35 @@ describe("Obtener diferentes datos de la API", () => {
     expect(result.mitad_dano.map((t) => t.name)).toContain("poison");
     expect(result.no_dano.map((t) => t.name)).toContain("metal");
   });
-  it("Obtener tipos a los que es debil el pokemon", () => {});
+  it("Obtener tipos a los que es debil el pokemon", async () => {
+    hacerFetch.mockResolvedValueOnce({
+      types: [
+        {
+          type: {
+            name: "grass",
+            url: "https://pokeapi.co/api/v2/type/12",
+          },
+        },
+      ],
+    });
+
+    hacerFetch.mockResolvedValueOnce({
+      damage_relations: {
+        double_damage_from: [
+          { name: "fire" },
+          { name: "flying" },
+        ],
+        half_damage_from: [],
+        no_damage_from: [],
+      },
+    });
+
+    const result = await funcionesAPI.obtenerDebilidadPokemon("1");
+
+    expect(result.length).toBe(2);
+    expect(result.map((t) => t.name)).toContain("fire");
+    expect(result.map((t) => t.name)).toContain("flying");
+  });
   it("Obtener tipos a los que resiste el pokemon", () => {});
   it("Obtener tipos a los que es inmune el pokemon", () => {});
   it("Obtener evoluciones del pokemon", () => {});
