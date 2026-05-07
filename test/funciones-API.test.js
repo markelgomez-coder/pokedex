@@ -123,10 +123,7 @@ describe("Obtener diferentes datos de la API", () => {
 
     hacerFetch.mockResolvedValueOnce({
       damage_relations: {
-        double_damage_from: [
-          { name: "fire" },
-          { name: "flying" },
-        ],
+        double_damage_from: [{ name: "fire" }, { name: "flying" }],
         half_damage_from: [],
         no_damage_from: [],
       },
@@ -139,7 +136,7 @@ describe("Obtener diferentes datos de la API", () => {
     expect(result.map((t) => t.name)).toContain("flying");
   });
   it("Obtener tipos a los que resiste el pokemon", async () => {
-        hacerFetch.mockResolvedValueOnce({
+    hacerFetch.mockResolvedValueOnce({
       types: [
         {
           type: {
@@ -153,9 +150,7 @@ describe("Obtener diferentes datos de la API", () => {
     hacerFetch.mockResolvedValueOnce({
       damage_relations: {
         double_damage_from: [],
-        half_damage_from: [
-          { name: "grass" },
-        ],
+        half_damage_from: [{ name: "grass" }],
         no_damage_from: [],
       },
     });
@@ -165,6 +160,34 @@ describe("Obtener diferentes datos de la API", () => {
     expect(result.length).toBe(1);
     expect(result.map((t) => t.name)).toContain("grass");
   });
-  it("Obtener tipos a los que es inmune el pokemon", () => {});
+  it("Obtener tipos a los que es inmune el pokemon", async () => {
+    hacerFetch.mockResolvedValueOnce({
+      types: [
+        {
+          type: {
+            name: "metal",
+            url: "https://pokeapi.co/api/v2/type/10",
+          },
+        },
+      ],
+    });
+
+    hacerFetch.mockResolvedValueOnce({
+      damage_relations: {
+        double_damage_from: [],
+        half_damage_from: [],
+        no_damage_from: [
+          { name: "metal" },
+          { name: "grass" },
+          { name: "fire" },
+        ],
+      },
+    });
+
+    const result = await funcionesAPI.obtenerInmunidadPokemon("1");
+
+    expect(result.length).toBe(3);
+    expect(result.map((t) => t.name)).toContain("metal");
+  });
   it("Obtener evoluciones del pokemon", () => {});
 });
