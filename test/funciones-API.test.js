@@ -189,5 +189,44 @@ describe("Obtener diferentes datos de la API", () => {
     expect(result.length).toBe(3);
     expect(result.map((t) => t.name)).toContain("metal");
   });
-  it("Obtener evoluciones del pokemon", () => {});
+  it("Obtener evoluciones del pokemon", async () => {
+    hacerFetch.mockResolvedValueOnce({
+      evolution_chain: {
+        url: "http://bulbasaur",
+      },
+    });
+
+    hacerFetch.mockResolvedValueOnce({
+      chain: {
+        species: { name: "bulbasaur" },
+        evolves_to: [],
+      },
+    });
+
+    hacerFetch.mockResolvedValueOnce({
+      name: "bulbasaur",
+      id: 1,
+      sprites: {
+        other: { "official-artwork": { front_default: "img.png" } },
+      },
+      types: [{ type: { name: "grass" } }],
+      weight: 100,
+      height: 10,
+      stats: [
+        { base_stat: 45 },
+        { base_stat: 49 },
+        { base_stat: 49 },
+        { base_stat: 65 },
+        { base_stat: 65 },
+        { base_stat: 45 },
+      ],
+    });
+
+    const link = await funcionesAPI.obtenerPokemonEvolucionesLink(2);
+    const result = await funcionesAPI.obtenerPokemonEvoluciones(link);
+
+    expect(link).toBe("http://bulbasaur");
+    expect(result.length).toBe(1);
+    expect(result[0].nombre).toBe("bulbasaur");
+  });
 });
