@@ -36,9 +36,9 @@ describe("Cambiar la lista de los pokemons en el dreamTeam", () => {
       dream_team: false,
     };
 
-    expect(datosGenerales.dreamTeam).not.toContain(pokemon);
+    expect(datosGenerales.dreamTeam).not.toContainEqual(pokemon);
     funcionesGenerales.sumarAlDreamTeam(pokemon);
-    expect(datosGenerales.dreamTeam).toContain(pokemon);
+    expect(datosGenerales.dreamTeam).toContainEqual(pokemon);
   });
 
   it("Quitar un pokemon del dreamTeam", () => {
