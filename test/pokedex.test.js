@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import * as funcionesPokedex from "../dist/ts/pokedex.js";
+import { hacerFetch } from "../dist/ts/fetch.js";
 
 vi.mock("../dist/ts/datos-generales.js", async (importOriginal) => {
   const actual = await importOriginal();
@@ -44,7 +45,6 @@ describe("Escribes algo correcto en el buscador", () => {
     const result = funcionesPokedex.filtraPorNombre(busqueda);
 
     expect(result).toEqual(listaPokemonMock);
-
   });
 
   it("Pone un nombre o parte del nombre", () => {
@@ -57,7 +57,6 @@ describe("Escribes algo correcto en el buscador", () => {
     result.forEach((pokemon) => {
       expect(pokemon.nombre).toContain(busqueda);
     });
-
   });
 
   it("Pone un tipo de pokemon en el buscador", () => {
@@ -70,7 +69,6 @@ describe("Escribes algo correcto en el buscador", () => {
     result.forEach((pokemon) => {
       expect(pokemon.tipos).toContain(busqueda);
     });
-
   });
 
   it("Pone un número sin #", () => {
@@ -83,7 +81,6 @@ describe("Escribes algo correcto en el buscador", () => {
     result.forEach((pokemon) => {
       expect(pokemon.numero).toContain(busqueda);
     });
-
   });
 
   it("Pone un número con #", () => {
@@ -113,5 +110,21 @@ describe("Escribes algo incorrecto en el buscador", () => {
     expect(filtro).toEqual([]);
     expect(result).not.toBeNull();
     expect(result.innerHTML).toContain(`There is no results for "${busqueda}"`);
+  });
+});
+
+describe("El API no responde a la busqueda y se pone el html de error de API", () => {
+  it("El API falla y pone error en el html de la pokedex", async () => {
+    
+    const result = document.getElementById("resultado-busqueda");
+
+    try {
+      const res = await fetch("https://pokeapi.co/api/v2/pokemon/1");
+    } catch (error) {
+      if (result) {
+        expect(result.innerHTML).toContain(`An error ocurred getting Pokemons`);
+      }
+    }
+
   });
 });
