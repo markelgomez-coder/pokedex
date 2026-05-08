@@ -4,9 +4,19 @@ import * as datosGenerales from "../dist/ts/datos-generales.js";
 
 describe("Cambiar la lista de los pokemons en el dreamTeam", () => {
   beforeEach(() => {
-    datosGenerales.dreamTeam.lenght = 0;
-    datosGenerales.dreamTeam.push({nombre: "charmander", numero: "004", tipos: ["fire"]});
-    datosGenerales.dreamTeam.push({nombre: "charmeleon", numero: "005", tipos: ["fire"]});
+    datosGenerales.VaciarDreamTeam();
+    datosGenerales.dreamTeam.push({
+      nombre: "charmander",
+      numero: "004",
+      tipos: ["fire"],
+      dream_team: true,
+    });
+    datosGenerales.dreamTeam.push({
+      nombre: "charmeleon",
+      numero: "005",
+      tipos: ["fire"],
+      dream_team: true,
+    });
   });
 
   it("Añadir un pokemon al dreamTeam", async () => {
@@ -32,6 +42,16 @@ describe("Cambiar la lista de los pokemons en el dreamTeam", () => {
   });
 
   it("Quitar un pokemon del dreamTeam", () => {
-    expect(1).toBe(1);
+    const pokemon = {
+      nombre: "charmander",
+      numero: "004",
+      tipos: ["fire"],
+      dream_team: true,
+    };
+
+    console.log(datosGenerales.dreamTeam);
+    expect(datosGenerales.dreamTeam).toContainEqual(pokemon);
+    funcionesGenerales.quitarDelDreamTeam(pokemon);
+    expect(datosGenerales.dreamTeam).not.toContainEqual(pokemon);
   });
 });
