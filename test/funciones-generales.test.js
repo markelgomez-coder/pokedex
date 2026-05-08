@@ -63,4 +63,12 @@ describe("Modificar un html en concreto (vaciar o meter un html)", () => {
     funcionesGenerales.vaciarHtmlConId("uno");
     expect(document.body.innerHTML).toBe(resultadoEsperado);
   });
+
+    it("Añadir un elemento html a un html", () => {
+    document.body.innerHTML = '<div id="uno"></div>';
+    const htmlNuevo = '<div id="dos"></div>'
+    const resultadoEsperado = '<div id="uno"><div id="dos"></div></div>';
+    funcionesGenerales.meterAlHtmlConId("uno",htmlNuevo);
+    expect(document.body.innerHTML).toBe(resultadoEsperado);
+  });
 });
