@@ -45,7 +45,6 @@ describe("Escribes algo correcto en el buscador", () => {
 
     expect(result).toEqual(listaPokemonMock);
 
-    console.log(result);
   });
 
   it("Pone un nombre o parte del nombre", () => {
@@ -59,7 +58,6 @@ describe("Escribes algo correcto en el buscador", () => {
       expect(pokemon.nombre).toContain(busqueda);
     });
 
-    console.log(result);
   });
 
   it("Pone un tipo de pokemon en el buscador", () => {
@@ -73,7 +71,6 @@ describe("Escribes algo correcto en el buscador", () => {
       expect(pokemon.tipos).toContain(busqueda);
     });
 
-    console.log(result);
   });
 
   it("Pone un número sin #", () => {
@@ -87,7 +84,6 @@ describe("Escribes algo correcto en el buscador", () => {
       expect(pokemon.numero).toContain(busqueda);
     });
 
-    console.log(result);
   });
 
   it("Pone un número con #", () => {
@@ -101,7 +97,6 @@ describe("Escribes algo correcto en el buscador", () => {
     result.forEach((pokemon) => {
       expect(pokemon.numero).toContain(busquedaSinHash);
     });
-    console.log(result);
   });
 });
 
@@ -118,6 +113,5 @@ describe("Escribes algo incorrecto en el buscador", () => {
     expect(filtro).toEqual([]);
     expect(result).not.toBeNull();
     expect(result.innerHTML).toContain(`There is no results for "${busqueda}"`);
-    console.log(result);
   });
 });
