@@ -55,3 +55,12 @@ describe("Cambiar la lista de los pokemons en el dreamTeam", () => {
     expect(datosGenerales.dreamTeam).not.toContainEqual(pokemon);
   });
 });
+
+describe("Modificar un html en concreto (vaciar o meter un html)", () => {
+  it("Vaciar un html", () => {
+    document.body.innerHTML = '<div id="uno"><div id="dos"><div id="tres"></div></div></div>';
+    const resultadoEsperado = '<div id="uno"></div>';
+    funcionesGenerales.vaciarHtmlConId("uno");
+    expect(document.body.innerHTML).toBe(resultadoEsperado);
+  });
+});
